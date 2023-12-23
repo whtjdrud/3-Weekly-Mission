@@ -23,7 +23,6 @@ export default class User {
 
   validatePasswordCheck(passwordTag, reEnteredPasswordTag) {
     if (passwordTag.value === reEnteredPasswordTag.value) return { valid: true, tag: reEnteredPasswordTag, error: null };
-
     return { valid: false, tag: reEnteredPasswordTag, error: 'PASSWORD_NOT_MATCH' };
   }
 
@@ -44,9 +43,7 @@ export default class User {
     }
 
     const responseData = await response.json();
-
-    localStorage.setItem('accessToken', responseData.data.accessToken);
-    localStorage.setItem('refreshToken', responseData.data.refreshToken);
+    settingLocalStorage(responseData);
 
     return { valid: true, tag: emailTag, error: null };
   }
@@ -83,10 +80,13 @@ export default class User {
     if (!response.ok) return { valid: false, tag: emailTag, error: 'FAILED_SIGNUP' };
 
     const responseData = await response.json();
-
-    localStorage.setItem('accessToken', responseData.data.accessToken);
-    localStorage.setItem('refreshToken', responseData.data.refreshToken);
+    settingLocalStorage(responseData);
 
     return { valid: true, tag: emailTag, error: null };
+  }
+
+  settingLocalStorage(responseData) {
+    localStorage.setItem('accessToken', responseData.data.accessToken);
+    localStorage.setItem('refreshToken', responseData.data.refreshToken);
   }
 }
