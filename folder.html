@@ -7,5 +7,13 @@
   </head>
   <body>
     <h1>안녕 난 folder야</h1>
+    <button id="clearButton">로그아웃(Local Storage 비우기)</button>
+
+    <script>
+      document.querySelector('#clearButton').addEventListener('click', function () {
+        localStorage.clear();
+        alert('로그아웃 완료(Local Storage 비움)');
+      });
+    </script>
   </body>
 </html>
