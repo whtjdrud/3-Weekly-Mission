@@ -11,6 +11,6 @@ const errorMessages = {
   PASSWORD_TOO_SHORT: '비밀번호는 8자 이상 20자 이하여야 합니다.',
 };
 
-const handleError = errCode => errorMessages[errCode];
+const getErrorMessage = errCode => errorMessages[errCode];
 
-export default handleError;
+export default getErrorMessage;

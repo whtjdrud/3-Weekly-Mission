@@ -1,3 +1,5 @@
+import getErrorMessage from '../../errorMessage.js';
+
 export default class LoginView {
   constructor() {
     this.emailInput = document.querySelector('#email');
@@ -7,12 +9,12 @@ export default class LoginView {
     this.signForm = document.querySelector('#sign_form');
   }
 
-  showErrorMessage(tag, errorMessage) {
+  showErrorMessage(tag, error) {
     const target = tag.parentElement.querySelector('.error_msg');
     const inputBorder = target.parentElement.querySelector('input');
 
     inputBorder.classList.add('input-error');
-    target.innerHTML = errorMessage;
+    target.innerHTML = getErrorMessage(error);
 
     return false;
   }
