@@ -5,50 +5,42 @@ export default class SignUpService {
   }
 
   async validateSignUpEmail(emailTag) {
-    const emailValid = this.user.validateEmail(emailTag);
+    const emailValidResult = this.user.validateEmail(emailTag);
 
-    if (!emailValid.valid) {
-      return this.view.showErrorMessage(emailTag, emailValid.error);
-    }
+    if (!emailValidResult.valid) return this.handlerViewErrorMessage(emailValidResult);
+
     const duplicatedEmail = await this.user.duplicatedEmail(emailTag);
-
-    if (!duplicatedEmail.valid) {
-      return this.view.showErrorMessage(emailTag, duplicatedEmail.error);
-    }
-
-    return this.view.clearErrorMessage(emailTag);
+    return this.handlerViewErrorMessage(duplicatedEmail);
   }
 
   validatePassword(passwordTag) {
-    const passwordValid = this.user.validatePassword(passwordTag);
-
-    if (!passwordValid.valid) {
-      return this.view.showErrorMessage(this.view.passwordInput, passwordValid.error);
-    }
-    return this.view.clearErrorMessage(this.view.passwordInput);
+    const passwordValidResult = this.user.validatePassword(passwordTag);
+    return this.handlerViewErrorMessage(passwordValidResult);
   }
 
   validatePasswordCheck(passwordTag, reEnteredPasswordTag) {
-    const passwordCheck = this.user.validatePasswordCheck(passwordTag, reEnteredPasswordTag);
-
-    if (!passwordCheck.valid) return this.view.showErrorMessage(passwordCheck.tag, passwordCheck.error);
-
-    return this.view.clearErrorMessage(passwordCheck.tag);
+    const passwordCheckResult = this.user.validatePasswordCheck(passwordTag, reEnteredPasswordTag);
+    return this.handlerViewErrorMessage(passwordCheckResult);
   }
 
   async signUpUser(e, emailTag, passwordTag) {
     e.preventDefault();
-    const emailValid = this.user.validateEmail(emailTag);
-    const passwordValid = this.user.validatePassword(passwordTag);
 
-    if (!(emailValid.valid && passwordValid.valid)) return;
+    const emailValidResult = this.user.validateEmail(emailTag);
+    const passwordValidResult = this.user.validatePassword(passwordTag);
+
+    if (!(emailValidResult.valid && passwordValidResult.valid)) return;
 
     const signUpResult = await this.user.signUpUser(emailTag, passwordTag);
+    this.handlerViewErrorMessage(signUpResult);
 
-    if (!signUpResult.valid) return this.view.showErrorMessage(signUpResult.tag, signUpResult.error);
+    if (signUpResult.valid) window.location.href = '/folder.html';
+  }
 
-    this.view.clearErrorMessage(signUpResult.tag);
-
-    window.location.href = '/folder.html';
+  handlerViewErrorMessage(resultValidated) {
+    if (!resultValidated.valid) {
+      return this.view.showErrorMessage(resultValidated.tag, resultValidated.error);
+    }
+    return this.view.clearErrorMessage(resultValidated.tag);
   }
 }

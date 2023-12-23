@@ -9,14 +9,13 @@ export default class User {
     if (username.length === 0) return { valid: false, tag: emailTag, error: 'EMPTY_EMAIL_FIELD' };
     if (!emailRegex.test(username)) return { valid: false, tag: emailTag, error: 'INVALID_EMAIL' };
 
-    return { valid: true };
+    return { valid: true, tag: emailTag };
   }
 
   validatePassword(passwordTag) {
     const passwordValue = passwordTag.value;
 
     if (passwordValue.length === 0) return { valid: false, tag: passwordTag, error: 'EMPTY_PASSWORD_FIELD' };
-
     if (!passwordRegex.test(passwordValue)) return { valid: false, tag: passwordTag, error: 'PASSWORD_TOO_SHORT' };
 
     return { valid: true, tag: passwordTag };
@@ -46,7 +45,6 @@ export default class User {
 
     const responseData = await response.json();
 
-    // 로컬 스토리지에 토큰 저장
     localStorage.setItem('accessToken', responseData.data.accessToken);
     localStorage.setItem('refreshToken', responseData.data.refreshToken);
 
@@ -67,7 +65,6 @@ export default class User {
     if (!response.ok) {
       return { valid: false, tag: emailTag, error: 'EMAIL_REGISTERED' };
     }
-
     return { valid: true, tag: emailTag, error: null };
   }
 
@@ -86,7 +83,7 @@ export default class User {
     if (!response.ok) return { valid: false, tag: emailTag, error: 'FAILED_SIGNUP' };
 
     const responseData = await response.json();
-    // 로컬 스토리지에 토큰 저장
+
     localStorage.setItem('accessToken', responseData.data.accessToken);
     localStorage.setItem('refreshToken', responseData.data.refreshToken);
 

@@ -10,6 +10,7 @@ export default class SignUpController {
     //email
     this.view.emailInput.addEventListener('focusout', () => this.service.validateSignUpEmail(this.view.emailInput));
     //reEntered password
+    this.view.passwordInput.addEventListener('focusout', () => this.service.validatePassword(this.view.passwordInput));
     this.view.passwordCheckInput.addEventListener('focusout', () => this.service.validatePassword(this.view.passwordInput));
     this.view.passwordCheckInput.addEventListener('focusout', () =>
       this.service.validatePasswordCheck(this.view.passwordInput, this.view.passwordCheckInput),

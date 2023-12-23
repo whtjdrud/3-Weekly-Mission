@@ -6,21 +6,12 @@ export default class LoginService {
 
   validateEmail(emailTag) {
     const emailValid = this.user.validateEmail(emailTag);
-
-    if (!emailValid.valid) {
-      return this.view.showErrorMessage(emailTag, emailValid.error);
-    }
-
-    return this.view.clearErrorMessage(emailTag);
+    return this.handlerViewErrorMessage(emailValid);
   }
 
   validatePassword(passwordTag) {
     const passwordValid = this.user.validatePassword(passwordTag);
-
-    if (!passwordValid.valid) {
-      return this.view.showErrorMessage(passwordValid.tag, passwordValid.error);
-    }
-    return this.view.clearErrorMessage(passwordValid.tag);
+    return this.handlerViewErrorMessage(passwordValid);
   }
 
   async LoginUser(e, emailTag, passwordTag) {
@@ -31,14 +22,15 @@ export default class LoginService {
     if (!(emailValid.valid && passwordValid.valid)) return;
 
     const loginResult = await this.user.LoginUser(emailTag, passwordTag);
+    this.handlerViewErrorMessage(loginResult);
 
-    if (!loginResult.valid) {
-      this.view.showErrorMessage(loginResult.tag, loginResult.error);
-      return;
+    if (loginResult.valid) window.location.href = '/folder.html';
+  }
+
+  handlerViewErrorMessage(resultValidated) {
+    if (!resultValidated.valid) {
+      return this.view.showErrorMessage(resultValidated.tag, resultValidated.error);
     }
-
-    this.view.clearErrorMessage(loginResult.tag);
-
-    window.location.href = '/folder.html';
+    return this.view.clearErrorMessage(resultValidated.tag);
   }
 }
