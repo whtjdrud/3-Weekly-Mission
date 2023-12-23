@@ -1,4 +1,4 @@
-import getErrorMessage from '../../errorMessage.js';
+import getErrorMessage from '../config/errorMessage.js';
 
 export default class SignUpView {
   constructor() {

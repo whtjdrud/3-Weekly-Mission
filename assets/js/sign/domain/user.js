@@ -1,4 +1,4 @@
-import { emailRegex, passwordRegex } from '../../../regex.js';
+import { emailRegex, passwordRegex } from '../config/regex.js';
 
 export default class User {
   constructor() {}

@@ -1,21 +1,18 @@
-import { validateEmail, checkEmailRegistered, validatePassword, validatePasswordCheck } from './validation.js';
-import { eyeToggle } from './ui.js';
-import { validateJoin } from './form.js';
+import SignUpController from './controller/signUpController.js';
+import SignUpView from './view/signUpView.js';
+import SignUpService from './service/SignupService.js';
+import User from './domain/user.js';
 
-const inputEmail = document.querySelector('#email');
-const inputPassword = document.querySelector('#password');
-const inputPasswordCheck = document.querySelector('#password_chk');
-const signForm = document.querySelector('#sign_form');
-const eyes = document.querySelectorAll('.eye-button');
+document.addEventListener('DOMContentLoaded', () => {
+  // 로그인 상태 확인
+  const accessToken = localStorage.getItem('accessToken');
+  if (accessToken) {
+    window.location.href = '/folder.html';
+    return; // 리다이렉트 후 나머지 코드는 실행하지 않음
+  }
 
-inputEmail.addEventListener('focusout', event => validateEmail(event));
-inputEmail.addEventListener('focusout', event => checkEmailRegistered(event));
-
-inputPassword.addEventListener('focusout', event => validatePassword(event));
-inputPasswordCheck.addEventListener('focusout', event => validatePasswordCheck(event));
-
-signForm.addEventListener('submit', event => validateJoin(event));
-
-eyes.forEach(button => {
-  button.addEventListener('click', event => eyeToggle(event));
+  const signUpView = new SignUpView();
+  const user = new User();
+  const signUpService = new SignUpService(signUpView, user);
+  const controller = new SignUpController(signUpView, user, signUpService);
 });
