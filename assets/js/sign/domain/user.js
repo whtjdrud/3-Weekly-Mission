@@ -43,7 +43,7 @@ export default class User {
     }
 
     const responseData = await response.json();
-    settingLocalStorage(responseData);
+    this.settingLocalStorage(responseData);
 
     return { valid: true, tag: emailTag, error: null };
   }
@@ -80,7 +80,7 @@ export default class User {
     if (!response.ok) return { valid: false, tag: emailTag, error: 'FAILED_SIGNUP' };
 
     const responseData = await response.json();
-    settingLocalStorage(responseData);
+    this.settingLocalStorage(responseData);
 
     return { valid: true, tag: emailTag, error: null };
   }
