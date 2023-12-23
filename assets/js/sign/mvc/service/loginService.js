@@ -7,7 +7,7 @@ export default class LoginService {
     this.user = new User();
   }
 
-  validateEmailService(emailTag) {
+  validateEmail(emailTag) {
     const emailValid = this.user.validateEmail(emailTag);
 
     if (!emailValid.valid) {
@@ -17,13 +17,13 @@ export default class LoginService {
     return this.view.clearErrorMessage(emailTag);
   }
 
-  validatePasswordService(passwordTag) {
+  validatePassword(passwordTag) {
     const passwordValid = this.user.validatePassword(passwordTag);
 
     if (!passwordValid.valid) {
-      return this.view.showErrorMessage(this.view.passwordInput, passwordValid.error);
+      return this.view.showErrorMessage(passwordValid.tag, passwordValid.error);
     }
-    return this.view.clearErrorMessage(this.view.passwordInput);
+    return this.view.clearErrorMessage(passwordValid.tag);
   }
 
   async LoginUser(e, emailTag, passwordTag) {
@@ -40,8 +40,7 @@ export default class LoginService {
       return;
     }
 
-    localStorage.setItem('accessToken', loginResult.data.accessToken);
-    localStorage.setItem('refreshToken', loginResult.data.refreshToken);
+    this.view.clearErrorMessage(loginResult.tag);
 
     window.location.href = '/folder.html';
   }

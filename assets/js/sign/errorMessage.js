@@ -9,6 +9,8 @@ const errorMessages = {
   INVALID_PASSWORD: '비밀번호를 확인해주세요.',
   PASSWORD_NOT_MATCH: '비밀번호가 일치하지 않습니다.',
   PASSWORD_TOO_SHORT: '비밀번호는 8자 이상 20자 이하여야 합니다.',
+
+  FAILED_SIGNUP: '시스템 장애로 회원가입에 실패하였습니다. 잠시 후 다시 시도해주세요.',
 };
 
 const getErrorMessage = errCode => errorMessages[errCode];

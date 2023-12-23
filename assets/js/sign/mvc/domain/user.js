@@ -19,7 +19,13 @@ export default class User {
 
     if (!passwordRegex.test(passwordValue)) return { valid: false, tag: passwordTag, error: 'PASSWORD_TOO_SHORT' };
 
-    return { valid: true };
+    return { valid: true, tag: passwordTag };
+  }
+
+  validatePasswordCheck(passwordTag, reEnteredPasswordTag) {
+    if (passwordTag.value === reEnteredPasswordTag.value) return { valid: true, tag: reEnteredPasswordTag, error: null };
+
+    return { valid: false, tag: reEnteredPasswordTag, error: 'PASSWORD_NOT_MATCH' };
   }
 
   async LoginUser(emailTag, passwordTag) {
@@ -39,6 +45,50 @@ export default class User {
     }
 
     const responseData = await response.json();
-    return { valid: true, tag: emailTag, error: null, data: responseData };
+
+    // 로컬 스토리지에 토큰 저장
+    localStorage.setItem('accessToken', responseData.data.accessToken);
+    localStorage.setItem('refreshToken', responseData.data.refreshToken);
+
+    return { valid: true, tag: emailTag, error: null };
+  }
+
+  async duplicatedEmail(emailTag) {
+    const response = await fetch('https://bootcamp-api.codeit.kr/api/check-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: emailTag.value,
+      }),
+    });
+
+    if (!response.ok) {
+      return { valid: false, tag: emailTag, error: 'EMAIL_REGISTERED' };
+    }
+
+    return { valid: true, tag: emailTag, error: null };
+  }
+
+  async signUpUser(emailTag, passwordTag) {
+    const response = await fetch('https://bootcamp-api.codeit.kr/api/sign-up', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: emailTag.value,
+        password: passwordTag.value,
+      }),
+    });
+
+    if (!response.ok) return { valid: false, tag: emailTag, error: 'FAILED_SIGNUP' };
+
+    const responseData = await response.json();
+    // 로컬 스토리지에 토큰 저장
+    localStorage.setItem('accessToken', responseData.data.accessToken);
+    localStorage.setItem('refreshToken', responseData.data.refreshToken);
+    return { valid: true, tag: emailTag, error: null };
   }
 }
