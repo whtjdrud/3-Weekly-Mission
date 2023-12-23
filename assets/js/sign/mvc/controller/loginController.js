@@ -1,12 +1,8 @@
-import LoginView from '../view/loginView.js';
-import LoginService from '../service/loginService.js';
-import User from '../domain/user.js';
-
 export default class LoginController {
-  constructor() {
-    this.view = new LoginView();
-    this.user = new User();
-    this.service = new LoginService();
+  constructor(loginView, user, loginService) {
+    this.view = loginView;
+    this.user = user;
+    this.service = loginService;
     this.#initEventListener();
   }
 

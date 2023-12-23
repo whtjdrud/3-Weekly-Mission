@@ -1,10 +1,7 @@
-import LoginView from '../view/loginView.js';
-import User from '../domain/user.js';
-
 export default class LoginService {
-  constructor() {
-    this.view = new LoginView();
-    this.user = new User();
+  constructor(loginView, user) {
+    this.view = loginView;
+    this.user = user;
   }
 
   validateEmail(emailTag) {

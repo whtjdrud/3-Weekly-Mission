@@ -89,6 +89,7 @@ export default class User {
     // 로컬 스토리지에 토큰 저장
     localStorage.setItem('accessToken', responseData.data.accessToken);
     localStorage.setItem('refreshToken', responseData.data.refreshToken);
+
     return { valid: true, tag: emailTag, error: null };
   }
 }
