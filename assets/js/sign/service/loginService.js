@@ -6,28 +6,28 @@ export default class LoginService {
 
   validateEmail(emailTag) {
     const emailValid = this.user.validateEmail(emailTag);
-    return this.handlerViewErrorMessage(emailValid);
+    return this.toggleErrorMessage(emailValid);
   }
 
   validatePassword(passwordTag) {
     const passwordValid = this.user.validatePassword(passwordTag);
-    return this.handlerViewErrorMessage(passwordValid);
+    return this.toggleErrorMessage(passwordValid);
   }
 
-  async LoginUser(e, emailTag, passwordTag) {
+  async loginUser(e, emailTag, passwordTag) {
     e.preventDefault();
     const emailValid = this.user.validateEmail(emailTag);
     const passwordValid = this.user.validatePassword(passwordTag);
 
     if (!(emailValid.valid && passwordValid.valid)) return;
 
-    const loginResult = await this.user.LoginUser(emailTag, passwordTag);
-    this.handlerViewErrorMessage(loginResult);
+    const loginResult = await this.user.loginUser(emailTag, passwordTag);
+    this.toggleErrorMessage(loginResult);
 
     if (loginResult.valid) window.location.href = '/folder.html';
   }
 
-  handlerViewErrorMessage(resultValidated) {
+  toggleErrorMessage(resultValidated) {
     if (!resultValidated.valid) {
       return this.view.showErrorMessage(resultValidated.tag, resultValidated.error);
     }

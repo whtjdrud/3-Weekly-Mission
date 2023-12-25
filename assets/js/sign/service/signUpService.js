@@ -7,20 +7,20 @@ export default class SignUpService {
   async validateSignUpEmail(emailTag) {
     const emailValidResult = this.user.validateEmail(emailTag);
 
-    if (!emailValidResult.valid) return this.handlerViewErrorMessage(emailValidResult);
+    if (!emailValidResult.valid) return this.toggleErrorMessage(emailValidResult);
 
     const duplicatedEmail = await this.user.duplicatedEmail(emailTag);
-    return this.handlerViewErrorMessage(duplicatedEmail);
+    return this.toggleErrorMessage(duplicatedEmail);
   }
 
   validatePassword(passwordTag) {
     const passwordValidResult = this.user.validatePassword(passwordTag);
-    return this.handlerViewErrorMessage(passwordValidResult);
+    return this.toggleErrorMessage(passwordValidResult);
   }
 
   validatePasswordCheck(passwordTag, reEnteredPasswordTag) {
     const passwordCheckResult = this.user.validatePasswordCheck(passwordTag, reEnteredPasswordTag);
-    return this.handlerViewErrorMessage(passwordCheckResult);
+    return this.toggleErrorMessage(passwordCheckResult);
   }
 
   async signUpUser(e, emailTag, passwordTag) {
@@ -32,12 +32,12 @@ export default class SignUpService {
     if (!(emailValidResult.valid && passwordValidResult.valid)) return;
 
     const signUpResult = await this.user.signUpUser(emailTag, passwordTag);
-    this.handlerViewErrorMessage(signUpResult);
+    this.toggleErrorMessage(signUpResult);
 
     if (signUpResult.valid) window.location.href = '/folder.html';
   }
 
-  handlerViewErrorMessage(resultValidated) {
+  toggleErrorMessage(resultValidated) {
     if (!resultValidated.valid) {
       return this.view.showErrorMessage(resultValidated.tag, resultValidated.error);
     }
