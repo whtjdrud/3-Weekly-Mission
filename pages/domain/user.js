@@ -1,4 +1,13 @@
 class User {
+  #userAccessToken = null;
+  #userRefreshToken = null;
+
+  constructor() {
+    this.userId = null;
+    this.#userAccessToken = localStorage.getItem('accessToken');
+    this.#userRefreshToken = localStorage.getItem('refreshToken');
+  }
+
   async loginUser(emailTag, passwordTag) {
     try {
       const response = await fetch('https://bootcamp-api.codeit.kr/api/sign-in', {
@@ -15,6 +24,7 @@ class User {
       if (response.ok) {
         const responseData = await response.json();
         this.setTokenInLocalStorage(responseData);
+
         return true;
       }
       return 'INVALID_LOGIN_CREDENTIALS';
@@ -72,9 +82,27 @@ class User {
     return true;
   }
 
+  getUserId() {
+    return this.userId;
+  }
+
+  isLoggedIn() {
+    return this.#userAccessToken !== null;
+  }
   setTokenInLocalStorage(responseData) {
     localStorage.setItem('accessToken', responseData.data.accessToken);
     localStorage.setItem('refreshToken', responseData.data.refreshToken);
+
+    this.#userAccessToken = responseData.data.accessToken;
+    this.#userRefreshToken = responseData.data.refreshToken;
+  }
+
+  clearToken() {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+
+    this.#userAccessToken = null;
+    this.#userRefreshToken = null;
   }
 }
 
