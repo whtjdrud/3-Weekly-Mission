@@ -1,8 +1,6 @@
 import { emailRegex, passwordRegex } from '../config/regex.js';
 
 export default class User {
-  constructor() {}
-
   validateEmail(emailTag) {
     const username = emailTag.value;
 
@@ -48,6 +46,7 @@ export default class User {
     return { valid: true, tag: emailTag, error: null };
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async duplicatedEmail(emailTag) {
     const response = await fetch('https://bootcamp-api.codeit.kr/api/check-email', {
       method: 'POST',
