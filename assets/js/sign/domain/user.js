@@ -52,7 +52,7 @@ export default class User {
     }
 
     const responseData = await response.json();
-    this.settingLocalStorage(responseData);
+    this.setTokenInLocalStorage(responseData);
 
     return { valid: true, tag: emailTag, error: null };
   }
@@ -91,12 +91,12 @@ export default class User {
     }
 
     const responseData = await response.json();
-    this.settingLocalStorage(responseData);
+    this.setTokenInLocalStorage(responseData);
 
     return { valid: true, tag: emailTag, error: null };
   }
 
-  settingLocalStorage(responseData) {
+  setTokenInLocalStorage(responseData) {
     localStorage.setItem('accessToken', responseData.data.accessToken);
     localStorage.setItem('refreshToken', responseData.data.refreshToken);
   }
