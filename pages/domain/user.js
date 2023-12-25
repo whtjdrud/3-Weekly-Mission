@@ -4,6 +4,9 @@ class User {
   validateEmail(emailTag) {
     const username = emailTag.value;
 
+    console.log(emailTag);
+    console.log(username);
+
     if (username.length === 0) {
       return { valid: false, tag: emailTag, error: 'EMPTY_EMAIL_FIELD' };
     }

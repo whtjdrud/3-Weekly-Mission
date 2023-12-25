@@ -1,6 +1,5 @@
 import SignUpController from './signUpController.js';
 import SignUpView from './signUpView.js';
-import SignUpService from './SignupService.js';
 import user from '../domain/user.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,6 +10,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const signUpView = new SignUpView();
-  const signUpService = new SignUpService(signUpView, user);
-  new SignUpController(signUpView, user, signUpService);
+  new SignUpController(signUpView, user);
 });
