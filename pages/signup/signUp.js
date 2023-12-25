@@ -3,8 +3,7 @@ import SignUpView from './signUpView.js';
 import user from '../domain/user.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const accessToken = localStorage.getItem('accessToken');
-  if (accessToken) {
+  if (user.isLoggedIn()) {
     window.location.href = '/folder.html';
     return;
   }
