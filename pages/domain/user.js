@@ -1,6 +1,6 @@
-import { emailRegex, passwordRegex } from '../config/regex.js';
+import { emailRegex, passwordRegex } from '../common/config/regex.js';
 
-export default class User {
+class User {
   validateEmail(emailTag) {
     const username = emailTag.value;
 
@@ -101,3 +101,6 @@ export default class User {
     localStorage.setItem('refreshToken', responseData.data.refreshToken);
   }
 }
+
+const user = new User();
+export default user;
