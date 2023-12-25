@@ -1,5 +1,5 @@
 import getErrorMessage from '../common/config/errorMessage.js';
-import { qs, qsAll } from '../common/helper.js';
+import { qs, qsAll } from '../common/config/helper.js';
 
 export default class LoginView {
   constructor() {

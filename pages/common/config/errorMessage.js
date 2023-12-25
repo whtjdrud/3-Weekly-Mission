@@ -12,6 +12,7 @@ const errorMessages = {
 
   FAILED_SIGNUP: '시스템 장애로 회원가입에 실패하였습니다. 잠시 후 다시 시도해주세요.',
   INVALID_NETWORK_ERROR: '시스템 장애로 로그인에 실패하였습니다. 잠시 후 다시 시도해주세요',
+  NETWORK_ERROR: '시스템 장애가 발생하였습니다. 잠시 후 다시 시도해주세요.',
 };
 
 const getErrorMessage = errCode => errorMessages[errCode] ?? '알 수없는 에러가 발생하였습니다.';

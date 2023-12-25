@@ -1,4 +1,5 @@
-import { on } from '../common/helper.js';
+import { on } from '../common/config/helper.js';
+import { emailRegex, passwordRegex } from '../common/config/regex.js';
 
 export default class LoginController {
   constructor(loginView, user) {
@@ -20,36 +21,56 @@ export default class LoginController {
   }
 
   validateEmail(emailTag) {
-    const emailValid = this.user.validateEmail(emailTag);
-    return this.toggleErrorMessage(emailValid);
+    const username = emailTag.value;
+
+    if (username.length === 0) {
+      return this.toggleErrorMessage(false, emailTag, 'EMPTY_EMAIL_FIELD');
+    }
+    if (!emailRegex.test(username)) {
+      return this.toggleErrorMessage(false, emailTag, 'INVALID_EMAIL');
+    }
+    return this.toggleErrorMessage(true, emailTag);
   }
 
   validatePassword(passwordTag) {
-    const passwordValid = this.user.validatePassword(passwordTag);
-    return this.toggleErrorMessage(passwordValid);
+    const passwordValue = passwordTag.value;
+
+    if (passwordValue.length === 0) {
+      return this.toggleErrorMessage(false, passwordTag, 'EMPTY_PASSWORD_FIELD');
+    }
+    if (!passwordRegex.test(passwordValue)) {
+      return this.toggleErrorMessage(false, passwordTag, 'PASSWORD_TOO_SHORT');
+    }
+    return this.toggleErrorMessage(true, passwordTag);
   }
 
   async loginUser(e, emailTag, passwordTag) {
     e.preventDefault();
-    const emailValid = this.user.validateEmail(emailTag);
-    const passwordValid = this.user.validatePassword(passwordTag);
+    const emailValid = this.validateEmail(emailTag);
+    const passwordValid = this.validatePassword(passwordTag);
 
-    if (!(emailValid.valid && passwordValid.valid)) {
+    if (!(emailValid && passwordValid)) {
       return;
     }
 
-    const loginResult = await this.user.loginUser(emailTag, passwordTag);
-    this.toggleErrorMessage(loginResult);
+    try {
+      const loginResult = await this.user.loginUser(emailTag, passwordTag);
+      if (loginResult === true) {
+        this.toggleErrorMessage(true, emailTag);
+        window.location.href = '/folder.html';
+        return;
+      }
 
-    if (loginResult.valid) {
-      window.location.href = '/folder.html';
+      this.toggleErrorMessage(false, emailTag, loginResult);
+    } catch (error) {
+      this.toggleErrorMessage(false, emailTag, 'INVALID_LOGIN_CREDENTIALS');
     }
   }
 
-  toggleErrorMessage(resultValidated) {
-    if (!resultValidated.valid) {
-      return this.view.showErrorMessage(resultValidated.tag, resultValidated.error);
+  toggleErrorMessage(returnValue, tag, message) {
+    if (returnValue === false) {
+      return this.view.showErrorMessage(tag, message);
     }
-    return this.view.clearErrorMessage(resultValidated.tag);
+    return this.view.clearErrorMessage(tag);
   }
 }

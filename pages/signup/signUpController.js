@@ -1,4 +1,5 @@
-import { on } from '../common/helper.js';
+import { on } from '../common/config/helper.js';
+import { emailRegex, passwordRegex } from '../common/config/regex.js';
 
 export default class SignUpController {
   constructor(signUpView, user) {
@@ -24,24 +25,41 @@ export default class SignUpController {
   }
 
   async validateSignUpEmail(emailTag) {
-    const emailValidResult = this.user.validateEmail(emailTag);
-
-    if (!emailValidResult.valid) {
-      return this.toggleErrorMessage(emailValidResult);
+    if (this.validateEmail(emailTag) === false) {
+      return;
     }
+    const response = await this.user.duplicatedEmail(emailTag);
+    if (response === true) {
+      return this.toggleErrorMessage(response, emailTag);
+    }
+    return this.toggleErrorMessage(false, emailTag, response);
+  }
 
-    const duplicatedEmail = await this.user.duplicatedEmail(emailTag);
-    return this.toggleErrorMessage(duplicatedEmail);
+  validateEmail(emailTag) {
+    if (emailTag.value.length === 0) {
+      return this.toggleErrorMessage(false, emailTag, 'EMPTY_EMAIL_FIELD');
+    }
+    if (!emailRegex.test(emailTag.value)) {
+      return this.toggleErrorMessage(false, emailTag, 'INVALID_EMAIL');
+    }
+    return this.toggleErrorMessage(true, emailTag);
   }
 
   validatePassword(passwordTag) {
-    const passwordValidResult = this.user.validatePassword(passwordTag);
-    return this.toggleErrorMessage(passwordValidResult);
+    if (passwordTag.value.length === 0) {
+      return this.toggleErrorMessage(false, passwordTag, 'EMPTY_PASSWORD_FIELD');
+    }
+    if (!passwordRegex.test(passwordTag.value)) {
+      return this.toggleErrorMessage(false, passwordTag, 'PASSWORD_TOO_SHORT');
+    }
+    return this.toggleErrorMessage(true, passwordTag);
   }
 
   validatePasswordCheck(passwordTag, reEnteredPasswordTag) {
-    const passwordCheckResult = this.user.validatePasswordCheck(passwordTag, reEnteredPasswordTag);
-    return this.toggleErrorMessage(passwordCheckResult);
+    if (passwordTag.value === reEnteredPasswordTag.value) {
+      return this.toggleErrorMessage(true, reEnteredPasswordTag);
+    }
+    return this.toggleErrorMessage(false, reEnteredPasswordTag, 'PASSWORD_NOT_MATCH');
   }
 
   async signUpUser(e, emailTag, passwordTag) {
@@ -54,18 +72,19 @@ export default class SignUpController {
       return;
     }
 
-    const signUpResult = await this.user.signUpUser(emailTag, passwordTag);
-    this.toggleErrorMessage(signUpResult);
+    const response = await this.user.signUpUser(emailTag, passwordTag);
 
-    if (signUpResult.valid) {
+    if (response === true) {
       window.location.href = '/folder.html';
+      return;
     }
+    return this.toggleErrorMessage(false, emailTag, response);
   }
 
-  toggleErrorMessage(resultValidated) {
-    if (!resultValidated.valid) {
-      return this.view.showErrorMessage(resultValidated.tag, resultValidated.error);
+  toggleErrorMessage(returnValue, tag, message) {
+    if (returnValue === false) {
+      return this.view.showErrorMessage(tag, message);
     }
-    return this.view.clearErrorMessage(resultValidated.tag);
+    return this.view.clearErrorMessage(tag);
   }
 }
