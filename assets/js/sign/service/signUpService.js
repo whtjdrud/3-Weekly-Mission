@@ -7,7 +7,9 @@ export default class SignUpService {
   async validateSignUpEmail(emailTag) {
     const emailValidResult = this.user.validateEmail(emailTag);
 
-    if (!emailValidResult.valid) return this.toggleErrorMessage(emailValidResult);
+    if (!emailValidResult.valid) {
+      return this.toggleErrorMessage(emailValidResult);
+    }
 
     const duplicatedEmail = await this.user.duplicatedEmail(emailTag);
     return this.toggleErrorMessage(duplicatedEmail);
@@ -29,12 +31,16 @@ export default class SignUpService {
     const emailValidResult = this.user.validateEmail(emailTag);
     const passwordValidResult = this.user.validatePassword(passwordTag);
 
-    if (!(emailValidResult.valid && passwordValidResult.valid)) return;
+    if (!(emailValidResult.valid && passwordValidResult.valid)) {
+      return;
+    }
 
     const signUpResult = await this.user.signUpUser(emailTag, passwordTag);
     this.toggleErrorMessage(signUpResult);
 
-    if (signUpResult.valid) window.location.href = '/folder.html';
+    if (signUpResult.valid) {
+      window.location.href = '/folder.html';
+    }
   }
 
   toggleErrorMessage(resultValidated) {

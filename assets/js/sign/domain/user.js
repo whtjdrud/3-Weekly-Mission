@@ -57,7 +57,6 @@ export default class User {
     return { valid: true, tag: emailTag, error: null };
   }
 
-  // eslint-disable-next-line class-methods-use-this
   async duplicatedEmail(emailTag) {
     const response = await fetch('https://bootcamp-api.codeit.kr/api/check-email', {
       method: 'POST',

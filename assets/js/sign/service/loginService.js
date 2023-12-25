@@ -19,12 +19,16 @@ export default class LoginService {
     const emailValid = this.user.validateEmail(emailTag);
     const passwordValid = this.user.validatePassword(passwordTag);
 
-    if (!(emailValid.valid && passwordValid.valid)) return;
+    if (!(emailValid.valid && passwordValid.valid)) {
+      return;
+    }
 
     const loginResult = await this.user.loginUser(emailTag, passwordTag);
     this.toggleErrorMessage(loginResult);
 
-    if (loginResult.valid) window.location.href = '/folder.html';
+    if (loginResult.valid) {
+      window.location.href = '/folder.html';
+    }
   }
 
   toggleErrorMessage(resultValidated) {
