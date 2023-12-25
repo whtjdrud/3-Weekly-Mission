@@ -13,5 +13,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const signUpView = new SignUpView();
   const user = new User();
   const signUpService = new SignUpService(signUpView, user);
-  const controller = new SignUpController(signUpView, user, signUpService);
+  new SignUpController(signUpView, user, signUpService);
 });
