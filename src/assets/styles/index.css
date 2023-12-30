@@ -113,11 +113,9 @@ nav a {
 }
 
 #search-bar_input {
-  width: 1060px;
+  width: 1028px;
   border-radius: 10px;
-
   background: #F5F5F5 no-repeat 10px center;
-
   padding: 15px 15px 15px 40px;
   border: none;
 }
@@ -231,7 +229,7 @@ footer {
 /* tablet */
 @media screen AND (min-width: 768px) AND (max-width: 1199px) {
   nav {
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding: 0 32px;
   }
   nav a:first-child {
@@ -247,8 +245,11 @@ footer {
     width: 385px;
     height: 315px;
   }
-  .grid-container {
+  #search-bar_input {
+    width: 672px;
+  }
 
+  .grid-container {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 25px 20px;
   }
@@ -268,6 +269,13 @@ footer {
     font-size: 32px;
     font-style: normal;
     line-height: 42px;
+  }
+
+  .login-profile span {
+    display: none;
+  }
+  #search-bar_input {
+    width: 325px;
   }
   .grid-container {
     grid-template-columns: repeat(1, 1fr);

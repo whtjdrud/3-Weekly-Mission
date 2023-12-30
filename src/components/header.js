@@ -1,24 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { getUserProfile } from '../services/userService';
+import React from 'react';
 import Logo from '../assets/images/index/logo.svg';
-
+import useProfileState from './useProfileState';
 function Header() {
-  const [profile, setProfile] = useState(null);
+  const { profile } = useProfileState();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getUserProfile();
-        setProfile(data);
-      } catch (error) {
-        console.error('프로필 데이터를 불러오는데 실패했습니다', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  // 로그인 상태에 따른 링크와 텍스트를 결정하는 함수
   const renderAuthLink = () => {
     if (profile) {
       return (
