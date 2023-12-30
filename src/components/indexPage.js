@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import Header from './Header.js';
+import Header from './header.js';
 import Footer from './footer.js';
 import searchIcon from '../assets/images/index/Search.svg';
 import { getFolderData } from '../services/folderService';
-
+import MainCard from './mainCard';
 function IndexPage() {
-  const [folder, setFolder] = useState(null);
+  const [folder, setFolder] = useState({
+    folder: {
+      links: [],
+      owner: {
+        profileImageSource: '',
+        name: '',
+      },
+      name: '',
+    },
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,31 +28,6 @@ function IndexPage() {
 
     fetchData();
   }, []);
-
-  const renderMainCard = () => {
-    if (folder) {
-      return folder.folder.links.map(link => (
-        <section key={link.id} className="card">
-          <a href={link.url} target="_blank" rel="noreferrer">
-            <div className="card-image">
-              <img src={link.imageSource} alt="Card Image" />
-            </div>
-            <div className="card-content">
-              <div className="time-posted">
-                <p>{link.createdAt}</p>
-              </div>
-              <div className="card-text">
-                <p>{link.description}</p>
-              </div>
-              <div className="card-date">
-                <p>2023. 3. 15</p>
-              </div>
-            </div>
-          </a>
-        </section>
-      ));
-    }
-  };
 
   return (
     <div>
@@ -62,7 +46,11 @@ function IndexPage() {
           </form>
         </div>
 
-        <div className="grid-container">{renderMainCard()}</div>
+        <div className="grid-container">
+          {folder.folder.links.map(link => (
+            <MainCard key={link.id} link={link} />
+          ))}
+        </div>
       </article>
       <Footer />
     </div>
