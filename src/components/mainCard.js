@@ -1,13 +1,14 @@
 import React from 'react';
 import { timeSince, convertDate } from '../utils/dateUtils';
 import PropTypes from 'prop-types';
+import default_thumnail from '../assets/images/index/default-thumbnail.png';
 
 function MainCard({ link }) {
   return (
     <section className="card">
       <a href={link.url} target="_blank" rel="noreferrer">
         <div className="card-image">
-          <img src={link.imageSource} alt="강의 메인 이미지" />
+          {link.imageSource ? <img src={link.imageSource} alt="강의 메인 이미지" /> : <img src={default_thumnail} alt="강의 메인 이미지" />}
         </div>
         <div className="card-content">
           <div className="time-posted">
