@@ -1,7 +1,7 @@
 import React from 'react';
-import { timeSince, convertDate } from '../utils/dateUtils';
+import { timeSince, convertDate } from '../../utils/dateUtils';
 import PropTypes from 'prop-types';
-import default_thumnail from '../assets/images/index/default-thumbnail.png';
+import default_thumnail from '../../assets/images/index/default-thumbnail.png';
 
 function MainCard({ link }) {
   return (
@@ -28,10 +28,10 @@ function MainCard({ link }) {
 MainCard.propTypes = {
   link: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    imageSource: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    url: PropTypes.string,
+    imageSource: PropTypes.string,
+    createdAt: PropTypes.string,
+    description: PropTypes.string,
   }).isRequired,
 };
 export default MainCard;
