@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from '../header/header.js';
-import Footer from '../footer/footer.js';
-import MainCard from './mainCard';
-import useFolderState from '../../hooks/useFolderState';
-import searchIcon from '../../assets/images/index/Search.svg';
+import Header from '../components/header/header.js';
+import Footer from '../components/footer/footer.js';
+import MainCard from '../components/index/mainCard';
+import useFolderState from '../hooks/useFolderState';
+import searchIcon from '../assets/images/index/Search.svg';
 function IndexPage() {
   const { folder } = useFolderState();
 
