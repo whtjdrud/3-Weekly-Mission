@@ -27,7 +27,7 @@ function MainCard({ link }) {
 }
 MainCard.propTypes = {
   link: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     url: PropTypes.string,
     imageSource: PropTypes.string,
     createdAt: PropTypes.string,

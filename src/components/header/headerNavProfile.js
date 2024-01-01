@@ -23,7 +23,7 @@ const HeaderNavProfile = ({ profile }) => {
 
 HeaderNavProfile.propTypes = {
   profile: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     name: PropTypes.string,
     email: PropTypes.string,
     profileImageSource: PropTypes.string,
