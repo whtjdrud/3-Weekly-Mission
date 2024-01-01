@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../../assets/images/index/logo.svg';
 import useProfileState from '../../hooks/useProfileState';
-import Header_nav_profile from './header_nav_profile';
+import HeaderNavProfile from './headerNavProfile';
 function Header() {
   const { profile } = useProfileState();
 
@@ -11,7 +11,7 @@ function Header() {
         <a href="index.html">
           <img src={Logo} alt="홈으로 연결된 Linkbrary 로고" />
         </a>
-        <Header_nav_profile profile={profile} />
+        <HeaderNavProfile profile={profile} />
       </nav>
     </header>
   );

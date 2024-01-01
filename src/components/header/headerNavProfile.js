@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Header_nav_profile = ({ profile }) => {
+const HeaderNavProfile = ({ profile }) => {
   if (profile) {
     return (
       <div className="login-profile">
         <img className="nav-profile-img" src={profile.profileImageSource} alt="" />
         <a className="" href="/pages/logout">
-          <span>{profile.email}</span>
+          {profile.email}
         </a>
       </div>
     );
@@ -15,13 +15,13 @@ const Header_nav_profile = ({ profile }) => {
   return (
     <div className="login-profile">
       <a className="cta cta-short" href="/pages/login/signin.html">
-        <span>로그인</span>
+        로그인
       </a>
     </div>
   );
 };
 
-Header_nav_profile.propTypes = {
+HeaderNavProfile.propTypes = {
   profile: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string,
@@ -30,4 +30,4 @@ Header_nav_profile.propTypes = {
   }),
 };
 
-export default Header_nav_profile;
+export default HeaderNavProfile;
