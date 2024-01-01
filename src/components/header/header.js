@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../../assets/images/index/logo.svg';
-import useProfileState from './useProfileState';
+import useProfileState from '../../hooks/useProfileState';
 import Header_nav_profile from './header_nav_profile';
 function Header() {
   const { profile } = useProfileState();

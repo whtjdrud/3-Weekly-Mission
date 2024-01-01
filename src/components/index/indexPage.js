@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../header/header.js';
 import Footer from '../footer/footer.js';
 import MainCard from './mainCard';
-import useFolderState from './useFolderState';
+import useFolderState from '../../hooks/useFolderState';
 import searchIcon from '../../assets/images/index/Search.svg';
 function IndexPage() {
   const { folder } = useFolderState();

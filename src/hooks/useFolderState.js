@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getFolderData } from '../../services/folderService';
+import { getFolderData } from '../services/folderService';
 
 function useFolderState() {
   const [folder, setFolder] = useState({
