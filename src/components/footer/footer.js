@@ -1,8 +1,8 @@
 import React from 'react';
-import facebook from '../assets/images/index/facebook.svg';
-import twitter from '../assets/images/index/twitter.svg';
-import youtube from '../assets/images/index/youtube.svg';
-import instragram from '../assets/images/index/instagram.svg';
+import facebook from '../../assets/images/index/facebook.svg';
+import twitter from '../../assets/images/index/twitter.svg';
+import youtube from '../../assets/images/index/youtube.svg';
+import instragram from '../../assets/images/index/instagram.svg';
 
 function Footer() {
   return (
