@@ -4,7 +4,7 @@ import Footer from '../components/footer/footer.js';
 import MainCard from '../components/index/mainCard';
 import useFolderState from '../hooks/useFolderState';
 import searchIcon from '../assets/images/index/Search.svg';
-function Index() {
+function Folder() {
   const { folder } = useFolderState();
 
   return (
@@ -39,4 +39,4 @@ const searchBarStyle = {
   backgroundImage: `url(${searchIcon})`,
 };
 
-export default Index;
+export default Folder;
