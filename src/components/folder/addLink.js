@@ -27,6 +27,7 @@ const SearchContainer = styled.div`
   border-radius: 15px;
   border: 1px solid #6d6afe;
   background: #fff;
+  gap: 12px;
 `;
 const AddButton = styled.button`
   width: 80px;
