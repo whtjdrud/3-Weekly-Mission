@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getFolderData } from '../api/folderApi';
 
 function useFolderState() {
-  const [folder, setFolder] = useState({
+  const [folderData, setFolderData] = useState({
     folder: {
       links: [],
       owner: {
@@ -18,7 +18,7 @@ function useFolderState() {
     const fetchData = async () => {
       try {
         const data = await getFolderData();
-        setFolder(data);
+        setFolderData(data);
       } catch (error) {
         setError(error);
         console.error('폴더 데이터를 불러오는데 실패했습니다', error);
@@ -28,7 +28,7 @@ function useFolderState() {
     fetchData();
   }, []);
 
-  return { folder, error };
+  return { folderData, error };
 }
 
 export default useFolderState;
