@@ -2,10 +2,10 @@ import React from 'react';
 import Header from '../components/header/header.js';
 import Footer from '../components/footer/footer.js';
 import MainCard from '../components/index/mainCard';
-import useFolderState from '../hooks/useFolderState';
+import { useSampleFolderData } from '../hooks/useFolderState';
 import searchIcon from '../assets/images/index/Search.svg';
 function Index() {
-  const { folderData } = useFolderState();
+  const { folderData } = useSampleFolderData();
   const { profileImageSource, name: ownerName } = folderData.folder.owner;
   const { folderName } = folderData.folder.name;
 

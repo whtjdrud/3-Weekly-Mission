@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getFolderData } from '../api/folderApi';
+import { getUserFolderData, getSampleFolderData, getUserLinkData } from '../api/folderApi';
 
-function useFolderState() {
+export const useSampleFolderData = () => {
   const [folderData, setFolderData] = useState({
     folder: {
       links: [],
@@ -17,7 +17,7 @@ function useFolderState() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getFolderData();
+        const data = await getSampleFolderData();
         setFolderData(data);
       } catch (error) {
         setError(error);
@@ -29,6 +29,42 @@ function useFolderState() {
   }, []);
 
   return { folderData, error };
-}
+};
 
-export default useFolderState;
+export const useUserFolders = () => {
+  const [folderList, setFolderList] = useState({ data: [] });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getUserFolderData();
+        setFolderList(data);
+      } catch (error) {
+        console.error('폴더 데이터를 불러오는데 실패했습니다', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { folderList };
+};
+
+export const useUserLinkData = activeFolderId => {
+  const [linkList, setUserLinkList] = useState({ data: [] });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getUserLinkData(activeFolderId);
+        setUserLinkList(data);
+      } catch (error) {
+        console.error('링크 데이터를 불러오는데 실패했습니다', error);
+      }
+    };
+
+    fetchData();
+  }, [activeFolderId]);
+
+  return { linkList };
+};

@@ -32,6 +32,7 @@ const SearchLinkIcon = styled.img`
 const SearchInput = styled.input`
   border: none;
   outline: none;
+  width: 100%;
   background: #f5f5f5;
   flex-grow: 1;
 `;
