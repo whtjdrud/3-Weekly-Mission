@@ -17,15 +17,9 @@ function FolderLinkCard({ link }) {
           )}
         </CardImageDiv>
         <CardContent>
-          <TimePosted>
-            <p>{timeSince(link.created_at)}</p>
-          </TimePosted>
-          <CardText>
-            <p>{link.description}</p>
-          </CardText>
-          <CardDate>
-            <p>{convertDate(link.created_at)}</p>
-          </CardDate>
+          <TimePosted>{timeSince(link.created_at)}</TimePosted>
+          <CardText>{link.description}</CardText>
+          <CardDate>{convertDate(link.created_at)}</CardDate>
         </CardContent>
       </Link>
     </Card>
