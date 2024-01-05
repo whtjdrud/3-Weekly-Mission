@@ -19,7 +19,7 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
   };
 
   return (
-    <>
+    <FolderLinkHeader>
       <MainNav>
         <FolderList onClick={handleFolderClick}>
           <FolderButton data-id="all">전체</FolderButton>
@@ -45,10 +45,17 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
           <DeleteButton />
         </HeaderButtons>
       </HeaderTitle>
-    </>
+    </FolderLinkHeader>
   );
 }
-
+const FolderLinkHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+`;
 const HeaderButtons = styled.div`
   display: flex;
   justify-content: space-between;
@@ -111,7 +118,6 @@ const MainNav = styled.div`
 `;
 const FolderList = styled.div`
   display: flex;
-
   align-items: flex-start;
   gap: 8px;
 `;
