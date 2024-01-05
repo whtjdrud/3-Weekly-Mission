@@ -17,8 +17,6 @@ function FolderLinkCard({ link }) {
           ) : (
             <CardImage src={default_thumbnail} alt="강의 메인 이미지" />
           )}
-
-          <StarImage src={star} alt={'즐겨찾기버튼'} />
         </CardImageDiv>
         <CardContent>
           <TimePosted>{timeSince(link.created_at)}</TimePosted>
@@ -26,7 +24,7 @@ function FolderLinkCard({ link }) {
           <CardDate>{convertDate(link.created_at)}</CardDate>
         </CardContent>
       </Link>
-
+      <StarImage src={star} alt={'즐겨찾기버튼'} />
       <KebabImage src={kebab} />
     </Card>
   );
