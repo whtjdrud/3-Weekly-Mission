@@ -1,6 +1,5 @@
 import React from 'react';
 import '../src/assets/styles/reset.css';
-
 import Share from './pages/share';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Folder from './pages/folder';
