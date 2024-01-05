@@ -1,10 +1,11 @@
 import React from 'react';
 import Header from '../components/header/header.js';
 import Footer from '../components/footer/footer.js';
-import MainCard from '../components/index/mainCard';
+import MainCard from '../components/share/mainCard';
+import '../assets/styles/index.css';
 import { useSampleFolderData } from '../hooks/useFolderState';
 import searchIcon from '../assets/images/index/Search.svg';
-function Index() {
+function Share() {
   const { folderData } = useSampleFolderData();
   const { profileImageSource, name: ownerName } = folderData.folder.owner;
   const { folderName } = folderData.folder.name;
@@ -42,4 +43,4 @@ const searchBarStyle = {
   backgroundImage: `url(${searchIcon})`,
 };
 
-export default Index;
+export default Share;
