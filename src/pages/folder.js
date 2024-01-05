@@ -32,15 +32,26 @@ function Folder() {
         </FolderView>
 
         <FolderLinkGridContainer>
-          {linkList.data.map(link => (
-            <FolderLinkCard key={link.id} link={link} />
-          ))}
+          {linkList.data && linkList.data.length > 0 ? (
+            linkList.data.map(link => <FolderLinkCard key={link.id} link={link} />)
+          ) : (
+            <EmptyFolder>저장된 링크가 없습니다</EmptyFolder>
+          )}
         </FolderLinkGridContainer>
       </FolderContent>
       <Footer />
     </>
   );
 }
+const EmptyFolder = styled.p`
+  grid-column: 1 / span 3;
+  color: #000;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+`;
 const FolderLinkGridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
