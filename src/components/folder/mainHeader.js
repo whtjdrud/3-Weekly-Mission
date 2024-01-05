@@ -12,9 +12,9 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
   const handleFolderClick = event => {
     const folderId = event.target.getAttribute('data-id');
     if (folderId === 'all') {
-      onFolderClick(null); // '전체보기' 클릭 시 null을 전달합니다.
+      onFolderClick(null);
     } else {
-      onFolderClick(Number(folderId)); // 다른 폴더 클릭 시 해당 ID를 전달합니다.
+      onFolderClick(Number(folderId));
     }
   };
 
@@ -24,7 +24,7 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
         <FolderList onClick={handleFolderClick}>
           <FolderButton data-id="all">전체</FolderButton>
           {folderList.map(folder => (
-            <FolderButton key={folder.id} data-id={folder.id} active={folder.id === activeFolderId}>
+            <FolderButton key={folder.id} data-id={folder.id} $active={folder.id === activeFolderId}>
               {folder.name}
             </FolderButton>
           ))}
