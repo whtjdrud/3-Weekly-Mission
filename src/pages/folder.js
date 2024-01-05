@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import { useUserLinkData, useUserFolders } from '../hooks/useFolderState';
 import MainHeader from '../components/folder/mainHeader';
 import FolderLinkCard from '../components/folder/folderLinkCard';
+import addIcon from '../assets/images/add_white.svg';
+
 function Folder() {
   const { folderList } = useUserFolders();
   const [activeFolderId, setActiveFolderId] = useState(null);
@@ -38,11 +40,43 @@ function Folder() {
             <EmptyFolder>저장된 링크가 없습니다</EmptyFolder>
           )}
         </FolderLinkGridContainer>
+
+        <FloatingActionButton>
+          <FabP>폴더추가</FabP> <AddImage src={addIcon} alt="폴더추가 버튼" />
+        </FloatingActionButton>
       </FolderContent>
       <Footer />
     </>
   );
 }
+
+const FabP = styled.p`
+  color: #e7effb;
+  text-align: center;
+  font-size: 16px;
+`;
+const AddImage = styled.img`
+  width: 16px;
+  height: 16px;
+`;
+const FloatingActionButton = styled.button`
+  display: none;
+  @media screen AND (min-width: 357px) and (max-width: 767px) {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 24px;
+
+    position: fixed; /* 화면에 고정 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: 101px; /* 하단에서 101px 떨어진 위치 */
+    z-index: 1; /* 다른 요소 위에 나타나도록 z-index 설정 */
+    border-radius: 20px;
+    border: 1px solid #fff;
+    background: #6d6afe;
+  }
+`;
 const EmptyFolder = styled.p`
   grid-column: 1 / span 3;
   color: #000;
