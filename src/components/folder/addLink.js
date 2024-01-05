@@ -13,6 +13,8 @@ function AddLink() {
   );
 }
 const SearchSection = styled.section`
+  display: flex;
+  justify-content: center;
   padding: 60px 320px 90px 320px;
   width: 100%;
   margin-top: 0;
