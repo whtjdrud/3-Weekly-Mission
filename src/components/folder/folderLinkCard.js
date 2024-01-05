@@ -2,6 +2,8 @@ import React from 'react';
 import { timeSince, convertDate } from '../../utils/dateUtils';
 import PropTypes from 'prop-types';
 import default_thumbnail from '../../assets/images/index/default-thumbnail.png';
+import star from '../../assets/images/star.svg';
+import kebab from '../../assets/images/kebab.svg';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -15,6 +17,8 @@ function FolderLinkCard({ link }) {
           ) : (
             <CardImage src={default_thumbnail} alt="강의 메인 이미지" />
           )}
+
+          <StarImage src={star} alt={'즐겨찾기버튼'} />
         </CardImageDiv>
         <CardContent>
           <TimePosted>{timeSince(link.created_at)}</TimePosted>
@@ -22,11 +26,29 @@ function FolderLinkCard({ link }) {
           <CardDate>{convertDate(link.created_at)}</CardDate>
         </CardContent>
       </Link>
+
+      <KebabImage src={kebab} />
     </Card>
   );
 }
 
+const KebabImage = styled.img`
+  position: absolute;
+  bottom: 100px;
+  right: 20px;
+  z-index: 100;
+  width: 21px;
+  height: 17px;
+`;
+const StarImage = styled.img`
+  position: absolute;
+  top: 15px; /* 위쪽으로부터의 거리 */
+  right: 15px;
+  width: 34px;
+  height: 34px;
+`;
 const Card = styled.div`
+  position: relative;
   width: 340px;
   height: 334px;
   font-style: normal;
@@ -44,6 +66,7 @@ const CardContent = styled.div`
 `;
 
 const CardImageDiv = styled.div`
+  position: relative;
   overflow: hidden;
   width: 340px;
   height: 200px;
