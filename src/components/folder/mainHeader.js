@@ -9,6 +9,8 @@ import delete_icon_path from '../../assets/images/delete.svg';
 
 function MainHeader({ folderList, activeFolderId, onFolderClick }) {
   const activeFolderName = folderList.find(folder => folder.id === activeFolderId)?.name;
+
+  console.log(activeFolderName);
   const handleFolderClick = event => {
     const folderId = event.target.getAttribute('data-id');
     if (folderId === 'all') {
@@ -39,11 +41,13 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
       <HeaderTitle>
         <MainTitle>{activeFolderName || '전체'}</MainTitle>
 
-        <HeaderButtons>
-          <PenButton />
-          <ShareButton />
-          <DeleteButton />
-        </HeaderButtons>
+        {activeFolderName !== undefined && (
+          <HeaderButtons>
+            <PenButton />
+            <ShareButton />
+            <DeleteButton />
+          </HeaderButtons>
+        )}
       </HeaderTitle>
     </FolderLinkHeader>
   );
