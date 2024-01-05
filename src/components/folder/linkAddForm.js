@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import linkIcon from '../../assets/images/link.svg';
-function AddLink() {
+function LinkAddForm() {
   return (
     <SearchSection>
       <SearchContainer>
@@ -54,4 +54,4 @@ const SearchLinkIcon = styled.img`
   height: 20px;
 `;
 
-export default AddLink;
+export default LinkAddForm;
