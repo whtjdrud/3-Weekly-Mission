@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Header from '../components/header/header.js';
 import Footer from '../components/footer/footer.js';
-import AddLink from '../components/folder/addLink';
+import LinkAddForm from '../components/folder/linkAddForm';
 import SearchBar from '../components/folder/searchBar';
 import styled from 'styled-components';
 import { useUserLinkData, useUserFolders } from '../hooks/useFolderState';
 import MainHeader from '../components/folder/mainHeader';
-import MainCard from '../components/folder/mainCard';
+import FolderLinkCard from '../components/folder/folderLinkCard';
 function Folder() {
   const { folderList } = useUserFolders();
   const [activeFolderId, setActiveFolderId] = useState(null);
@@ -20,26 +20,33 @@ function Folder() {
   return (
     <>
       <Header />
-      <AddLink />
-      <FolderMain>
+      <LinkAddForm />
+
+      <FolderContent>
         <SearchSection>
           <SearchBar />
         </SearchSection>
-        <MainArticle>
+
+        <FolderView>
           <MainHeader folderList={folderList.data} activeFolderId={activeFolderId} onFolderClick={handleFolderClick} />
-        </MainArticle>
-        <div className="grid-container">
+        </FolderView>
+
+        <FolderLinkGridContainer>
           {linkList.data.map(link => (
-            <MainCard key={link.id} link={link} />
+            <FolderLinkCard key={link.id} link={link} />
           ))}
-        </div>
-      </FolderMain>
+        </FolderLinkGridContainer>
+      </FolderContent>
       <Footer />
     </>
   );
 }
-
-const FolderMain = styled.main`
+const FolderLinkGridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 25px 20px;
+`;
+const FolderContent = styled.main`
   display: flex;
   flex-direction: column;
   width: 1060px;
@@ -56,7 +63,7 @@ const SearchSection = styled.section`
   margin-top: 40px;
   margin-bottom: 40px;
 `;
-const MainArticle = styled.section`
+const FolderView = styled.section`
   display: flex;
   width: 100%;
   flex-direction: column;
