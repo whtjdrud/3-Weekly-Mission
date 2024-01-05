@@ -1,7 +1,7 @@
 import React from 'react';
 import { timeSince, convertDate } from '../../utils/dateUtils';
 import PropTypes from 'prop-types';
-import default_thumnail from '../../assets/images/index/default-thumbnail.png';
+import default_thumbnail from '../../assets/images/index/default-thumbnail.png';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ function FolderLinkCard({ link }) {
           {link.image_source ? (
             <CardImage src={link.image_source} alt="강의 메인 이미지" />
           ) : (
-            <CardImage src={default_thumnail} alt="강의 메인 이미지" />
+            <CardImage src={default_thumbnail} alt="강의 메인 이미지" />
           )}
         </CardImageDiv>
         <CardContent>
