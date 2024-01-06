@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FolderButton, StyledFolderList } from './folderList.style';
+import { FolderButton, StyledFolderList } from './style/folderList.style';
 
 const FolderList = ({ folderList, activeFolderId, onFolderClick }) => {
   return (
