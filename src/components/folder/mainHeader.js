@@ -4,7 +4,7 @@ import addIcon from '../../assets/images/add.svg';
 import { Link } from 'react-router-dom';
 import MainIconButton from './mainIconButton';
 import FolderList from './folderList';
-import { FolderAdd, FolderAddIcon, FolderLinkHeader, HeaderButtons, HeaderTitle, MainNav, MainTitle } from './mainHeader.style';
+import { FolderAdd, FolderAddIcon, FolderLinkHeader, HeaderButtons, HeaderTitle, MainNav, MainTitle } from './style/mainHeader.style';
 
 function MainHeader({ folderList, activeFolderId, onFolderClick }) {
   const activeFolderName = folderList.find(folder => folder.id === activeFolderId)?.name;

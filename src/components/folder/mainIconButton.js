@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import share_icon_path from '../../assets/images/share.svg';
 import pen_icon_path from '../../assets/images/pen.svg';
 import delete_icon_path from '../../assets/images/delete.svg';
-import { MainHeaderButton, MainHeaderIcon } from './mainIconButton.style';
+import { MainHeaderButton, MainHeaderIcon } from './style/mainIconButton.style';
 
 const MainIconButton = ({ text }) => (
   <MainHeaderButton>

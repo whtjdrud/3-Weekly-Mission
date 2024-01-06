@@ -6,7 +6,17 @@ import star from '../../assets/images/star.svg';
 import kebab from '../../assets/images/kebab.svg';
 
 import { Link } from 'react-router-dom';
-import { Card, CardContent, CardDate, CardImage, CardImageDiv, CardText, KebabImage, StarImage, TimePosted } from './folderLinkCard.style';
+import {
+  Card,
+  CardContent,
+  CardDate,
+  CardImage,
+  CardImageDiv,
+  CardText,
+  KebabImage,
+  StarImage,
+  TimePosted,
+} from './style/folderLinkCard.style';
 
 function FolderLinkCard({ link }) {
   return (
@@ -33,14 +43,10 @@ function FolderLinkCard({ link }) {
 
 FolderLinkCard.propTypes = {
   link: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    created_at: PropTypes.string,
-    updated_at: PropTypes.string,
-    url: PropTypes.string,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    image_source: PropTypes.string,
-    folder_id: PropTypes.number,
+    created_at: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    image_source: PropTypes.string, // 옵셔널 프로퍼티
   }).isRequired,
 };
 export default FolderLinkCard;
