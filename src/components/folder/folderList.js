@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import { FolderButton, StyledFolderList } from './folderList.style';
 
 const FolderList = ({ folderList, activeFolderId, onFolderClick }) => {
   return (
@@ -20,20 +20,5 @@ FolderList.propTypes = {
   activeFolderId: PropTypes.number,
   onFolderClick: PropTypes.func.isRequired,
 };
-
-const StyledFolderList = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-`;
-
-const FolderButton = styled.button`
-  padding: 8px 12px;
-  align-items: center;
-  border-radius: 5px;
-  background: ${props => (props.active ? '#6d6afe' : '#fff')};
-  color: ${props => (props.active ? '#fff' : '#000')};
-  border: 1px solid #6d6afe;
-`;
 
 export default FolderList;
