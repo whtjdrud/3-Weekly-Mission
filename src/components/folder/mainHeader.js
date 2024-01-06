@@ -19,6 +19,13 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
     }
   };
 
+  const renderHeaderButtons = (MainIconButtons, activeFolderName) => {
+    if (!activeFolderName) {
+      return null;
+    }
+    return MainIconButtons.map(text => <MainIconButton key={text} text={text} />);
+  };
+
   return (
     <FolderLinkHeader>
       <MainNav>
@@ -36,13 +43,6 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
       </HeaderTitle>
     </FolderLinkHeader>
   );
-
-  function renderHeaderButtons(MainIconButtons, activeFolderName) {
-    if (!activeFolderName) {
-      return null;
-    }
-    return MainIconButtons.map(text => <MainIconButton key={text} text={text} />);
-  }
 }
 
 const FolderLinkHeader = styled.div`
