@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import addIcon from '../../assets/images/add.svg';
 import { Link } from 'react-router-dom';
 import MainIconButton from './mainIconButton';
+import FolderList from './folderList';
 
 function MainHeader({ folderList, activeFolderId, onFolderClick }) {
   const activeFolderName = folderList.find(folder => folder.id === activeFolderId)?.name;
@@ -21,14 +22,7 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
   return (
     <FolderLinkHeader>
       <MainNav>
-        <FolderList onClick={handleFolderClick}>
-          <FolderButton data-id="all">전체</FolderButton>
-          {folderList.map(folder => (
-            <FolderButton key={folder.id} data-id={folder.id} $active={folder.id === activeFolderId}>
-              {folder.name}
-            </FolderButton>
-          ))}
-        </FolderList>
+        <FolderList folderList={folderList} activeFolderId={activeFolderId} onFolderClick={handleFolderClick} />
         <Link to="#">
           <FolderAdd>
             폴더 추가 <FolderAddIcon src={addIcon} alt="폴더 추가 아이콘" />
@@ -81,30 +75,6 @@ const MainNav = styled.div`
   width: 1060px;
   justify-content: space-between;
   align-items: center;
-`;
-const FolderList = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-`;
-
-const FolderButton = styled.button`
-  ${props => (props.active ? activeStyle : inactiveStyle)}
-  padding: 8px 12px;
-  align-items: center;
-  border-radius: 5px;
-`;
-
-const activeStyle = css`
-  border: 1px solid #6d6afe;
-  background: #6d6afe;
-  color: #fff;
-`;
-
-const inactiveStyle = css`
-  border: 1px solid #6d6afe;
-  background: #fff;
-  color: #000;
 `;
 
 const FolderAdd = styled.div`
