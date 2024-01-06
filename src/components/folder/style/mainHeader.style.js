@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const FolderLinkHeader = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
@@ -15,6 +16,7 @@ export const HeaderButtons = styled.div`
 `;
 export const HeaderTitle = styled.div`
   display: flex;
+  max-width: 1060px;
   width: 100%;
   justify-content: space-between;
 `;
@@ -28,13 +30,15 @@ export const MainTitle = styled.div`
 
 export const MainNav = styled.div`
   display: flex;
-  width: 1060px;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
 `;
 
 export const FolderAdd = styled.div`
   display: flex;
+  flex-direction: row;
+  width: 100%;
   align-items: center;
   text-align: center;
   font-size: 16px;
