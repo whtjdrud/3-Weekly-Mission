@@ -92,7 +92,7 @@ const FolderLinkGridContainer = styled.div`
 const FolderContent = styled.main`
   display: flex;
   flex-direction: column;
-  width: 1060px;
+  max-width: 1060px;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -108,6 +108,7 @@ const SearchSection = styled.section`
 `;
 const FolderView = styled.section`
   display: flex;
+  max-width: 1060px;
   width: 100%;
   flex-direction: column;
   align-items: center;

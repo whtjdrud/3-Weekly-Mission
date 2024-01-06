@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const SearchDiv = styled.div`
   display: flex;
   align-items: center;
-  width: 1060px;
+  max-width: 1060px;
+  width: 100%;
   border-radius: 10px;
   background: #f5f5f5;
   justify-content: space-between;
@@ -11,7 +12,9 @@ export const SearchDiv = styled.div`
   border: none;
   gap: 10px;
 `;
-
+export const SearchForm = styled.form`
+  width: 100%;
+`;
 export const SearchLinkIcon = styled.img`
   width: 16px;
   height: 16px;
