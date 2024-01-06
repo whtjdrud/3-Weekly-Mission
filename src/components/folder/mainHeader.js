@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import addIcon from '../../assets/images/add.svg';
 import { Link } from 'react-router-dom';
-import share_icon_path from '../../assets/images/share.svg';
-import pen_icon_path from '../../assets/images/pen.svg';
-import delete_icon_path from '../../assets/images/delete.svg';
+import MainIconButton from './mainIconButton';
 
 function MainHeader({ folderList, activeFolderId, onFolderClick }) {
   const activeFolderName = folderList.find(folder => folder.id === activeFolderId)?.name;
@@ -42,9 +40,9 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
 
         {activeFolderName !== undefined && (
           <HeaderButtons>
-            <PenButton />
-            <ShareButton />
-            <DeleteButton />
+            <MainIconButton text="삭제" />
+            <MainIconButton text="수정" />
+            <MainIconButton text="공유" />
           </HeaderButtons>
         )}
       </HeaderTitle>
@@ -67,45 +65,9 @@ const HeaderButtons = styled.div`
 const HeaderTitle = styled.div`
   display: flex;
   width: 100%;
-
   justify-content: space-between;
 `;
-const MainHeaderIcon = styled.img`
-  width: 18px;
-  height: 18px;
-`;
 
-const MainHeaderButton = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: #9fa6b2;
-  font-size: 14px;
-  font-weight: 600;
-  background: #fff;
-  border: none;
-`;
-
-const DeleteButton = () => (
-  <MainHeaderButton>
-    <MainHeaderIcon src={delete_icon_path} />
-    삭제
-  </MainHeaderButton>
-);
-
-const PenButton = () => (
-  <MainHeaderButton>
-    <MainHeaderIcon src={pen_icon_path} />
-    수정
-  </MainHeaderButton>
-);
-
-const ShareButton = () => (
-  <MainHeaderButton>
-    <MainHeaderIcon src={share_icon_path} />
-    공유
-  </MainHeaderButton>
-);
 const MainTitle = styled.div`
   font-size: 24px;
   font-style: normal;
