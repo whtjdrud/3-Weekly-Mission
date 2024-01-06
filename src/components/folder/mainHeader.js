@@ -32,18 +32,19 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
 
       <HeaderTitle>
         <MainTitle>{activeFolderName || '전체'}</MainTitle>
-
-        {activeFolderName !== undefined && (
-          <HeaderButtons>
-            {MainIconButtons.map(text => (
-              <MainIconButton key={text} text={text} />
-            ))}
-          </HeaderButtons>
-        )}
+        <HeaderButtons>{renderHeaderButtons(MainIconButtons, activeFolderName)} </HeaderButtons>
       </HeaderTitle>
     </FolderLinkHeader>
   );
+
+  function renderHeaderButtons(MainIconButtons, activeFolderName) {
+    if (!activeFolderName) {
+      return null;
+    }
+    return MainIconButtons.map(text => <MainIconButton key={text} text={text} />);
+  }
 }
+
 const FolderLinkHeader = styled.div`
   display: flex;
   flex-direction: column;
