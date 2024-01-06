@@ -18,6 +18,13 @@ function Folder() {
   const handleFolderClick = id => {
     setActiveFolderId(id);
   };
+  function renderLinks(linkList) {
+    if (!linkList.data || linkList.data.length === 0) {
+      return <EmptyFolder>저장된 링크가 없습니다</EmptyFolder>;
+    }
+
+    return linkList.data.map(link => <FolderLinkCard key={link.id} link={link} />);
+  }
 
   return (
     <>
@@ -28,19 +35,10 @@ function Folder() {
         <SearchSection>
           <SearchBar />
         </SearchSection>
-
         <FolderView>
           <MainHeader folderList={folderList.data} activeFolderId={activeFolderId} onFolderClick={handleFolderClick} />
         </FolderView>
-
-        <FolderLinkGridContainer>
-          {linkList.data && linkList.data.length > 0 ? (
-            linkList.data.map(link => <FolderLinkCard key={link.id} link={link} />)
-          ) : (
-            <EmptyFolder>저장된 링크가 없습니다</EmptyFolder>
-          )}
-        </FolderLinkGridContainer>
-
+        <FolderLinkGridContainer>{renderLinks(linkList)}</FolderLinkGridContainer>
         <FloatingActionButton>
           <FabP>폴더추가</FabP> <AddImage src={addIcon} alt="폴더추가 버튼" />
         </FloatingActionButton>
