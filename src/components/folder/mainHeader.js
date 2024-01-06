@@ -49,11 +49,7 @@ MainHeader.propTypes = {
   folderList: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      createdAt: PropTypes.string,
-      name: PropTypes.string,
-      user_id: PropTypes.number,
-      favorite: PropTypes.bool,
-      link: PropTypes.shape({ count: PropTypes.number }),
+      name: PropTypes.string.isRequired,
     }),
   ).isRequired,
 
