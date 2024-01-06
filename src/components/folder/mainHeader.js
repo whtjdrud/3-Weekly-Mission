@@ -7,6 +7,7 @@ import MainIconButton from './mainIconButton';
 
 function MainHeader({ folderList, activeFolderId, onFolderClick }) {
   const activeFolderName = folderList.find(folder => folder.id === activeFolderId)?.name;
+  const MainIconButtons = ['삭제', '수정', '공유'];
 
   const handleFolderClick = event => {
     const folderId = event.target.getAttribute('data-id');
@@ -40,9 +41,9 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
 
         {activeFolderName !== undefined && (
           <HeaderButtons>
-            <MainIconButton text="삭제" />
-            <MainIconButton text="수정" />
-            <MainIconButton text="공유" />
+            {MainIconButtons.map(text => (
+              <MainIconButton key={text} text={text} />
+            ))}
           </HeaderButtons>
         )}
       </HeaderTitle>
