@@ -1,6 +1,6 @@
 import React from 'react';
 import linkIcon from '../../assets/images/link.svg';
-import { AddButton, AddLinkInput, SearchContainer, SearchLinkIcon, SearchSection } from './linkAddForm.style';
+import { AddButton, AddLinkInput, SearchContainer, SearchLinkIcon, SearchSection } from './style/linkAddForm.style';
 function LinkAddForm() {
   return (
     <SearchSection>
