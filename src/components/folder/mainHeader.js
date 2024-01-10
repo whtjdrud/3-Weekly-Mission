@@ -20,13 +20,6 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
     }
   };
 
-  const renderHeaderButtons = (MAIN_ICON_BUTTONS, activeFolderName) => {
-    if (!activeFolderName) {
-      return null;
-    }
-    return MAIN_ICON_BUTTONS.map(text => <MainIconButton key={text} text={text} />);
-  };
-
   return (
     <FolderLinkHeader>
       <MainNav>
@@ -40,7 +33,7 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
 
       <HeaderTitle>
         <MainTitle>{activeFolderName || '전체'}</MainTitle>
-        <HeaderButtons>{renderHeaderButtons(MAIN_ICON_BUTTONS, activeFolderName)} </HeaderButtons>
+        <HeaderButtons>{activeFolderName && MAIN_ICON_BUTTONS.map(text => <MainIconButton key={text} text={text} />)}</HeaderButtons>
       </HeaderTitle>
     </FolderLinkHeader>
   );
