@@ -51,13 +51,13 @@ export const useUserFolders = () => {
 };
 
 export const useUserLinkData = activeFolderId => {
-  const [linkList, setUserLinkList] = useState({ data: [] });
+  const [linkList, setLinkList] = useState({ data: [] });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getUserLinkData(activeFolderId);
-        setUserLinkList(data);
+        setLinkList(data);
       } catch (error) {
         console.error('링크 데이터를 불러오는데 실패했습니다', error);
       }
