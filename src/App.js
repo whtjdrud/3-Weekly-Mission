@@ -1,14 +1,17 @@
 import React from 'react';
 import '../src/assets/styles/reset.css';
-import '../src/assets/styles/index.css';
-import '../src/assets/styles/color.css';
-import IndexPage from './pages/indexPage';
+import Share from './pages/share';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Folder from './pages/folder';
 
 function App() {
   return (
-    <div className="App">
-      <IndexPage />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/share" element={<Share />} />
+        <Route path="/folder" element={<Folder />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
