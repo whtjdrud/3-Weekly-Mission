@@ -9,7 +9,7 @@ import { useUserFolders } from '../../hooks/useFolderState';
 
 const MAIN_ICON_BUTTONS = ['삭제', '수정', '공유'];
 
-function MainHeader({ activeFolderId, onFolderClick }) {
+function MainHeader({ activeFolderId, onFolderClick, onModalClick }) {
   const { folderList } = useUserFolders();
   const activeFolderName = folderList.data.find(folder => folder.id === activeFolderId)?.name;
 
@@ -27,7 +27,7 @@ function MainHeader({ activeFolderId, onFolderClick }) {
       <MainNav>
         <FolderList folderList={folderList} activeFolderId={activeFolderId} onFolderClick={handleFolderClick} />
         <Link to="#">
-          <FolderAdd>
+          <FolderAdd onClick={onModalClick}>
             폴더 추가 <FolderAddIcon src={addIcon} alt="폴더 추가 아이콘" />
           </FolderAdd>
         </Link>
@@ -44,6 +44,7 @@ function MainHeader({ activeFolderId, onFolderClick }) {
 MainHeader.propTypes = {
   activeFolderId: PropTypes.number,
   onFolderClick: PropTypes.func.isRequired,
+  onModalClick: PropTypes.func.isRequired,
 };
 
 export default MainHeader;

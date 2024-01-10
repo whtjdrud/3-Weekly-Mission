@@ -8,15 +8,20 @@ import { useUserLinkData } from '../hooks/useFolderState';
 import MainHeader from '../components/folder/mainHeader';
 import FolderLinkCard from '../components/folder/folderLinkCard';
 import addIcon from '../assets/images/add_white.svg';
+import Modal from '../components/modal/modal';
 
 function Folder() {
   const [activeFolderId, setActiveFolderId] = useState(null);
-
   const { linkList } = useUserLinkData(activeFolderId);
+  const [modalOpen, setModalOpen] = useState(false);
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
 
   const handleFolderClick = id => {
     setActiveFolderId(id);
   };
+
   function renderLinks(linkList) {
     if (!linkList.data || linkList.data.length === 0) {
       return <EmptyFolder>저장된 링크가 없습니다</EmptyFolder>;
@@ -35,7 +40,7 @@ function Folder() {
           <SearchBar />
         </SearchSection>
         <FolderView>
-          <MainHeader activeFolderId={activeFolderId} onFolderClick={handleFolderClick} />
+          <MainHeader activeFolderId={activeFolderId} onFolderClick={handleFolderClick} onModalClick={toggleModal} />
         </FolderView>
         <FolderLinkGridContainer>{renderLinks(linkList)}</FolderLinkGridContainer>
         <FloatingActionButton>
@@ -43,6 +48,7 @@ function Folder() {
         </FloatingActionButton>
       </FolderContent>
       <Footer />
+      {modalOpen && <Modal toggleModal={toggleModal}></Modal>}
     </>
   );
 }

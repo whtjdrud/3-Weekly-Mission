@@ -45,8 +45,8 @@ FolderLinkCard.propTypes = {
   link: PropTypes.shape({
     created_at: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    image_source: PropTypes.string, // 옵셔널 프로퍼티
+    description: PropTypes.string,
+    image_source: PropTypes.string,
   }).isRequired,
 };
 export default FolderLinkCard;

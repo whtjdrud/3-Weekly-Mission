@@ -7,7 +7,7 @@ const FolderList = ({ folderList, activeFolderId, onFolderClick }) => {
     <StyledFolderList onClick={onFolderClick}>
       <FolderButton data-id="all">전체</FolderButton>
       {folderList.data.map(folder => (
-        <FolderButton key={folder.id} data-id={folder.id} active={folder.id === activeFolderId}>
+        <FolderButton key={folder.id} data-id={folder.id} $active={folder.id === activeFolderId}>
           {folder.name}
         </FolderButton>
       ))}
