@@ -6,9 +6,10 @@ import MainIconButton from './mainIconButton';
 import FolderList from './folderList';
 import { FolderAdd, FolderAddIcon, FolderLinkHeader, HeaderButtons, HeaderTitle, MainNav, MainTitle } from './style/mainHeader.style';
 
+const MAIN_ICON_BUTTONS = ['삭제', '수정', '공유'];
+
 function MainHeader({ folderList, activeFolderId, onFolderClick }) {
   const activeFolderName = folderList.find(folder => folder.id === activeFolderId)?.name;
-  const MainIconButtons = ['삭제', '수정', '공유'];
 
   const handleFolderClick = event => {
     const folderId = event.target.getAttribute('data-id');
@@ -19,11 +20,11 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
     }
   };
 
-  const renderHeaderButtons = (MainIconButtons, activeFolderName) => {
+  const renderHeaderButtons = (MAIN_ICON_BUTTONS, activeFolderName) => {
     if (!activeFolderName) {
       return null;
     }
-    return MainIconButtons.map(text => <MainIconButton key={text} text={text} />);
+    return MAIN_ICON_BUTTONS.map(text => <MainIconButton key={text} text={text} />);
   };
 
   return (
@@ -39,7 +40,7 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
 
       <HeaderTitle>
         <MainTitle>{activeFolderName || '전체'}</MainTitle>
-        <HeaderButtons>{renderHeaderButtons(MainIconButtons, activeFolderName)} </HeaderButtons>
+        <HeaderButtons>{renderHeaderButtons(MAIN_ICON_BUTTONS, activeFolderName)} </HeaderButtons>
       </HeaderTitle>
     </FolderLinkHeader>
   );
