@@ -11,12 +11,11 @@ export const getUserFolderData = async () => {
 };
 
 export const getUserLinkData = async activeFolderId => {
-  let url = '/users/1/links';
+  let queryParams = {};
 
   if (activeFolderId) {
-    url = `/users/1/links?folderId=${activeFolderId}`;
+    queryParams['folderId'] = activeFolderId;
   }
-
-  const response = await api.get(url);
+  const response = await api.get('/users/1/links', { params: queryParams });
   return response.data;
 };
