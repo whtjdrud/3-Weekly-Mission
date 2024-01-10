@@ -4,13 +4,12 @@ import Footer from '../components/footer/footer.js';
 import LinkAddForm from '../components/folder/linkAddForm';
 import SearchBar from '../components/folder/searchBar';
 import styled from 'styled-components';
-import { useUserLinkData, useUserFolders } from '../hooks/useFolderState';
+import { useUserLinkData } from '../hooks/useFolderState';
 import MainHeader from '../components/folder/mainHeader';
 import FolderLinkCard from '../components/folder/folderLinkCard';
 import addIcon from '../assets/images/add_white.svg';
 
 function Folder() {
-  const { folderList } = useUserFolders();
   const [activeFolderId, setActiveFolderId] = useState(null);
 
   const { linkList } = useUserLinkData(activeFolderId);
@@ -36,7 +35,7 @@ function Folder() {
           <SearchBar />
         </SearchSection>
         <FolderView>
-          <MainHeader folderList={folderList.data} activeFolderId={activeFolderId} onFolderClick={handleFolderClick} />
+          <MainHeader activeFolderId={activeFolderId} onFolderClick={handleFolderClick} />
         </FolderView>
         <FolderLinkGridContainer>{renderLinks(linkList)}</FolderLinkGridContainer>
         <FloatingActionButton>

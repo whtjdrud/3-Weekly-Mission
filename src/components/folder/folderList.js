@@ -6,7 +6,7 @@ const FolderList = ({ folderList, activeFolderId, onFolderClick }) => {
   return (
     <StyledFolderList onClick={onFolderClick}>
       <FolderButton data-id="all">전체</FolderButton>
-      {folderList.map(folder => (
+      {folderList.data.map(folder => (
         <FolderButton key={folder.id} data-id={folder.id} active={folder.id === activeFolderId}>
           {folder.name}
         </FolderButton>
@@ -16,7 +16,14 @@ const FolderList = ({ folderList, activeFolderId, onFolderClick }) => {
 };
 
 FolderList.propTypes = {
-  folderList: PropTypes.array.isRequired,
+  folderList: PropTypes.shape({
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+  }).isRequired,
   activeFolderId: PropTypes.number,
   onFolderClick: PropTypes.func.isRequired,
 };

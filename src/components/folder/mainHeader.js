@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom';
 import MainIconButton from './mainIconButton';
 import FolderList from './folderList';
 import { FolderAdd, FolderAddIcon, FolderLinkHeader, HeaderButtons, HeaderTitle, MainNav, MainTitle } from './style/mainHeader.style';
+import { useUserFolders } from '../../hooks/useFolderState';
 
 const MAIN_ICON_BUTTONS = ['삭제', '수정', '공유'];
 
-function MainHeader({ folderList, activeFolderId, onFolderClick }) {
-  const activeFolderName = folderList.find(folder => folder.id === activeFolderId)?.name;
+function MainHeader({ activeFolderId, onFolderClick }) {
+  const { folderList } = useUserFolders();
+  const activeFolderName = folderList.data.find(folder => folder.id === activeFolderId)?.name;
 
   const handleFolderClick = event => {
     const folderId = event.target.getAttribute('data-id');
@@ -40,13 +42,6 @@ function MainHeader({ folderList, activeFolderId, onFolderClick }) {
 }
 
 MainHeader.propTypes = {
-  folderList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-
   activeFolderId: PropTypes.number,
   onFolderClick: PropTypes.func.isRequired,
 };
