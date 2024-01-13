@@ -8,7 +8,7 @@ import { useUserLinkData } from '../hooks/useFolderState';
 import MainHeader from '../components/folder/mainHeader';
 import FolderLinkCard from '../components/folder/folderLinkCard';
 import addIcon from '../assets/images/add_white.svg';
-import Modal from '../components/modal/modal';
+import Modal from '../components/modals/modal';
 
 function Folder() {
   const [activeFolderId, setActiveFolderId] = useState(null);
