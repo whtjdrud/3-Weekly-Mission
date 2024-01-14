@@ -8,15 +8,10 @@ import { useUserLinkData } from '../hooks/useFolderState';
 import MainHeader from '../components/folder/mainHeader';
 import FolderLinkCard from '../components/folder/folderLinkCard';
 import addIcon from '../assets/images/add_white.svg';
-import Modal from '../components/modals/modal';
 
 function Folder() {
   const [activeFolderId, setActiveFolderId] = useState(null);
   const { linkList } = useUserLinkData(activeFolderId);
-  const [modalOpen, setModalOpen] = useState(false);
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
-  };
 
   const handleFolderClick = id => {
     setActiveFolderId(id);
@@ -40,7 +35,7 @@ function Folder() {
           <SearchBar />
         </SearchSection>
         <FolderView>
-          <MainHeader activeFolderId={activeFolderId} onFolderClick={handleFolderClick} onModalClick={toggleModal} />
+          <MainHeader activeFolderId={activeFolderId} onFolderClick={handleFolderClick} />
         </FolderView>
         <FolderLinkGridContainer>{renderLinks(linkList)}</FolderLinkGridContainer>
         <FloatingActionButton>
@@ -48,7 +43,6 @@ function Folder() {
         </FloatingActionButton>
       </FolderContent>
       <Footer />
-      {modalOpen && <Modal toggleModal={toggleModal}></Modal>}
     </>
   );
 }
