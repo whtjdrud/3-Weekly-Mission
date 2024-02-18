@@ -4,6 +4,7 @@ import { FieldErrors, useForm } from 'react-hook-form'
 import { NextPage } from 'next'
 import useMutation from '@/libs/client/useMutation'
 import { useRouter } from 'next/router'
+import SignHeader from '@/components/SignHeader'
 
 interface LoginForm {
   email: string
@@ -39,6 +40,7 @@ const Login: NextPage = () => {
 
   return (
     <main className={styles.main}>
+      <SignHeader />
       <div className={styles.sign_box}>
         <form
           id="sign_form"
