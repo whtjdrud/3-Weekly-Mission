@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from './signheader.module.css'
+import { router } from 'next/client'
 const SignHeader = () => {
   return (
     <header>
@@ -13,12 +14,22 @@ const SignHeader = () => {
             height={38}
           />
         </Link>
-        <p className={styles.header_container__p}>
-          회원이 아니신가요?
-          <Link className={styles.header_container__a} href="/signup">
-            회원 가입하기
-          </Link>
-        </p>
+        {router.pathname === '/login' ? (
+          <p className={styles.header_container__p}>
+            회원이 아니신가요?
+            <Link className={styles.header_container__a} href="/signup">
+              회원 가입하기
+            </Link>
+          </p>
+        ) : null}
+        {router.pathname === '/signup' ? (
+          <p className={styles.header_container__p}>
+            이미 회원이신가요?
+            <Link className={styles.header_container__a} href="/login">
+              로그인 하기
+            </Link>
+          </p>
+        ) : null}
       </div>
     </header>
   )
