@@ -1,8 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from './signheader.module.css'
-import { router } from 'next/client'
+import { useRouter } from 'next/router' // 수정된 부분
+
 const SignHeader = () => {
+  const router = useRouter() // 수정된 부분
+
   return (
     <header>
       <div className={styles.header_container}>
