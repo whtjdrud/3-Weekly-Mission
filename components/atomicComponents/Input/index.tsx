@@ -7,8 +7,8 @@ interface InputProps {
   label: string
   name: string
   onChange: ChangeEventHandler<HTMLInputElement>
-  placeholder: string
-  error: string
+  placeholder?: string
+  error?: string
 }
 const Input: React.FC<InputProps> = ({
   type,
