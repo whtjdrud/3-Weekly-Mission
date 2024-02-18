@@ -1,14 +1,20 @@
 import styles from '@/styles/signin.module.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FieldErrors, useForm } from 'react-hook-form'
 import { NextPage } from 'next'
+import useMutation from '@/libs/client/useMutation'
+import { useRouter } from 'next/router'
 
 interface LoginForm {
   email: string
   password: string
 }
 const Login: NextPage = () => {
-  const [submitting, setSubmitting] = useState(false)
+  const [enter, { loading, data, error }] = useMutation(
+    'https://bootcamp-api.codeit.kr/api/sign-in',
+  )
+
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -16,17 +22,20 @@ const Login: NextPage = () => {
   } = useForm<LoginForm>({ mode: 'onBlur' })
 
   const onValid = (data: LoginForm) => {
-    setSubmitting(true)
-    fetch('/api/sign-in', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then(() => setSubmitting(false))
+    enter(data)
   }
 
-  const onInvalid = (errors: FieldErrors) => {}
+  useEffect(() => {
+    if (data?.data?.accessToken) {
+      sessionStorage.setItem('accessToken', data.data.accessToken)
+      router.push('/folder')
+    }
+  }, [data])
+
+  const [showPassword, setShowPassword] = useState(false)
+  const eyeButtonClassName = showPassword
+    ? `${styles.eyeButton} ${styles.eyeOff}`
+    : `${styles.eyeButton} ${styles.eyeOn}`
 
   return (
     <main className={styles.main}>
@@ -34,7 +43,7 @@ const Login: NextPage = () => {
         <form
           id="sign_form"
           className={styles.signForm}
-          onSubmit={handleSubmit(onValid, onInvalid)}
+          onSubmit={handleSubmit(onValid)}
         >
           <div className={styles.sign_box_inputs}>
             <div className={styles.sign_box_input}>
@@ -63,14 +72,19 @@ const Login: NextPage = () => {
                     message: '영문, 숫자 조합 8자 이상 입력해주세요.',
                   },
                 })}
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder="password"
                 className={styles.input}
+              />
+              <button
+                onClick={() => setShowPassword(!showPassword)}
+                type="button"
+                className={eyeButtonClassName}
               />
               <p className="error_msg">{errors.password?.message}</p>
             </div>
           </div>
-          <input type="submit" value={submitting ? 'Loading' : '로그인'} />
+          <input type="submit" value="로그인" />
         </form>
       </div>
     </main>
