@@ -1,45 +1,21 @@
 import styles from '@/styles/signin.module.css'
-import React, { useEffect, useState } from 'react'
-import { FieldErrors, useForm } from 'react-hook-form'
+import React from 'react'
 import { NextPage } from 'next'
 import useMutation from '@/libs/client/useMutation'
-import { useRouter } from 'next/router'
 import SignHeader from '@/components/SignHeader'
+import { SignUpForm } from '@/types/sign'
+import useSignUpForm from '@/hooks/useSignUpForm'
+import useTogglePassword from '@/hooks/useTogglePassword'
 
-interface SignUpForm {
-  email: string
-  password: string
-  passwordchk: string
-}
 const SignUp: NextPage = () => {
+  const { register, handleSubmit, errors, password } = useSignUpForm()
+  const { showPassword, toggleShowPassword } = useTogglePassword()
+
   const [enter, { loading, data, error }] = useMutation(
     'https://bootcamp-api.codeit.kr/api/sign-in',
   )
-  const {
-    register,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SignUpForm>({ mode: 'onBlur' })
 
-  const router = useRouter()
-  const password = watch('password')
-
-  const onValid = (data: SignUpForm) => {
-    enter(data)
-  }
-
-  const [showPassword, setShowPassword] = useState({
-    password: false,
-    passwordchk: false,
-  })
-
-  const toggleShowPassword = (field: 'password' | 'passwordchk') => {
-    setShowPassword((prevState) => ({
-      ...prevState,
-      [field]: !prevState[field],
-    }))
-  }
+  const onValid = (data: SignUpForm) => {}
 
   return (
     <main className={styles.main}>
@@ -92,7 +68,7 @@ const SignUp: NextPage = () => {
             <div className={styles.sign_box_input}>
               <label htmlFor="password">비밀번호 확인</label>
               <input
-                {...register('passwordchk', {
+                {...register('passwordCheck', {
                   required: '패스워드를 입력해주세요.',
                   pattern: {
                     value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
@@ -111,7 +87,7 @@ const SignUp: NextPage = () => {
                 type="button"
                 className={`${styles.eyeButton} ${showPassword.passwordchk ? styles.eyeOff : styles.eyeOn}`}
               />
-              <p className="error_msg">{errors.passwordchk?.message}</p>
+              <p className="error_msg">{errors.passwordCheck?.message}</p>
             </div>
           </div>
           <input type="submit" value="회원가입" />
