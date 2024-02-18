@@ -10,13 +10,13 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const accessToken = sessionStorage.getItem('accessToken')
 
-    const isAuthPage =
-      router.pathname === '/login' || router.pathname === '/signup'
-
-    if (isAuthPage && accessToken) {
-      router.push('/folder')
+    if (router.pathname === '/signup' || router.pathname === '/login') {
+      if (accessToken) {
+        router.push('/folder')
+      }
     }
-    if (!isAuthPage && !accessToken) {
+
+    if (router.pathname === '/folder' && !accessToken) {
       router.push('/login')
     }
   }, [router])
