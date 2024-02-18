@@ -60,6 +60,23 @@
   font-size: 14px;
 }
 
+.eyeButton {
+  position: absolute;
+  top: 50px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  border: 0;
+}
+.eyeOff {
+  background-image: url('/images/signin/eye-off.svg');
+}
+
+.eyeOn {
+  background-image: url('/images/signin/eye-on.svg');
+}
+
 .signForm input[type='submit'] {
   display: flex;
   justify-content: center;
