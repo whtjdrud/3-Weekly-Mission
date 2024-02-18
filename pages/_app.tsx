@@ -1,6 +1,12 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
+import MainHead from '@/components/mainhead'
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <MainHead />
+      <Component {...pageProps} />
+    </>
+  )
 }
