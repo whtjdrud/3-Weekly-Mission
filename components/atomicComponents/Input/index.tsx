@@ -1,41 +1,46 @@
-import React, { ChangeEventHandler } from 'react'
-import styles from './input.module.css'
+import React from 'react'
+import styles from '@/styles/signin.module.css'
 
 interface InputProps {
-  type: string
-  value: string
   label: string
   name: string
-  onChange: ChangeEventHandler<HTMLInputElement>
-  placeholder?: string
+  type: string
+  register: any
+  validationRules: object
   error?: string
+  toggleShowPassword?: () => void
+  showPasswordButton?: boolean
 }
-const Input: React.FC<InputProps> = ({
-  type,
-  value,
-  name,
-  label,
-  onChange,
-  placeholder = '',
-  error = '',
-}) => {
-  const inputClassName = error
-    ? `${styles.input} ${styles.input_error}`
-    : styles.input
 
+const Input: React.FC<InputProps> = ({
+  label,
+  name,
+  type,
+  register,
+  validationRules,
+  error,
+  toggleShowPassword,
+  showPasswordButton = false,
+}) => {
   return (
     <div className={styles.sign_box_input}>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={label}>{label}</label>
       <input
+        {...register(name, validationRules)}
         type={type}
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className={inputClassName}
+        placeholder={label}
+        className={styles.input}
       />
-      <p className="error_msg">{error}</p>
+      {showPasswordButton && (
+        <button
+          onClick={toggleShowPassword}
+          type="button"
+          className={`${styles.eyeButton} ${type === 'text' ? styles.eyeOff : styles.eyeOn}`}
+        />
+      )}
+      {error && <p className="error_msg">{error}</p>}
     </div>
   )
 }
+
 export default Input
