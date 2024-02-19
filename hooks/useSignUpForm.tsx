@@ -10,12 +10,14 @@ const useSignUpForm = () => {
   } = useForm<SignUpForm>({ mode: 'onBlur' })
 
   const password = watch('password')
+  const email = watch('email')
 
   return {
     register,
     handleSubmit,
     errors,
     password,
+    email,
   }
 }
 
