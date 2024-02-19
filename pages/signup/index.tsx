@@ -7,7 +7,8 @@ import { LoginForm } from '@/types/sign'
 import useSignUpForm from '@/hooks/useSignUpForm'
 import useTogglePassword from '@/hooks/useTogglePassword'
 import Input from '@/components/atomicComponents/Input'
-import { router } from 'next/client'
+import { useRouter } from 'next/router'
+
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
 
 const SignUp: NextPage = () => {
@@ -16,6 +17,7 @@ const SignUp: NextPage = () => {
   const [signup, { loading, data, error }] = useMutation(
     'https://bootcamp-api.codeit.kr/api/sign-up',
   )
+  const router = useRouter()
 
   const onValid = (data: LoginForm) => {
     signup(data)
