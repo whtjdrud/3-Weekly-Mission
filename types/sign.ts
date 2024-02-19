@@ -3,3 +3,8 @@ export interface SignUpForm {
   password: string
   passwordCheck: string
 }
+
+export interface LoginForm {
+  email: string
+  password: string
+}

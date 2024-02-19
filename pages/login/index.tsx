@@ -1,26 +1,20 @@
 import styles from '@/styles/signin.module.css'
-import React, { useEffect, useState } from 'react'
-import { FieldErrors, useForm } from 'react-hook-form'
+import React, { useEffect } from 'react'
 import { NextPage } from 'next'
 import useMutation from '@/libs/client/useMutation'
 import { useRouter } from 'next/router'
 import SignHeader from '@/components/SignHeader'
+import useTogglePassword from '@/hooks/useTogglePassword'
+import useSignUpForm from '@/hooks/useSignUpForm'
+import { LoginForm } from '@/types/sign'
 
-interface LoginForm {
-  email: string
-  password: string
-}
 const Login: NextPage = () => {
   const [enter, { loading, data, error }] = useMutation(
     'https://bootcamp-api.codeit.kr/api/sign-in',
   )
-
   const router = useRouter()
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginForm>({ mode: 'onBlur' })
+  const { register, handleSubmit, errors } = useSignUpForm()
+  const { showPassword, toggleShowPassword } = useTogglePassword()
 
   const onValid = (data: LoginForm) => {
     enter(data)
@@ -31,12 +25,7 @@ const Login: NextPage = () => {
       sessionStorage.setItem('accessToken', data.data.accessToken)
       router.push('/folder')
     }
-  }, [data])
-
-  const [showPassword, setShowPassword] = useState(false)
-  const eyeButtonClassName = showPassword
-    ? `${styles.eyeButton} ${styles.eyeOff}`
-    : `${styles.eyeButton} ${styles.eyeOn}`
+  }, [data, router])
 
   return (
     <main className={styles.main}>
@@ -79,9 +68,9 @@ const Login: NextPage = () => {
                 className={styles.input}
               />
               <button
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() => toggleShowPassword('password')}
                 type="button"
-                className={eyeButtonClassName}
+                className={`${styles.eyeButton} ${showPassword.password ? styles.eyeOff : styles.eyeOn}`}
               />
               <p className="error_msg">{errors.password?.message}</p>
             </div>
