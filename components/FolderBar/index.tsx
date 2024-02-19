@@ -9,7 +9,6 @@ interface FolderBarProps {
   onFolderClick: (id: string) => void
 }
 const FolderBar: React.FC<FolderBarProps> = ({ folders, onFolderClick }) => {
-  console.log(folders)
   return (
     <div className={styles.container}>
       <div className={styles.folders}>

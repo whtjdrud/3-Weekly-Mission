@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from './signheader.module.css'
-import { useRouter } from 'next/router' // 수정된 부분
+import { useRouter } from 'next/router'
 
 const SignHeader = () => {
-  const router = useRouter() // 수정된 부분
+  const router = useRouter()
 
   return (
     <header>

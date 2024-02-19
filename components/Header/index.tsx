@@ -31,10 +31,7 @@ const HeaderPage = () => {
           <Profile email={email} imageSource={imageSource} />
         ) : (
           <div className={styles.loginProfile}>
-            <Link
-              className={`${styles.cta} ${styles.ctaShort}`}
-              href="/login/signin"
-            >
+            <Link className={`${styles.cta} ${styles.ctaShort}`} href="/login">
               로그인
             </Link>
           </div>
