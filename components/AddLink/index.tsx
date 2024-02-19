@@ -9,6 +9,8 @@ const AddLink = () => {
             className={styles.icon}
             src="images/link.svg"
             alt="링크 아이콘"
+            height={20}
+            width={20}
           />
           <input
             className={styles.input}

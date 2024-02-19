@@ -8,6 +8,7 @@ import useTogglePassword from '@/hooks/useTogglePassword'
 import useSignUpForm from '@/hooks/useSignUpForm'
 import { LoginForm } from '@/types/sign'
 import Input from '@/components/atomicComponents/Input'
+import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
 
 const Login: NextPage = () => {
   const [enter, { loading, data, error }] = useMutation(
@@ -46,7 +47,7 @@ const Login: NextPage = () => {
               validationRules={{
                 required: '이메일을 입력해주세요.',
                 pattern: {
-                  value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                  value: emailPattern,
                   message: '올바른 이메일 형식이 아닙니다.',
                 },
               }}
@@ -60,7 +61,7 @@ const Login: NextPage = () => {
               validationRules={{
                 required: '패스워드를 입력해주세요.',
                 pattern: {
-                  value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                  value: passwordPattern,
                   message: '영문, 숫자 조합 8자 이상 입력해주세요.',
                 },
               }}
