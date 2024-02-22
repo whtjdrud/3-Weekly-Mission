@@ -1,0 +1,121 @@
+.main {
+  background-color: #f0f6ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+  padding: 120px 32px 0;
+  height: 100vh;
+}
+
+.sign_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 32px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.signForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  width: 100%;
+}
+
+.sign_box_inputs {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+.sign_box_input {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  position: relative;
+}
+
+.sign_box_input label {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+.input {
+  padding: 18px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccd5e3;
+  font-size: 1.6rem;
+}
+
+.input:focus {
+  border: #6d6afe 1px solid;
+}
+
+.input_error {
+  border: 1px solid #ff5b56;
+}
+
+.sign_box_input p {
+  color: var(--Linkbrary-red, #ff5b56);
+  font-size: 14px;
+}
+
+.eyeButton {
+  position: absolute;
+  top: 50px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  border: 0;
+}
+.eyeOff {
+  background-image: url('/images/signin/eye-off.svg');
+}
+
+.eyeOn {
+  background-image: url('/images/signin/eye-on.svg');
+}
+
+.signForm input[type='submit'] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 54px;
+  background-image: linear-gradient(91deg, #6d6afe 0.12%, #6ae3fe 101.84%);
+  border-radius: 8px;
+  color: #f5f5f5;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.singin_oauth {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 1px solid #ccd5e3;
+  background-color: #e7effb;
+}
+
+.sign_oauth__icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.singin_oauth p {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #373740;
+}
+
+@media screen AND (min-width: 357px) and (max-width: 767px) {
+  .main {
+    padding: 120px 32px 120px 32px;
+  }
+}

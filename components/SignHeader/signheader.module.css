@@ -1,0 +1,21 @@
+.header_container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+.header_container__p {
+  display: flex;
+  column-gap: 8px;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.header_container__a {
+  height: fit-content;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: normal;
+  color: #6d6afe;
+  border-bottom: 0.1rem solid #6d6afe;
+}
