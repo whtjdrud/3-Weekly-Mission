@@ -9,6 +9,6 @@ export interface LoginForm {
   password: string
 }
 
-export interface validateEmailForm {
+export interface ValidateEmailForm {
   email: string
 }
