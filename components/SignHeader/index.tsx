@@ -17,22 +17,22 @@ const SignHeader = () => {
             height={38}
           />
         </Link>
-        {router.pathname === '/login' ? (
+        {router.pathname === '/login' && (
           <p className={styles.header_container__p}>
             회원이 아니신가요?
             <Link className={styles.header_container__a} href="/signup">
               회원 가입하기
             </Link>
           </p>
-        ) : null}
-        {router.pathname === '/signup' ? (
+        )}
+        {router.pathname === '/signup' && (
           <p className={styles.header_container__p}>
             이미 회원이신가요?
             <Link className={styles.header_container__a} href="/login">
               로그인 하기
             </Link>
           </p>
-        ) : null}
+        )}
       </div>
     </header>
   )
