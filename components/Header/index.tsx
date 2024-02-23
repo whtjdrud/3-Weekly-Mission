@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react'
 import Profile from '@/components/atomicComponents/Profile'
 
 const HeaderPage = () => {
-  const [email, setEmail] = useState<string | null>(null)
-  const [imageSource, setImageSource] = useState<string | null>(null)
+  const [email, setEmail] = useState<string>('')
+  const [imageSource, setImageSource] = useState<string>('')
 
   useEffect(() => {
     const email = localStorage.getItem('email')
