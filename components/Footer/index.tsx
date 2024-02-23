@@ -1,6 +1,7 @@
 import styles from './footer.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
+
 const Footer = () => {
   return (
     <footer className={styles.container}>
