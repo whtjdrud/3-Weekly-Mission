@@ -1,0 +1,34 @@
+.button {
+  flex: 0 0 4rem;
+  display: flex;
+  align-items: center;
+  column-gap: 0.8rem;
+  width: 100%;
+  height: 4rem;
+  padding: 0.8rem;
+  border-radius: 0.8rem;
+}
+.button :hover {
+  background-color: var(--color-light-blue);
+}
+.button .selected {
+  background-color: var(--color-light-blue);
+}
+
+.name {
+  font-size: 1.6rem;
+  color: var(--color-gray100);
+}
+
+.name.selected {
+  color: var(--color-primary);
+}
+
+.count {
+  font-size: 1.4rem;
+  color: var(--color-gray60);
+}
+
+.check {
+  margin-left: auto;
+}

@@ -1,0 +1,75 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경색 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.modalContainer {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  position: absolute;
+  width: 36rem;
+  height: fit-content;
+  padding: 3.2rem 4rem;
+  border-radius: 1.5rem;
+  background-color: var(--color-white);
+}
+.modalContent {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  row-gap: 1.5rem;
+}
+.title {
+  color: var(--color-gray100);
+  font-size: 2rem;
+  font-weight: 700;
+}
+.description {
+  color: var(--color-gray60);
+  font-size: 1.4rem;
+  line-height: 2.2rem;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  row-gap: 2.4rem;
+}
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.modalHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  row-gap: 0.8rem;
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1rem;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+}

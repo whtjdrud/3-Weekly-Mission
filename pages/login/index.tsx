@@ -9,25 +9,30 @@ import useSignUpForm from '@/hooks/useSignUpForm'
 import { LoginForm } from '@/types/sign'
 import Input from '@/components/atomicComponents/Input'
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
+import axios from 'axios'
 
 const Login: NextPage = () => {
-  const [enter, { loading, data, error }] = useMutation(
-    'https://bootcamp-api.codeit.kr/api/sign-in',
-  )
   const router = useRouter()
   const { register, handleSubmit, errors } = useSignUpForm()
   const { showPassword, toggleShowPassword } = useTogglePassword()
 
-  const onValid = (data: LoginForm) => {
-    enter(data)
-  }
+  const onValid = async (data: LoginForm) => {
+    const response = await axios.post(
+      'https://bootcamp-api.codeit.kr/api/sign-in',
+      data,
+    )
+    const { accessToken, refreshToken } = response.data.data
 
-  useEffect(() => {
-    if (data?.data?.accessToken) {
-      sessionStorage.setItem('accessToken', data.data.accessToken)
-      router.push('/folder')
-    }
-  }, [data, router])
+    const expires = new Date()
+    expires.setDate(expires.getDate() + 1)
+
+    //localtest로 인해 HttpOnly; Secure는 삭제
+    document.cookie = `access_token=${accessToken}; Path=/; Expires=${expires.toUTCString()};`
+    document.cookie = `refresh_token=${refreshToken}; Path=/; Expires=${expires.toUTCString()};`
+    sessionStorage.setItem('accessToken', accessToken)
+
+    router.push('/folder')
+  }
 
   return (
     <main className={styles.main}>
