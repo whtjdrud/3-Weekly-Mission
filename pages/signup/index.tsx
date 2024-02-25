@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
 import { useSignUpUser } from '@/libs/client/useSignUpUser'
+import { useCheckDuplicateEmail } from '@/libs/client/useCheckDuplicateEmail'
 
 const SignUp: NextPage = () => {
   const { register, handleSubmit, errors, password, email } = useSignUpForm()
@@ -24,6 +25,10 @@ const SignUp: NextPage = () => {
     } catch (error) {
       console.log(error)
     }
+  }
+  const handleBlur = async () => {
+    console.log('===handleBlur===')
+    //await useCheckDuplicateEmail(email)
   }
 
   return (
@@ -46,6 +51,21 @@ const SignUp: NextPage = () => {
                 pattern: {
                   value: emailPattern,
                   message: '올바른 이메일 형식이 아닙니다.',
+                },
+                validate: {
+                  asyncValidation: async (value: string) => {
+                    const response = await useCheckDuplicateEmail(value)
+                    if (response === true) {
+                      return true
+                    }
+                    if (response.status === 409) {
+                      return '이메일이 이미 사용 중입니다.'
+                    }
+                    if (response.status === 500) {
+                      return '서버 오류가 발생했습니다. 나중에 다시 시도해주세요.'
+                    }
+                    return `${response.status}: ${response.message}`
+                  },
                 },
               }}
               error={errors.email?.message}
