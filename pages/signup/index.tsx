@@ -96,7 +96,7 @@ const SignUp: NextPage = () => {
                 validate: (value: string) =>
                   value === password || '비밀번호가 일치하지 않습니다.',
               }}
-              error={errors.passwordCheck?.message}
+              error={errors.passwordcheck?.message}
               toggleShowPassword={() => toggleShowPassword('passwordchk')}
               showPasswordButton={true}
             />
