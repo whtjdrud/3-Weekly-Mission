@@ -1,7 +1,6 @@
 import styles from '@/styles/signin.module.css'
 import React, { useEffect } from 'react'
 import { NextPage } from 'next'
-import useMutation from '@/libs/client/useMutation'
 import SignHeader from '@/components/SignHeader'
 import { LoginForm } from '@/types/sign'
 import useSignUpForm from '@/hooks/useSignUpForm'
@@ -10,25 +9,22 @@ import Input from '@/components/atomicComponents/Input'
 import { useRouter } from 'next/router'
 
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
+import { useSignUpUser } from '@/libs/client/useSignUpUser'
 
 const SignUp: NextPage = () => {
   const { register, handleSubmit, errors, password, email } = useSignUpForm()
   const { showPassword, toggleShowPassword } = useTogglePassword()
-  const [signup, { loading, data, error }] = useMutation(
-    'https://bootcamp-api.codeit.kr/api/sign-up',
-  )
+
   const router = useRouter()
 
-  const onValid = (data: LoginForm) => {
-    signup(data)
-  }
-
-  useEffect(() => {
-    if (data?.data?.accessToken) {
-      sessionStorage.setItem('accessToken', data.data.accessToken)
-      router.push('/folder')
+  const onValid = async (data: LoginForm) => {
+    try {
+      await useSignUpUser(data)
+      await router.push('/folder')
+    } catch (error) {
+      console.log(error)
     }
-  }, [data, router])
+  }
 
   return (
     <main className={styles.main}>

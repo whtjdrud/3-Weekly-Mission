@@ -1,7 +1,5 @@
 import styles from '@/styles/signin.module.css'
-import React, { useEffect } from 'react'
 import { NextPage } from 'next'
-import useMutation from '@/libs/client/useMutation'
 import { useRouter } from 'next/router'
 import SignHeader from '@/components/SignHeader'
 import useTogglePassword from '@/hooks/useTogglePassword'
@@ -9,7 +7,7 @@ import useSignUpForm from '@/hooks/useSignUpForm'
 import { LoginForm } from '@/types/sign'
 import Input from '@/components/atomicComponents/Input'
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
-import axios from 'axios'
+import { useLoginUser } from '@/libs/client/useLoginUser'
 
 const Login: NextPage = () => {
   const router = useRouter()
@@ -17,21 +15,8 @@ const Login: NextPage = () => {
   const { showPassword, toggleShowPassword } = useTogglePassword()
 
   const onValid = async (data: LoginForm) => {
-    const response = await axios.post(
-      'https://bootcamp-api.codeit.kr/api/sign-in',
-      data,
-    )
-    const { accessToken, refreshToken } = response.data.data
-
-    const expires = new Date()
-    expires.setDate(expires.getDate() + 1)
-
-    //localtest로 인해 HttpOnly; Secure는 삭제
-    document.cookie = `access_token=${accessToken}; Path=/; Expires=${expires.toUTCString()};`
-    document.cookie = `refresh_token=${refreshToken}; Path=/; Expires=${expires.toUTCString()};`
-    sessionStorage.setItem('accessToken', accessToken)
-
-    router.push('/folder')
+    await useLoginUser(data)
+    await router.push('/folder')
   }
 
   return (
