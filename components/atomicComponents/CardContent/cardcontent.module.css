@@ -1,0 +1,32 @@
+.container {
+  height: 100%;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.container:hover {
+  background-color: var(--color-light-blue);
+}
+
+.elapsedTime {
+  font-size: 1.3rem;
+  color: var(--color-text-content-gray);
+}
+
+.description {
+  height: 4.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  font-size: 1.6rem;
+  line-height: 150%;
+}
+
+.createdAt {
+  font-size: 1.4rem;
+  color: var(--color-text-content-black);
+}

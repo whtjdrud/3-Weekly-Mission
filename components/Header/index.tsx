@@ -1,21 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
-
 import styles from '@/components/Header/header.module.css'
-import { useEffect, useState } from 'react'
 import Profile from '@/components/atomicComponents/Profile'
+import axios from 'axios'
 
-const HeaderPage = () => {
-  const [email, setEmail] = useState<string | null>(null)
-  const [imageSource, setImageSource] = useState<string | null>(null)
-
-  useEffect(() => {
-    const email = localStorage.getItem('email')
-    const imageSource = localStorage.getItem('imageSource')
-    if (email) setEmail(email)
-    if (imageSource) setImageSource(imageSource)
-  }, [])
-
+// @ts-ignore
+const HeaderPage = ({ email, image_source }) => {
   return (
     <header className={styles.header}>
       <nav className={styles.header_nav}>
@@ -27,8 +17,8 @@ const HeaderPage = () => {
             height={24}
           />
         </Link>
-        {email && imageSource ? (
-          <Profile email={email} imageSource={imageSource} />
+        {email && image_source ? (
+          <Profile email={email} imageSource={image_source} />
         ) : (
           <div className={styles.loginProfile}>
             <Link className={`${styles.cta} ${styles.ctaShort}`} href="/login">

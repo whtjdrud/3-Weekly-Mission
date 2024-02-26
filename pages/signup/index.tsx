@@ -1,7 +1,6 @@
 import styles from '@/styles/signin.module.css'
 import React, { useEffect } from 'react'
 import { NextPage } from 'next'
-import useMutation from '@/libs/client/useMutation'
 import SignHeader from '@/components/SignHeader'
 import { LoginForm } from '@/types/sign'
 import useSignUpForm from '@/hooks/useSignUpForm'
@@ -10,25 +9,27 @@ import Input from '@/components/atomicComponents/Input'
 import { useRouter } from 'next/router'
 
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
+import { useSignUpUser } from '@/libs/client/useSignUpUser'
+import { useCheckDuplicateEmail } from '@/libs/client/useCheckDuplicateEmail'
 
 const SignUp: NextPage = () => {
   const { register, handleSubmit, errors, password, email } = useSignUpForm()
   const { showPassword, toggleShowPassword } = useTogglePassword()
-  const [signup, { loading, data, error }] = useMutation(
-    'https://bootcamp-api.codeit.kr/api/sign-up',
-  )
+
   const router = useRouter()
 
-  const onValid = (data: LoginForm) => {
-    signup(data)
-  }
-
-  useEffect(() => {
-    if (data?.data?.accessToken) {
-      sessionStorage.setItem('accessToken', data.data.accessToken)
-      router.push('/folder')
+  const onValid = async (data: LoginForm) => {
+    try {
+      await useSignUpUser(data)
+      await router.push('/folder')
+    } catch (error) {
+      console.log(error)
     }
-  }, [data, router])
+  }
+  const handleBlur = async () => {
+    console.log('===handleBlur===')
+    //await useCheckDuplicateEmail(email)
+  }
 
   return (
     <main className={styles.main}>
@@ -51,6 +52,21 @@ const SignUp: NextPage = () => {
                   value: emailPattern,
                   message: '올바른 이메일 형식이 아닙니다.',
                 },
+                validate: {
+                  asyncValidation: async (value: string) => {
+                    const response = await useCheckDuplicateEmail(value)
+                    if (response === true) {
+                      return true
+                    }
+                    if (response.status === 409) {
+                      return '이메일이 이미 사용 중입니다.'
+                    }
+                    if (response.status === 500) {
+                      return '서버 오류가 발생했습니다. 나중에 다시 시도해주세요.'
+                    }
+                    return `${response.status}: ${response.message}`
+                  },
+                },
               }}
               error={errors.email?.message}
             />
@@ -72,8 +88,8 @@ const SignUp: NextPage = () => {
             />
             <Input
               label="비밀번호 확인"
-              type={showPassword.passwordchk ? 'text' : 'password'}
-              name="passwordcheck"
+              type={showPassword.passwordCheck ? 'text' : 'password'}
+              name="passwordCheck"
               register={register}
               validationRules={{
                 required: '패스워드 확인을 입력해주세요.',
@@ -81,7 +97,7 @@ const SignUp: NextPage = () => {
                   value === password || '비밀번호가 일치하지 않습니다.',
               }}
               error={errors.passwordCheck?.message}
-              toggleShowPassword={() => toggleShowPassword('passwordchk')}
+              toggleShowPassword={() => toggleShowPassword('passwordCheck')}
               showPasswordButton={true}
             />
           </div>

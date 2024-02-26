@@ -1,5 +1,3 @@
-@import url('./reset.css');
-
 :root {
   --color-primary: #6d6afe;
   --color-red: #ff5b56;
@@ -19,3 +17,4 @@
   --color-text-content-black: #333333;
 }
 
+@import url('./reset.css');
