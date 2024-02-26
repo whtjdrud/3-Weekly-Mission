@@ -2,14 +2,15 @@ import styles from './addLinkToFolder.module.css'
 import { Dispatch, FC, SetStateAction } from 'react'
 import { FolderItem } from '@/components/atomicComponents/FolderItem'
 
-type AddLinkToFolder = {
-  folder: {
-    id: String
-    createdAt: String
-    name: String
-    userId: Number
-    linkCount: Number
-  }
+type AddLinkToFolderProps = {
+  folders: {
+    id: string
+    createdAt: string
+    name: string
+    userId: number
+    linkCount: number
+  }[]
+
   isOpen: boolean
   description: string
   onAddClick: () => void
@@ -27,7 +28,7 @@ type FolderItemProps = {
   onClick: () => void
 }
 
-const Modal: FC<AddLinkToFolder> = ({
+const Modal: FC<AddLinkToFolderProps> = ({
   isOpen,
   folders,
   description,

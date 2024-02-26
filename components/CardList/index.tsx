@@ -10,14 +10,14 @@ type CardListProps = {
     id: number
     title: string
     url: string
-    imageSource: string
+    image_source: string
     alt: string
     description: string
     elapsedTime: string
-    createdAt: string
+    created_at: string
   }[]
 }
-interface folder {
+interface Folder {
   id: number
   createdAt: string
   name: string
@@ -29,7 +29,7 @@ export const CardList = ({ links }: CardListProps) => {
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null)
   const [currentModal, setCurrentModal] = useState<string | null>(null)
   const [selectedLinkUrl, setSelectedLinkUrl] = useState<string>('')
-  const [folders, setFolders] = useState<folder[]>([]) // 상태를 추가합니다.
+  const [folders, setFolders] = useState<Folder[]>([]) // 상태를 추가합니다.
 
   useEffect(() => {
     const fetchFolders = async () => {
@@ -70,7 +70,7 @@ export const CardList = ({ links }: CardListProps) => {
       />
       <AddLinkToFolder
         isOpen={currentModal === MODALS_ID.addToFolder}
-        folders={folders}
+        folder={folders}
         description={selectedLinkUrl}
         onAddClick={() => {}}
         onCloseClick={() => {
