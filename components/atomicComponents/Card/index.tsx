@@ -1,10 +1,4 @@
-import {
-  MouseEvent,
-  MouseEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { MouseEventHandler, useRef, useState } from 'react'
 import { CardContent } from '@/components/atomicComponents/CardContent'
 import styles from './card.module.css'
 import { convertDate, timeSince } from '@/utils/dateUtils'
@@ -28,13 +22,12 @@ export const Card = ({
   onDeleteClick,
   onAddToFolderClick,
 }: CardProps) => {
-  const kebabButtonRef = useRef(null)
   const DEFAULT_IMAGE = '/images/card-default.png'
-  const popoverRef = useRef(null)
+  const kebabButtonRef = useRef<HTMLButtonElement>(null)
+  const popoverRef = useRef<HTMLDivElement>(null)
   const [isPopoverOpen, setPopoverOpen] = useState(false)
 
   const togglePopover = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
     setPopoverOpen(!isPopoverOpen)
   }
 
@@ -43,29 +36,12 @@ export const Card = ({
     onDeleteClick()
     setPopoverOpen(false)
   }
+
   const handleAddToFolderClick: MouseEventHandler<HTMLLIElement> = (event) => {
     event.preventDefault()
     onAddToFolderClick()
     setPopoverOpen(false)
   }
-
-  const handleClickOutside = (event: { target: any }) => {
-    if (
-      popoverRef.current &&
-      !popoverRef.current.contains(event.target) &&
-      kebabButtonRef.current &&
-      !kebabButtonRef.current.contains(event.target)
-    ) {
-      setPopoverOpen(false)
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
 
   return (
     <a href={url} target="_blank" rel="noopener noreferrer">
