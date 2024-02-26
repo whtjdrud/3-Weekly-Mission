@@ -17,12 +17,19 @@ type CardListProps = {
     createdAt: string
   }[]
 }
+interface folder {
+  id: number
+  createdAt: string
+  name: string
+  userId: number
+  linkCount: number
+}
 export const CardList = ({ links }: CardListProps) => {
   const cardListRef = useRef(null)
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null)
   const [currentModal, setCurrentModal] = useState<string | null>(null)
   const [selectedLinkUrl, setSelectedLinkUrl] = useState<string>('')
-  const [folders, setFolders] = useState([]) // 상태를 추가합니다.
+  const [folders, setFolders] = useState<folder[]>([]) // 상태를 추가합니다.
 
   useEffect(() => {
     const fetchFolders = async () => {
