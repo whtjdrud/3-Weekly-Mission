@@ -88,16 +88,16 @@ const SignUp: NextPage = () => {
             />
             <Input
               label="비밀번호 확인"
-              type={showPassword.passwordchk ? 'text' : 'password'}
-              name="passwordcheck"
+              type={showPassword.passwordCheck ? 'text' : 'password'}
+              name="passwordCheck"
               register={register}
               validationRules={{
                 required: '패스워드 확인을 입력해주세요.',
                 validate: (value: string) =>
                   value === password || '비밀번호가 일치하지 않습니다.',
               }}
-              error={errors.passwordcheck?.message}
-              toggleShowPassword={() => toggleShowPassword('passwordchk')}
+              error={errors.passwordCheck?.message}
+              toggleShowPassword={() => toggleShowPassword('passwordCheck')}
               showPasswordButton={true}
             />
           </div>
