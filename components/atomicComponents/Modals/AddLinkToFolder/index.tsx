@@ -17,15 +17,8 @@ type AddLinkToFolderProps = {
   onCloseClick: () => void
   themeColor: string
   buttonText: string
-  selectedFolderId: string | null
-  setSelectedFolderId: Dispatch<SetStateAction<string | null>>
-}
-
-type FolderItemProps = {
-  isSelected: boolean
-  folderName: string
-  linkCount: number
-  onClick: () => void
+  selectedFolderId: string
+  setSelectedFolderId: (id: string) => void
 }
 
 const Modal: FC<AddLinkToFolderProps> = ({

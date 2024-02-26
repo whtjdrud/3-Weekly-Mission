@@ -7,7 +7,7 @@ import AddLinkToFolder from '@/components/atomicComponents/Modals/AddLinkToFolde
 import { useGetFolders } from '@/libs/client/useGetFolders'
 type CardListProps = {
   links: {
-    id: number
+    id: string
     title: string
     url: string
     image_source: string
@@ -18,7 +18,7 @@ type CardListProps = {
   }[]
 }
 interface Folder {
-  id: number
+  id: string
   createdAt: string
   name: string
   userId: number
@@ -26,10 +26,10 @@ interface Folder {
 }
 export const CardList = ({ links }: CardListProps) => {
   const cardListRef = useRef(null)
-  const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null)
-  const [currentModal, setCurrentModal] = useState<string | null>(null)
+  const [selectedFolderId, setSelectedFolderId] = useState<string>('all')
+  const [currentModal, setCurrentModal] = useState<string>('')
   const [selectedLinkUrl, setSelectedLinkUrl] = useState<string>('')
-  const [folders, setFolders] = useState<Folder[]>([]) // 상태를 추가합니다.
+  const [folders, setFolders] = useState<Folder[]>([])
 
   useEffect(() => {
     const fetchFolders = async () => {
@@ -42,7 +42,7 @@ export const CardList = ({ links }: CardListProps) => {
     }
     fetchFolders()
   }, [])
-  const closeModal = () => setCurrentModal(null)
+  const closeModal = () => setCurrentModal('')
   return (
     <div className={styles.container} ref={cardListRef}>
       {links.map((link, index) => (
@@ -70,15 +70,17 @@ export const CardList = ({ links }: CardListProps) => {
       />
       <AddLinkToFolder
         isOpen={currentModal === MODALS_ID.addToFolder}
-        folder={folders}
+        folders={folders}
         description={selectedLinkUrl}
         onAddClick={() => {}}
         onCloseClick={() => {
-          setSelectedFolderId(null)
+          setSelectedFolderId('all')
           closeModal()
         }}
         themeColor="blue"
         buttonText="추가하기"
+        selectedFolderId={selectedFolderId}
+        setSelectedFolderId={setSelectedFolderId}
       />
     </div>
   )

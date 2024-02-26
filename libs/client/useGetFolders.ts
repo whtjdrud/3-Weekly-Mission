@@ -1,7 +1,7 @@
 import axiosInstance from '@/libs/axiosInstance'
 
 type FolderRawData = {
-  id: number
+  id: string
   created_at: string
   name: string
   user_id: number
