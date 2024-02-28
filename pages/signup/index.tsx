@@ -7,7 +7,6 @@ import useSignUpForm from '@/hooks/useSignUpForm'
 import useTogglePassword from '@/hooks/useTogglePassword'
 import Input from '@/components/atomicComponents/Input'
 import { useRouter } from 'next/router'
-
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
 import { useSignUpUser } from '@/libs/client/useSignUpUser'
 import { useCheckDuplicateEmail } from '@/libs/client/useCheckDuplicateEmail'
@@ -25,10 +24,6 @@ const SignUp: NextPage = () => {
     } catch (error) {
       console.log(error)
     }
-  }
-  const handleBlur = async () => {
-    console.log('===handleBlur===')
-    //await useCheckDuplicateEmail(email)
   }
 
   return (
