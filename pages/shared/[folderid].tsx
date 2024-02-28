@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import HeaderPage from '@/components/Header'
 import Footer from '@/components/Footer'
 import SearchBar from '@/components/SearchBar'
