@@ -1,5 +1,5 @@
 import styles from './cardlist.module.css'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Card } from '@/components/atomicComponents/Card'
 import DeleteModal from '@/components/atomicComponents/Modals/DeleteModal'
 import { MODALS_ID } from '@/components/FolderBar/constants'
@@ -8,7 +8,6 @@ import { useGetFolders } from '@/libs/client/useGetFolders'
 import { CardListProps, Folder } from '@/types/folder'
 
 export const CardList = ({ links }: CardListProps) => {
-  const cardListRef = useRef(null)
   const [selectedFolderId, setSelectedFolderId] = useState<string>('all')
   const [currentModal, setCurrentModal] = useState<string>('')
   const [selectedLinkUrl, setSelectedLinkUrl] = useState<string>('')
@@ -27,7 +26,7 @@ export const CardList = ({ links }: CardListProps) => {
   }, [])
   const closeModal = () => setCurrentModal('')
   return (
-    <div className={styles.container} ref={cardListRef}>
+    <div className={styles.container}>
       {links.map((link, index) => (
         <Card
           key={link?.id}
@@ -55,7 +54,6 @@ export const CardList = ({ links }: CardListProps) => {
         isOpen={currentModal === MODALS_ID.addToFolder}
         folders={folders}
         description={selectedLinkUrl}
-        onAddClick={() => {}}
         onCloseClick={() => {
           setSelectedFolderId('all')
           closeModal()

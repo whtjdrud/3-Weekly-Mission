@@ -30,11 +30,12 @@ const FolderBar: React.FC<FolderBarProps> = ({
   const [inputValue, setInputValue] = useState<string>('')
 
   const shareLink = `${window.location.origin}/shared/${selectedFolderId}`
-
   const closeModal = () => setCurrentModal(null)
-  const handleKakaoClick = () => {}
+  const handleKakaoClick = () => {
+    alert('아직 제공되지 않습니다.')
+  }
   const handleFacebookClick = () => {
-    window.open(`https://www.facebook.com/sharer.php?u=${shareLink}`)
+    window.open(`https://www.facebook.com/sharer.php?u='${shareLink}'`)
   }
 
   const handleLinkCopyClick = () => {
