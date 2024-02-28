@@ -4,11 +4,29 @@ type FolderType = {
 }
 
 export type FolderProps = {
+  userId?: string
   email: string
   image_source: string
   folders: {
     folder: FolderType[]
   }
+}
+
+export type shareProps = {
+  folderName: string
+  ownerName: string
+  email: string
+  image_source: string
+  links: {
+    id: string
+    title: string
+    url: string
+    image_source: string
+    alt: string
+    description: string
+    elapsedTime: string
+    created_at: string
+  }[]
 }
 
 export type FolderRawData = {
