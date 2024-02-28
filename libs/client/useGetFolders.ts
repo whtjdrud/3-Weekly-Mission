@@ -3,8 +3,10 @@ import { FolderRawData } from '@/types/folder'
 
 export const useGetFolders = async () => {
   try {
+    const user = await axiosClient.get('/users')
+    const userId = user.data.data[0].id
     const response = await axiosClient.get<{ data: FolderRawData[] }>(
-      'users/25/folders',
+      `users/${userId}/folders`,
     )
     const folders = response?.data.data
 
