@@ -8,7 +8,3 @@ export interface LoginForm {
   email: string
   password: string
 }
-
-export interface ValidateEmailForm {
-  email: string
-}

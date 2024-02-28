@@ -1,27 +1,16 @@
+import React, { useEffect, useState } from 'react'
 import HeaderPage from '@/components/Header'
 import Footer from '@/components/Footer'
 import AddLink from '@/components/AddLink'
 import SearchBar from '@/components/SearchBar'
 import styles from '@/styles/folder.module.css'
 import FolderBar from '@/components/FolderBar'
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { CardList } from '@/components/CardList'
+import axiosClient from '@/libs/axiosClient'
+import { FolderProps } from '@/types/folder'
+import axiosServer from '@/libs/axiosServer'
 
-const Folder = ({
-  email,
-  image_source,
-  folders,
-}: {
-  email: string
-  image_source: string
-  folders: {
-    folder: {
-      id: string
-      name: string
-    }[]
-  }
-}) => {
+const Folder = ({ email, image_source, folders }: FolderProps) => {
   const [selectedFolderId, setSelectedFolderId] = useState('all')
   const [links, setLinks] = useState([])
   const [modalOpen, setModalOpen] = useState(false)
@@ -30,24 +19,12 @@ const Folder = ({
     setModalOpen(true)
   }
 
-  const closeModal = () => {
-    setModalOpen(false)
-  }
-
   useEffect(() => {
     const fetchData = async (folderId: string) => {
-      const accessToken = sessionStorage.getItem('accessToken')
       const queryString = folderId === 'all' ? '' : `?folderId=${folderId}`
 
       try {
-        const res = await axios.get(
-          `https://bootcamp-api.codeit.kr/api/links${queryString}`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          },
-        )
+        const res = await axiosClient.get(`/links${queryString}`)
         setLinks(res.data.data.folder)
       } catch (error) {
         console.error('API 호출 중 에러 발생:', error)
@@ -80,18 +57,18 @@ const Folder = ({
 }
 
 export async function getServerSideProps(context: { req: any }) {
-  try {
-    const { req } = context
-    const { cookies } = req
-    const accessToken = cookies.access_token
+  const {
+    cookies: { accessToken },
+  } = context.req
 
+  try {
     const [userResponse, folderResponse] = await Promise.all([
-      axios.get('https://bootcamp-api.codeit.kr/api/users', {
+      axiosServer.get('/users', {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       }),
-      axios.get('https://bootcamp-api.codeit.kr/api/folders', {
+      axiosServer.get('/folders', {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

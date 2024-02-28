@@ -5,25 +5,8 @@ import DeleteModal from '@/components/atomicComponents/Modals/DeleteModal'
 import { MODALS_ID } from '@/components/FolderBar/constants'
 import AddLinkToFolder from '@/components/atomicComponents/Modals/AddLinkToFolder'
 import { useGetFolders } from '@/libs/client/useGetFolders'
-type CardListProps = {
-  links: {
-    id: string
-    title: string
-    url: string
-    image_source: string
-    alt: string
-    description: string
-    elapsedTime: string
-    created_at: string
-  }[]
-}
-interface Folder {
-  id: string
-  createdAt: string
-  name: string
-  userId: number
-  linkCount: number
-}
+import { CardListProps, Folder } from '@/types/folder'
+
 export const CardList = ({ links }: CardListProps) => {
   const cardListRef = useRef(null)
   const [selectedFolderId, setSelectedFolderId] = useState<string>('all')
