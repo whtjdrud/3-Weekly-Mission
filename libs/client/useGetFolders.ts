@@ -1,23 +1,14 @@
-import axiosInstance from '@/libs/axiosInstance'
-
-type FolderRawData = {
-  id: string
-  created_at: string
-  name: string
-  user_id: number
-  link: {
-    count: number
-  }
-}
+import axiosClient from '@/libs/axiosClient'
+import { FolderRawData } from '@/types/folder'
 
 export const useGetFolders = async () => {
   try {
-    const response = await axiosInstance.get<{ data: FolderRawData[] }>(
+    const response = await axiosClient.get<{ data: FolderRawData[] }>(
       'users/25/folders',
     )
-    const rawfolders = response?.data.data
+    const folders = response?.data.data
 
-    const folders = rawfolders.map((folder) => {
+    return folders.map((folder) => {
       const { id, created_at, name, user_id, link } = folder
 
       return {
@@ -28,8 +19,6 @@ export const useGetFolders = async () => {
         linkCount: link.count,
       }
     })
-
-    return folders
   } catch (error) {
     console.error('Error fetching folders:', error)
     throw error

@@ -1,16 +1,13 @@
 import axios from 'axios'
 
-const axiosInstance = axios.create({
+const axiosClient = axios.create({
   baseURL: 'https://bootcamp-api.codeit.kr/api',
   timeout: 5000,
 })
 
-axiosInstance.interceptors.request.use(
+axiosClient.interceptors.request.use(
   (config) => {
-    const accessToken =
-      typeof window !== 'undefined'
-        ? sessionStorage.getItem('accessToken')
-        : null
+    const accessToken = sessionStorage.getItem('accessToken')
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`
@@ -22,4 +19,4 @@ axiosInstance.interceptors.request.use(
   },
 )
 
-export default axiosInstance
+export default axiosClient

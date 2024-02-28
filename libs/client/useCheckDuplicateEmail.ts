@@ -1,8 +1,9 @@
 import axios from 'axios'
+import axiosClient from '@/libs/axiosClient'
 
 export const useCheckDuplicateEmail = async (email: string) => {
   try {
-    await axios.post('https://bootcamp-api.codeit.kr/api/check-email', {
+    await axiosClient.post('/check-email', {
       email,
     })
     return true
