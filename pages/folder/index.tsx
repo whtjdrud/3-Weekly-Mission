@@ -6,31 +6,24 @@ import SearchBar from '@/components/SearchBar'
 import styles from '@/styles/folder.module.css'
 import FolderBar from '@/components/FolderBar'
 import { CardList } from '@/components/CardList'
-import axiosClient from '@/libs/axiosClient'
-import { FolderProps } from '@/types/folder'
+import { CardListProps, FolderProps } from '@/types/folder'
 import axiosServer from '@/libs/axiosServer'
+import useGetLinkData from '@/libs/client/useGetLinkData'
 
 const Folder = ({ email, image_source, folders }: FolderProps) => {
   const [selectedFolderId, setSelectedFolderId] = useState('all')
-  const [links, setLinks] = useState([])
-  const [modalOpen, setModalOpen] = useState(false)
-
-  const openModal = () => {
-    setModalOpen(true)
-  }
+  const [links, setLinks] = useState<CardListProps['links']>([])
 
   useEffect(() => {
-    const fetchData = async (folderId: string) => {
-      const queryString = folderId === 'all' ? '' : `?folderId=${folderId}`
-
+    const fetchData = async () => {
       try {
-        const res = await axiosClient.get(`/links${queryString}`)
-        setLinks(res.data.data.folder)
+        const linksData = await useGetLinkData(selectedFolderId)
+        setLinks(linksData)
       } catch (error) {
-        console.error('API 호출 중 에러 발생:', error)
+        console.error('링크 데이터를 가져오는 중 에러가 발생했습니다:', error)
       }
     }
-    fetchData(selectedFolderId)
+    fetchData()
   }, [selectedFolderId])
 
   return (
@@ -45,7 +38,6 @@ const Folder = ({ email, image_source, folders }: FolderProps) => {
               folders={folders}
               selectedFolderId={selectedFolderId}
               onFolderClick={setSelectedFolderId}
-              openModal={openModal}
             />
           </div>
           <CardList links={links} />
