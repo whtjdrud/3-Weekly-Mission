@@ -1,5 +1,6 @@
 import styles from './delteModal.module.css'
 import { FC, MouseEventHandler } from 'react'
+import Modal from '@/components/atomicComponents/Modals/modal'
 
 type DeleteModalProps = {
   title: string
@@ -10,7 +11,7 @@ type DeleteModalProps = {
   onCloseClick: MouseEventHandler<HTMLDivElement | HTMLButtonElement>
 }
 
-const Modal: FC<DeleteModalProps> = ({
+const DeleteModal: FC<DeleteModalProps> = ({
   isOpen,
   title,
   buttonText,
@@ -21,27 +22,16 @@ const Modal: FC<DeleteModalProps> = ({
   if (!isOpen) return null
 
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalContainer}>
-        <button onClick={onCloseClick}>
-          <img
-            className={styles.close}
-            src="/images/close.svg"
-            alt="X모양 닫기 버튼"
-          />
-        </button>
-        <div className={styles.items}>
-          <h2 className={styles.title}>{title}</h2>
-          <p className={styles.description}>{description}</p>
-          <div className={styles.modalContent}>
-            <button className={`${styles.button} ${styles[themeColor]}`}>
-              {buttonText}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Modal
+      buttonText={buttonText}
+      onCloseClick={onCloseClick}
+      themeColor={themeColor}
+    >
+      <h2 className={styles.title}>{title}</h2>
+      <p className={styles.description}>{description}</p>
+      <div className={styles.modalContent}></div>
+    </Modal>
   )
 }
 
-export default Modal
+export default DeleteModal
