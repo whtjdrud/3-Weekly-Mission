@@ -6,6 +6,7 @@ import { MODALS_ID } from '@/components/FolderBar/constants'
 import AddLinkToFolder from '@/components/atomicComponents/Modals/AddLinkToFolder'
 import { useGetFolders } from '@/libs/client/useGetFolders'
 import { CardListProps, Folder } from '@/types/folder'
+import NoLink from '@/components/NoLink'
 
 export const CardList = ({ links }: CardListProps) => {
   const [selectedFolderId, setSelectedFolderId] = useState<string>('all')
@@ -25,6 +26,8 @@ export const CardList = ({ links }: CardListProps) => {
     fetchFolders()
   }, [])
   const closeModal = () => setCurrentModal('')
+
+  if (links === undefined || links.length === 0) return <NoLink />
   return (
     <div className={styles.container}>
       {links.map((link, index) => (
