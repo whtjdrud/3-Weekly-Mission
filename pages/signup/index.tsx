@@ -8,18 +8,25 @@ import useTogglePassword from '@/hooks/useTogglePassword'
 import Input from '@/components/atomicComponents/Input'
 import { useRouter } from 'next/router'
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
-import { useSignUpUser } from '@/libs/client/useSignUpUser'
 import { useCheckDuplicateEmail } from '@/libs/client/useCheckDuplicateEmail'
+import { useAuth } from '@/contexts/AuthProvider'
 
 const SignUp: NextPage = () => {
   const { register, handleSubmit, errors, password, email } = useSignUpForm()
   const { showPassword, toggleShowPassword } = useTogglePassword()
 
+  const { user, signUp } = useAuth(false)
   const router = useRouter()
+
+  useEffect(() => {
+    if (user) {
+      router.push('/folder')
+    }
+  })
 
   const onValid = async (data: LoginForm) => {
     try {
-      await useSignUpUser(data)
+      signUp(data)
       await router.push('/folder')
     } catch (error) {
       console.log(error)

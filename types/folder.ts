@@ -4,9 +4,7 @@ type FolderType = {
 }
 
 export type FolderProps = {
-  userId?: string
-  email: string
-  image_source: string
+  shareLink: string
   folders: {
     folder: FolderType[]
   }
@@ -15,7 +13,6 @@ export type FolderProps = {
 export type shareProps = {
   folderName: string
   ownerName: string
-  email: string
   image_source: string
   links: {
     id: string

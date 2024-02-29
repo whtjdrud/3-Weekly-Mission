@@ -9,16 +9,10 @@ import axiosServer from '@/libs/axiosServer'
 import axiosInstance from '@/libs/axiosInstance'
 import FolderInfo from '@/components/FolderInfo'
 
-const Share = ({
-  folderName,
-  ownerName,
-  links,
-  email,
-  image_source,
-}: shareProps) => {
+const Share = ({ folderName, ownerName, links, image_source }: shareProps) => {
   return (
     <>
-      <HeaderPage email={email} image_source={image_source} />
+      <HeaderPage />
       <div className={styles.container}>
         <FolderInfo
           profileImage={image_source}
@@ -60,7 +54,6 @@ export async function getServerSideProps(context: {
         Authorization: `Bearer ${accessToken}`,
       },
     })
-    console.log(userResponse.data.data[0])
 
     return {
       props: {

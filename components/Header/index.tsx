@@ -2,14 +2,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from '@/components/Header/header.module.css'
 import Profile from '@/components/atomicComponents/Profile'
+import { useAuth } from '@/contexts/AuthProvider'
 
-const HeaderPage = ({
-  email,
-  image_source,
-}: {
-  email: string
-  image_source: string
-}) => {
+const HeaderPage = () => {
+  const { user } = useAuth(true)
+
+  const email: string | undefined = user?.email
+  const imageSource: string | undefined = user?.image_source
+
   return (
     <header className={styles.header}>
       <nav className={styles.header_nav}>
@@ -21,8 +21,8 @@ const HeaderPage = ({
             height={24}
           />
         </Link>
-        {email && image_source ? (
-          <Profile email={email} imageSource={image_source} />
+        {email && imageSource ? (
+          <Profile email={email} imageSource={imageSource} />
         ) : (
           <div className={styles.loginProfile}>
             <Link className={`${styles.cta} ${styles.ctaShort}`} href="/login">

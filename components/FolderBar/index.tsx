@@ -16,11 +16,13 @@ interface FolderBarProps {
   }
   selectedFolderId: string
   onFolderClick: React.Dispatch<React.SetStateAction<string>>
+  shareLink: string
 }
 const FolderBar: React.FC<FolderBarProps> = ({
   folders,
   selectedFolderId,
   onFolderClick,
+  shareLink,
 }) => {
   const folderName =
     'all' === selectedFolderId
@@ -29,7 +31,6 @@ const FolderBar: React.FC<FolderBarProps> = ({
   const [currentModal, setCurrentModal] = useState<string | null>(null)
   const [inputValue, setInputValue] = useState<string>('')
 
-  const shareLink = `${window.location.origin}/shared/${selectedFolderId}`
   const closeModal = () => setCurrentModal(null)
   const handleKakaoClick = () => {
     alert('아직 제공되지 않습니다.')

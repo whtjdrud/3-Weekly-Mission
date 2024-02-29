@@ -10,7 +10,7 @@ import { CardListProps, FolderProps } from '@/types/folder'
 import axiosServer from '@/libs/axiosServer'
 import useGetLinkData from '@/libs/client/useGetLinkData'
 
-const Folder = ({ email, image_source, folders }: FolderProps) => {
+const Folder = ({ shareLink, folders }: FolderProps) => {
   const [selectedFolderId, setSelectedFolderId] = useState('all')
   const [links, setLinks] = useState<CardListProps['links']>([])
 
@@ -28,7 +28,7 @@ const Folder = ({ email, image_source, folders }: FolderProps) => {
 
   return (
     <>
-      <HeaderPage email={email} image_source={image_source} />
+      <HeaderPage />
       <div className={styles.container}>
         <AddLink />
         <main className={styles.items}>
@@ -38,6 +38,7 @@ const Folder = ({ email, image_source, folders }: FolderProps) => {
               folders={folders}
               selectedFolderId={selectedFolderId}
               onFolderClick={setSelectedFolderId}
+              shareLink={shareLink}
             />
           </div>
           <CardList links={links} />
@@ -49,29 +50,22 @@ const Folder = ({ email, image_source, folders }: FolderProps) => {
 }
 
 export async function getServerSideProps(context: { req: any }) {
-  const {
-    cookies: { accessToken },
-  } = context.req
+  const { host, 'x-forwarded-proto': proto = 'http' } =
+    context.req?.headers || {}
+  const url = `${proto}://${host}${context.req?.url}`
+  const accessToken = context.req?.cookies.accessToken
 
   try {
-    const [userResponse, folderResponse] = await Promise.all([
-      axiosServer.get('/users', {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }),
-      axiosServer.get('/folders', {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }),
-    ])
+    const folderResponse = await axiosServer.get('/folders', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
 
     return {
       props: {
-        email: userResponse.data.data[0]?.email || null,
-        image_source: userResponse.data.data[0]?.image_source || null,
         folders: folderResponse.data.data || [],
+        shareLink: url,
       },
     }
   } catch (error) {
