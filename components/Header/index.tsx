@@ -2,10 +2,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from '@/components/Header/header.module.css'
 import Profile from '@/components/atomicComponents/Profile'
-import axios from 'axios'
 
-// @ts-ignore
-const HeaderPage = ({ email, image_source }) => {
+const HeaderPage = ({
+  email,
+  image_source,
+}: {
+  email: string
+  image_source: string
+}) => {
   return (
     <header className={styles.header}>
       <nav className={styles.header_nav}>
