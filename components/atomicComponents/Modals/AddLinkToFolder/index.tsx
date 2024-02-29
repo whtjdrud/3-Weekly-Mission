@@ -1,5 +1,5 @@
 import styles from './addLinkToFolder.module.css'
-import { Dispatch, FC, SetStateAction } from 'react'
+import { FC } from 'react'
 import { FolderItem } from '@/components/atomicComponents/FolderItem'
 
 type AddLinkToFolderProps = {
@@ -10,10 +10,8 @@ type AddLinkToFolderProps = {
     userId: number
     linkCount: number
   }[]
-
   isOpen: boolean
   description: string
-  onAddClick: () => void
   onCloseClick: () => void
   themeColor: string
   buttonText: string
