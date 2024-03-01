@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { API_URL } from '@/constants/constant'
 
 const axiosClient = axios.create({
-  baseURL: 'https://bootcamp-api.codeit.kr/api',
+  baseURL: API_URL,
   timeout: 5000,
 })
 
