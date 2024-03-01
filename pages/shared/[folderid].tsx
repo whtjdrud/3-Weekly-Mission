@@ -5,7 +5,6 @@ import SearchBar from '@/components/SearchBar'
 import styles from '@/styles/folder.module.css'
 import { CardList } from '@/components/CardList'
 import { shareProps } from '@/types/folder'
-import axiosServer from '@/libs/axiosServer'
 import axiosInstance from '@/libs/axiosInstance'
 import FolderInfo from '@/components/FolderInfo'
 
@@ -40,7 +39,7 @@ export async function getServerSideProps(context: {
   const { folderid } = context.query
 
   try {
-    const userResponse = await axiosServer.get('/users', {
+    const userResponse = await axiosInstance.get('/users', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -49,7 +48,7 @@ export async function getServerSideProps(context: {
 
     const userId = userResponse.data.data[0].id
     const url = `/users/${userId}/links?folderId=${folderid}`
-    const linkResponse = await axiosServer.get(url, {
+    const linkResponse = await axiosInstance.get(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

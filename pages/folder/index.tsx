@@ -7,8 +7,9 @@ import styles from '@/styles/folder.module.css'
 import FolderBar from '@/components/FolderBar'
 import { CardList } from '@/components/CardList'
 import { CardListProps, FolderProps } from '@/types/folder'
-import axiosServer from '@/libs/axiosServer'
 import useGetLinkData from '@/libs/client/useGetLinkData'
+import { fetchLinkDataError, networkerror } from '@/constants/errorMessage'
+import axiosInstance from '@/libs/axiosInstance'
 
 const Folder = ({ shareLink, folders }: FolderProps) => {
   const [selectedFolderId, setSelectedFolderId] = useState('all')
@@ -20,7 +21,7 @@ const Folder = ({ shareLink, folders }: FolderProps) => {
         const linksData = await useGetLinkData(selectedFolderId)
         setLinks(linksData)
       } catch (error) {
-        console.error('링크 데이터를 가져오는 중 에러가 발생했습니다:', error)
+        console.error(fetchLinkDataError, error)
       }
     }
     fetchData()
@@ -56,7 +57,7 @@ export async function getServerSideProps(context: { req: any }) {
   const accessToken = context.req?.cookies.accessToken
 
   try {
-    const folderResponse = await axiosServer.get('/folders', {
+    const folderResponse = await axiosInstance.get('/folders', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -76,7 +77,7 @@ export async function getServerSideProps(context: { req: any }) {
         email: null,
         image_source: null,
         folders: [],
-        errorMessage: '서버에서 데이터를 가져오는 중에 문제가 발생했습니다.',
+        errorMessage: networkerror,
       },
     }
   }
