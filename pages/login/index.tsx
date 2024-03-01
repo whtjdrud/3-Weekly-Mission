@@ -9,6 +9,12 @@ import Input from '@/components/atomicComponents/Input'
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
 import { useAuth } from '@/contexts/AuthProvider'
 import { useEffect } from 'react'
+import {
+  emailFormatInvalid,
+  emailIsEmpty,
+  passwordFormatInvalid,
+  passwordIsEmpty,
+} from '@/constants/errorMessage'
 
 const Login: NextPage = () => {
   const router = useRouter()
@@ -41,10 +47,10 @@ const Login: NextPage = () => {
               name="email"
               register={register}
               validationRules={{
-                required: '이메일을 입력해주세요.',
+                required: emailIsEmpty,
                 pattern: {
                   value: emailPattern,
-                  message: '올바른 이메일 형식이 아닙니다.',
+                  message: emailFormatInvalid,
                 },
               }}
               error={errors.email?.message}
@@ -55,10 +61,10 @@ const Login: NextPage = () => {
               name="password"
               register={register}
               validationRules={{
-                required: '패스워드를 입력해주세요.',
+                required: passwordIsEmpty,
                 pattern: {
                   value: passwordPattern,
-                  message: '영문, 숫자 조합 8자 이상 입력해주세요.',
+                  message: passwordFormatInvalid,
                 },
               }}
               error={errors.password?.message}

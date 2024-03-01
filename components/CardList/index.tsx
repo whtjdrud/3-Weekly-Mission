@@ -2,11 +2,12 @@ import styles from './cardlist.module.css'
 import { useEffect, useState } from 'react'
 import { Card } from '@/components/atomicComponents/Card'
 import DeleteModal from '@/components/atomicComponents/Modals/DeleteModal'
-import { MODALS_ID } from '@/components/FolderBar/constants'
+import { MODALS_ID } from '@/constants/folder'
 import AddLinkToFolder from '@/components/atomicComponents/Modals/AddLinkToFolder'
 import { useGetFolders } from '@/libs/client/useGetFolders'
 import { CardListProps, Folder } from '@/types/folder'
 import NoLink from '@/components/NoLink'
+import { fetchFolderDataError } from '@/constants/errorMessage'
 
 export const CardList = ({ links }: CardListProps) => {
   const [selectedFolderId, setSelectedFolderId] = useState<string>('all')
@@ -20,7 +21,7 @@ export const CardList = ({ links }: CardListProps) => {
         const folders = await useGetFolders()
         setFolders(folders)
       } catch (error) {
-        console.error('폴더를 가져오는데 실패했습니다:', error)
+        console.error(fetchFolderDataError, error)
       }
     }
     fetchFolders()

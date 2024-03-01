@@ -10,6 +10,16 @@ import { useRouter } from 'next/router'
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
 import { useCheckDuplicateEmail } from '@/libs/client/useCheckDuplicateEmail'
 import { useAuth } from '@/contexts/AuthProvider'
+import {
+  emailAlreadyInUseMessage,
+  emailFormatInvalid,
+  emailIsEmpty,
+  passwordCheckIsEmpty,
+  passwordFormatInvalid,
+  passwordIsEmpty,
+  passwordIsNotMach,
+  serverError,
+} from '@/constants/errorMessage'
 
 const SignUp: NextPage = () => {
   const { register, handleSubmit, errors, password, email } = useSignUpForm()
@@ -49,10 +59,10 @@ const SignUp: NextPage = () => {
               name="email"
               register={register}
               validationRules={{
-                required: '이메일을 입력해주세요.',
+                required: emailIsEmpty,
                 pattern: {
                   value: emailPattern,
-                  message: '올바른 이메일 형식이 아닙니다.',
+                  message: emailFormatInvalid,
                 },
                 validate: {
                   asyncValidation: async (value: string) => {
@@ -61,10 +71,10 @@ const SignUp: NextPage = () => {
                       return true
                     }
                     if (response.status === 409) {
-                      return '이메일이 이미 사용 중입니다.'
+                      return emailAlreadyInUseMessage
                     }
                     if (response.status === 500) {
-                      return '서버 오류가 발생했습니다. 나중에 다시 시도해주세요.'
+                      return serverError
                     }
                     return `${response.status}: ${response.message}`
                   },
@@ -78,10 +88,10 @@ const SignUp: NextPage = () => {
               type={showPassword.password ? 'text' : 'password'}
               register={register}
               validationRules={{
-                required: '패스워드를 입력해주세요.',
+                required: passwordIsEmpty,
                 pattern: {
                   value: passwordPattern,
-                  message: '영문, 숫자 조합 8자 이상 입력해주세요.',
+                  message: passwordFormatInvalid,
                 },
               }}
               error={errors.password?.message}
@@ -94,9 +104,9 @@ const SignUp: NextPage = () => {
               name="passwordCheck"
               register={register}
               validationRules={{
-                required: '패스워드 확인을 입력해주세요.',
+                required: passwordCheckIsEmpty,
                 validate: (value: string) =>
-                  value === password || '비밀번호가 일치하지 않습니다.',
+                  value === password || passwordIsNotMach,
               }}
               error={errors.passwordCheck?.message}
               toggleShowPassword={() => toggleShowPassword('passwordCheck')}

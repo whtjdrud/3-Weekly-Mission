@@ -12,6 +12,7 @@ import axiosClient from '@/libs/axiosClient'
 import { useSignUpUser } from '@/libs/client/useSignUpUser'
 import { useRouter } from 'next/router'
 import { AuthContextType } from '@/types/user'
+import { missingContextError } from '@/constants/errorMessage'
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
@@ -88,7 +89,7 @@ export function useAuth(required: boolean) {
   const router = useRouter()
 
   if (!context) {
-    throw new Error('반드시 AuthProvider 안에서 사용해야 합니다.')
+    throw new Error(missingContextError)
   }
 
   useEffect(() => {

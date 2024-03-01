@@ -7,6 +7,7 @@ import { CardList } from '@/components/CardList'
 import { shareProps } from '@/types/folder'
 import axiosInstance from '@/libs/axiosInstance'
 import FolderInfo from '@/components/FolderInfo'
+import { fetchDataError } from '@/constants/errorMessage'
 
 const Share = ({ folderName, ownerName, links, image_source }: shareProps) => {
   return (
@@ -64,14 +65,14 @@ export async function getServerSideProps(context: {
       },
     }
   } catch (error) {
-    console.error('Error fetching data:', error)
+    console.error(fetchDataError, error)
 
     return {
       props: {
         email: null,
         image_source: null,
         folders: [],
-        errorMessage: '서버에서 데이터를 가져오는 중에 문제가 발생했습니다.',
+        errorMessage: fetchDataError,
       },
     }
   }
