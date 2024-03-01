@@ -8,7 +8,7 @@ import FolderBar from '@/components/FolderBar'
 import { CardList } from '@/components/CardList'
 import { CardListProps, FolderProps } from '@/types/folder'
 import useGetLinkData from '@/libs/client/useGetLinkData'
-import { fetchLinkDataError, networkerror } from '@/constants/errorMessage'
+import { fetchDataError, networkerror } from '@/constants/errorMessage'
 import axiosInstance from '@/libs/axiosInstance'
 
 const Folder = ({ shareLink, folders }: FolderProps) => {
@@ -21,7 +21,7 @@ const Folder = ({ shareLink, folders }: FolderProps) => {
         const linksData = await useGetLinkData(selectedFolderId)
         setLinks(linksData)
       } catch (error) {
-        console.error(fetchLinkDataError, error)
+        console.error(fetchDataError, error)
       }
     }
     fetchData()
@@ -70,14 +70,14 @@ export async function getServerSideProps(context: { req: any }) {
       },
     }
   } catch (error) {
-    console.error('Error fetching data:', error)
+    console.error(fetchDataError, error)
 
     return {
       props: {
         email: null,
         image_source: null,
         folders: [],
-        errorMessage: networkerror,
+        errorMessage: fetchDataError,
       },
     }
   }
