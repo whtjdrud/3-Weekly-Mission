@@ -8,7 +8,7 @@ import FolderBar from '@/components/FolderBar'
 import { CardList } from '@/components/CardList'
 import { CardListProps, FolderProps } from '@/types/folder'
 import useGetLinkData from '@/libs/client/useGetLinkData'
-import { fetchDataError, networkerror } from '@/constants/errorMessage'
+import { fetchDataError } from '@/constants/errorMessage'
 import axiosInstance from '@/libs/axiosInstance'
 
 const Folder = ({ shareLink, folders }: FolderProps) => {
@@ -53,7 +53,7 @@ const Folder = ({ shareLink, folders }: FolderProps) => {
 export async function getServerSideProps(context: { req: any }) {
   const { host, 'x-forwarded-proto': proto = 'http' } =
     context.req?.headers || {}
-  const url = `${proto}://${host}${context.req?.url}`
+  const url = `${proto}://${host}/shared`
   const accessToken = context.req?.cookies.accessToken
 
   try {
@@ -65,7 +65,7 @@ export async function getServerSideProps(context: { req: any }) {
 
     return {
       props: {
-        folders: folderResponse.data.data || [],
+        folders: folderResponse.data || [],
         shareLink: url,
       },
     }

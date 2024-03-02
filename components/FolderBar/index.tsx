@@ -6,18 +6,8 @@ import { BUTTONS, MODALS_ID } from '@/constants/folder'
 import InputModal from '@/components/atomicComponents/Modals/InputModal'
 import DeleteModal from '@/components/atomicComponents/Modals/DeleteModal'
 import ShareModal from '@/components/atomicComponents/Modals/ShareModal'
+import { FolderBarProps } from '@/types/folder'
 
-interface FolderBarProps {
-  folders: {
-    folder?: {
-      id: string
-      name: string
-    }[]
-  }
-  selectedFolderId: string
-  onFolderClick: React.Dispatch<React.SetStateAction<string>>
-  shareLink: string
-}
 const FolderBar: React.FC<FolderBarProps> = ({
   folders,
   selectedFolderId,
@@ -27,9 +17,10 @@ const FolderBar: React.FC<FolderBarProps> = ({
   const folderName =
     'all' === selectedFolderId
       ? '전체'
-      : folders.folder?.find(({ id }) => id === selectedFolderId)?.name ?? ''
+      : folders.find(({ id }) => id === selectedFolderId)?.name ?? ''
   const [currentModal, setCurrentModal] = useState<string | null>(null)
   const [inputValue, setInputValue] = useState<string>('')
+  shareLink += `/${selectedFolderId}`
 
   const closeModal = () => setCurrentModal(null)
   const handleKakaoClick = () => {
@@ -55,7 +46,7 @@ const FolderBar: React.FC<FolderBarProps> = ({
           onClick={() => onFolderClick('all')}
           isSelected={'all' === selectedFolderId}
         />
-        {folders.folder?.map(({ id, name }) => (
+        {folders?.map(({ id, name }) => (
           <FolderButton
             key={id}
             text={name}

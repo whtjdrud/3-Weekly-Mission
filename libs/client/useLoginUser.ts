@@ -2,8 +2,8 @@ import { LoginForm } from '@/types/sign'
 import axiosInstance from '@/libs/axiosInstance'
 
 export const useLoginUser = async (data: LoginForm) => {
-  const response = await axiosInstance.post('/sign-in', data)
-  const { accessToken, refreshToken } = response.data.data
+  const response = await axiosInstance.post('/auth/sign-in', data)
+  const { accessToken, refreshToken } = response.data
 
   const expires = new Date()
   expires.setDate(expires.getDate() + 1)

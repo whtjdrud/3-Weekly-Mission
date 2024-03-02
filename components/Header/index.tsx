@@ -4,6 +4,19 @@ import styles from '@/components/Header/header.module.css'
 import Profile from '@/components/atomicComponents/Profile'
 import { useAuth } from '@/contexts/AuthProvider'
 
+export async function getServerSideProps() {
+  const { user } = useAuth(true)
+  const email: string | undefined = user?.email
+  const imageSource: string | undefined = user?.image_source
+
+  return {
+    props: {
+      email,
+      imageSource,
+    },
+  }
+}
+
 const HeaderPage = () => {
   const { user } = useAuth(true)
 

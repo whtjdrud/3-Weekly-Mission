@@ -3,7 +3,7 @@ import axiosInstance from '@/libs/axiosInstance'
 
 export const useSignUpUser = async (data: LoginForm) => {
   try {
-    const response = await axiosInstance.post('/sign-up', data)
+    const response = await axiosInstance.post('/auth/sign-up', data)
     const { accessToken, refreshToken } = response.data.data
 
     const expires = new Date()

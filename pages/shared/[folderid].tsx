@@ -47,7 +47,7 @@ export async function getServerSideProps(context: {
     })
     const folderResponse = await axiosInstance.get(`/folders/${folderid}`)
 
-    const userId = userResponse.data.data[0].id
+    const userId = userResponse.data[0].id
     const url = `/users/${userId}/links?folderId=${folderid}`
     const linkResponse = await axiosInstance.get(url, {
       headers: {
@@ -57,11 +57,11 @@ export async function getServerSideProps(context: {
 
     return {
       props: {
-        folderName: folderResponse.data.data[0].name || null,
-        ownerName: userResponse.data.data[0].name,
-        email: userResponse.data.data[0]?.email || null,
-        image_source: userResponse.data.data[0]?.image_source || null,
-        links: Array.from(linkResponse.data.data) || [],
+        folderName: folderResponse.data[0].name || null,
+        ownerName: userResponse.data[0].name,
+        email: userResponse.data[0]?.email || null,
+        image_source: userResponse.data[0]?.image_source || null,
+        links: Array.from(linkResponse.data) || [],
       },
     }
   } catch (error) {

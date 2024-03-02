@@ -8,7 +8,7 @@ const useGetUsersLinkData = async (
 
   try {
     const res = await axiosClient.get(url)
-    return res.data.data
+    return res.data
   } catch (error) {
     console.error('API 호출 중 에러 발생:', error)
   }

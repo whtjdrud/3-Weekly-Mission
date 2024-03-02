@@ -41,7 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     let nextUser: any
     try {
       const res = await axiosClient.get('/users')
-      nextUser = res.data.data[0]
+      nextUser = res.data[0]
     } catch {
     } finally {
       setValues((prevValues) => ({
@@ -55,7 +55,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   async function login(data: LoginForm) {
     await useLoginUser(data)
     await getMe()
-    await router.push('/folder')
+
+    if (router.pathname === '/shared') {
+      router.back()
+    } else {
+      // 다른 페이지에서 로그인하는 경우 지정된 경로로 이동합니다.
+      await router.push('/folder')
+    }
   }
 
   async function signUp(data: LoginForm) {

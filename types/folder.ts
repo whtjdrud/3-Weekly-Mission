@@ -1,13 +1,22 @@
-type FolderType = {
+import React from 'react'
+
+export interface Folder {
   id: string
+  createdAt: string
   name: string
+  userId: number
+  linkCount: number
 }
 
 export type FolderProps = {
   shareLink: string
-  folders: {
-    folder: FolderType[]
-  }
+  folders: Folder[]
+}
+export interface FolderBarProps {
+  folders: Folder[]
+  selectedFolderId: string
+  onFolderClick: React.Dispatch<React.SetStateAction<string>>
+  shareLink: string
 }
 
 export type shareProps = {
@@ -26,16 +35,6 @@ export type shareProps = {
   }[]
 }
 
-export type FolderRawData = {
-  id: string
-  created_at: string
-  name: string
-  user_id: number
-  link: {
-    count: number
-  }
-}
-
 export type CardListProps = {
   links: {
     id: string
@@ -47,11 +46,4 @@ export type CardListProps = {
     elapsedTime: string
     created_at: string
   }[]
-}
-export interface Folder {
-  id: string
-  createdAt: string
-  name: string
-  userId: number
-  linkCount: number
 }
