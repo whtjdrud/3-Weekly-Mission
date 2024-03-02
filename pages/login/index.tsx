@@ -7,28 +7,23 @@ import useSignUpForm from '@/hooks/useSignUpForm'
 import { LoginForm } from '@/types/sign'
 import Input from '@/components/atomicComponents/Input'
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
-import { useAuth } from '@/contexts/AuthProvider'
-import { useEffect } from 'react'
+import { withAuth } from '@/contexts/AuthProvider'
 import {
   emailFormatInvalid,
   emailIsEmpty,
   passwordFormatInvalid,
   passwordIsEmpty,
 } from '@/constants/errorMessage'
+import { useLoginUser } from '@/libs/client/useLoginUser'
 
 const Login: NextPage = () => {
   const router = useRouter()
   const { register, handleSubmit, errors } = useSignUpForm()
   const { showPassword, toggleShowPassword } = useTogglePassword()
-  const { user, login } = useAuth(false)
 
-  useEffect(() => {
-    if (user) {
-      router.push('/folder')
-    }
-  })
   const onValid = async (data: LoginForm) => {
-    login(data)
+    await useLoginUser(data)
+    await router.push('/folder')
   }
 
   return (
@@ -78,5 +73,10 @@ const Login: NextPage = () => {
     </main>
   )
 }
-
+export const getServerSideProps = withAuth(
+  async (context, user) => {
+    return { props: {} }
+  },
+  { reverseRedirect: true },
+)
 export default Login

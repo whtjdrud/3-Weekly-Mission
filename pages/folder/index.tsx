@@ -6,14 +6,17 @@ import SearchBar from '@/components/SearchBar'
 import styles from '@/styles/folder.module.css'
 import FolderBar from '@/components/FolderBar'
 import { CardList } from '@/components/CardList'
-import { CardListProps, FolderProps } from '@/types/folder'
+import { FolderProps, Links } from '@/types/folder'
 import useGetLinkData from '@/libs/client/useGetLinkData'
 import { fetchDataError } from '@/constants/errorMessage'
 import axiosInstance from '@/libs/axiosInstance'
+import { withAuth } from '@/contexts/AuthProvider'
+import { User } from '@/types/user'
+import { GetServerSidePropsContext } from 'next'
 
-const Folder = ({ shareLink, folders }: FolderProps) => {
+const Folder = ({ user, shareLink, folders }: FolderProps) => {
   const [selectedFolderId, setSelectedFolderId] = useState('all')
-  const [links, setLinks] = useState<CardListProps['links']>([])
+  const [links, setLinks] = useState<Links[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +32,7 @@ const Folder = ({ shareLink, folders }: FolderProps) => {
 
   return (
     <>
-      <HeaderPage />
+      <HeaderPage user={user} />
       <div className={styles.container}>
         <AddLink />
         <main className={styles.items}>
@@ -50,37 +53,39 @@ const Folder = ({ shareLink, folders }: FolderProps) => {
   )
 }
 
-export async function getServerSideProps(context: { req: any }) {
-  const { host, 'x-forwarded-proto': proto = 'http' } =
-    context.req?.headers || {}
-  const url = `${proto}://${host}/shared`
-  const accessToken = context.req?.cookies.accessToken
+export const getServerSideProps = withAuth(
+  async (context: GetServerSidePropsContext, user: User) => {
+    const { host, 'x-forwarded-proto': proto = 'http' } =
+      context.req?.headers || {}
+    const url = `${proto}://${host}/shared`
+    const accessToken = context.req?.cookies.accessToken
 
-  try {
-    const folderResponse = await axiosInstance.get('/folders', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
+    try {
+      const folderResponse = await axiosInstance.get('/folders', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
 
-    return {
-      props: {
-        folders: folderResponse.data || [],
-        shareLink: url,
-      },
+      return {
+        props: {
+          folders: folderResponse.data || [],
+          shareLink: url,
+          user: user,
+        },
+      }
+    } catch (error) {
+      console.error(fetchDataError, error)
+
+      return {
+        props: {
+          user: user,
+          folders: [],
+          shareLink: url,
+        },
+      }
     }
-  } catch (error) {
-    console.error(fetchDataError, error)
-
-    return {
-      props: {
-        email: null,
-        image_source: null,
-        folders: [],
-        errorMessage: fetchDataError,
-      },
-    }
-  }
-}
+  },
+)
 
 export default Folder

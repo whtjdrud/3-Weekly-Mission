@@ -1,4 +1,5 @@
 import React from 'react'
+import { User } from '@/types/user'
 
 export interface Folder {
   id: string
@@ -9,6 +10,7 @@ export interface Folder {
 }
 
 export type FolderProps = {
+  user: User
   shareLink: string
   folders: Folder[]
 }
@@ -20,30 +22,18 @@ export interface FolderBarProps {
 }
 
 export type shareProps = {
+  user: User
+  links: Links[]
   folderName: string
-  ownerName: string
-  image_source: string
-  links: {
-    id: string
-    title: string
-    url: string
-    image_source: string
-    alt: string
-    description: string
-    elapsedTime: string
-    created_at: string
-  }[]
 }
 
-export type CardListProps = {
-  links: {
-    id: string
-    title: string
-    url: string
-    image_source: string
-    alt: string
-    description: string
-    elapsedTime: string
-    created_at: string
-  }[]
+export type Links = {
+  id: string
+  title: string
+  url: string
+  image_source: string
+  alt: string
+  description: string
+  elapsedTime: string
+  created_at: string
 }

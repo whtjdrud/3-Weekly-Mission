@@ -1,5 +1,5 @@
 import styles from '@/styles/signin.module.css'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { NextPage } from 'next'
 import SignHeader from '@/components/SignHeader'
 import { LoginForm } from '@/types/sign'
@@ -9,7 +9,7 @@ import Input from '@/components/atomicComponents/Input'
 import { useRouter } from 'next/router'
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
 import { useCheckDuplicateEmail } from '@/libs/client/useCheckDuplicateEmail'
-import { useAuth } from '@/contexts/AuthProvider'
+import { withAuth } from '@/contexts/AuthProvider'
 import {
   emailAlreadyInUseMessage,
   emailFormatInvalid,
@@ -20,23 +20,17 @@ import {
   passwordIsNotMach,
   serverError,
 } from '@/constants/errorMessage'
+import { useSignUpUser } from '@/libs/client/useSignUpUser'
 
 const SignUp: NextPage = () => {
   const { register, handleSubmit, errors, password, email } = useSignUpForm()
   const { showPassword, toggleShowPassword } = useTogglePassword()
 
-  const { user, signUp } = useAuth(false)
   const router = useRouter()
-
-  useEffect(() => {
-    if (user) {
-      router.push('/folder')
-    }
-  })
 
   const onValid = async (data: LoginForm) => {
     try {
-      signUp(data)
+      useSignUpUser(data)
       await router.push('/folder')
     } catch (error) {
       console.log(error)
@@ -119,5 +113,12 @@ const SignUp: NextPage = () => {
     </main>
   )
 }
+
+export const getServerSideProps = withAuth(
+  async (context, user) => {
+    return { props: {} }
+  },
+  { reverseRedirect: true },
+)
 
 export default SignUp

@@ -5,11 +5,11 @@ import DeleteModal from '@/components/atomicComponents/Modals/DeleteModal'
 import { MODALS_ID } from '@/constants/folder'
 import AddLinkToFolder from '@/components/atomicComponents/Modals/AddLinkToFolder'
 import { useGetFolders } from '@/libs/client/useGetFolders'
-import { CardListProps, Folder } from '@/types/folder'
+import { Folder, Links } from '@/types/folder'
 import NoLink from '@/components/NoLink'
 import { fetchFolderDataError } from '@/constants/errorMessage'
 
-export const CardList = ({ links }: CardListProps) => {
+export const CardList = ({ links }: { links: Links[] }) => {
   const [selectedFolderId, setSelectedFolderId] = useState<string>('all')
   const [currentModal, setCurrentModal] = useState<string>('')
   const [selectedLinkUrl, setSelectedLinkUrl] = useState<string>('')
@@ -33,7 +33,7 @@ export const CardList = ({ links }: CardListProps) => {
     <div className={styles.container}>
       {links.map((link, index) => (
         <Card
-          key={link?.id}
+          key={index}
           {...link}
           onDeleteClick={() => {
             setSelectedLinkUrl(link?.url ?? '')
