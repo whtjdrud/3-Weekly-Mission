@@ -8,6 +8,14 @@ export interface Folder {
   userId: number
   linkCount: number
 }
+export interface FolderRaw {
+  id: string
+  created_at: string
+  favorite: boolean
+  name: string
+  user_id: string
+  link_count: number
+}
 
 export interface FolderProps {
   user: User
@@ -53,5 +61,5 @@ export interface Links {
   alt: string
   description: string
   elapsedTime: string
-  created_at: string
+  createdAt: string
 }

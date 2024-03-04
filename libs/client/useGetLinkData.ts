@@ -22,7 +22,7 @@ const useGetLinkData = async (folderId: string) => {
       return {
         id: id,
         favorite: favorite,
-        created_at: created_at,
+        createdAt: created_at,
         url: url,
         title: title,
         imageSource: image_source,

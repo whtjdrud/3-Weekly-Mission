@@ -3,7 +3,7 @@ export interface CardProps {
   imageSource: string
   alt: string
   description: string
-  created_at: string
+  createdAt: string
   onDeleteClick: () => void
   onAddToFolderClick: () => void
 }

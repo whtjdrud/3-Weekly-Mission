@@ -9,7 +9,7 @@ export const Card = ({
   imageSource,
   alt,
   description,
-  created_at,
+  createdAt,
   onDeleteClick,
   onAddToFolderClick,
 }: CardProps) => {
@@ -43,9 +43,9 @@ export const Card = ({
           alt={alt}
         />
         <CardContent
-          elapsedTime={timeSince(created_at)}
+          elapsedTime={timeSince(createdAt)}
           description={description}
-          createdAt={convertDate(created_at)}
+          createdAt={convertDate(createdAt)}
         />
         <button
           className={styles.star}

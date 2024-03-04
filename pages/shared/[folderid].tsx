@@ -66,7 +66,7 @@ export const getServerSideProps = withAuth(async (context, user) => {
       return {
         id: id,
         favorite: favorite,
-        created_at: created_at,
+        createAt: created_at,
         url: url,
         title: title,
         imageSource: image_source,
