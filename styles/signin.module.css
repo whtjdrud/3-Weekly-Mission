@@ -77,7 +77,7 @@
   background-image: url('/images/signin/eye-on.svg');
 }
 
-.signForm input[type='submit'] {
+.sign_form input[type='submit'] {
   display: flex;
   justify-content: center;
   align-items: center;
