@@ -38,6 +38,12 @@ export interface ShareProps {
   links: Links[]
   folderName: string
 }
+export interface FolderItemProps {
+  folderName: string
+  linkCount: number
+  isSelected?: boolean
+  onClick: MouseEventHandler<HTMLButtonElement>
+}
 
 export interface Links {
   id: string

@@ -8,12 +8,12 @@ import DeleteModal from '@/components/atomicComponents/Modals/DeleteModal'
 import ShareModal from '@/components/atomicComponents/Modals/ShareModal'
 import { FolderBarProps } from '@/types/folder'
 
-const FolderBar: React.FC<FolderBarProps> = ({
+const FolderBar = ({
   folders,
   selectedFolderId,
   onFolderClick,
   shareLink,
-}) => {
+}: FolderBarProps) => {
   const folderName =
     'all' === selectedFolderId
       ? '전체'

@@ -1,12 +1,5 @@
-import { MouseEventHandler } from 'react'
 import styles from './folderItems.module.css'
-
-type FolderItemProps = {
-  folderName: string
-  linkCount: number
-  isSelected?: boolean
-  onClick: MouseEventHandler<HTMLButtonElement>
-}
+import { FolderItemProps } from '@/types/folder'
 
 export const FolderItem = ({
   folderName,

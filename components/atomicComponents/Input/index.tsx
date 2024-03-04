@@ -1,18 +1,8 @@
 import React from 'react'
 import styles from '@/styles/signin.module.css'
+import { InputProps } from '@/types/common'
 
-interface InputProps {
-  label: string
-  name: string
-  type: string
-  register: any
-  validationRules: object
-  error?: string
-  toggleShowPassword?: () => void
-  showPasswordButton?: boolean
-}
-
-const Input: React.FC<InputProps> = ({
+const Input = ({
   label,
   name,
   type,
@@ -21,7 +11,7 @@ const Input: React.FC<InputProps> = ({
   error,
   toggleShowPassword,
   showPasswordButton = false,
-}) => {
+}: InputProps) => {
   return (
     <div className={styles.sign_box_input}>
       <label htmlFor={label}>{label}</label>
