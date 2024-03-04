@@ -7,7 +7,7 @@ import AddLinkToFolder from '@/components/atomicComponents/Modals/AddLinkToFolde
 import { useGetFolders } from '@/libs/client/useGetFolders'
 import { Folder, Links } from '@/types/folder'
 import NoLink from '@/components/NoLink'
-import { fetchFolderDataError } from '@/constants/errorMessage'
+import { FETCH_FOLDER_DATA_ERROR } from '@/constants/errorMessage'
 
 export const CardList = ({ links }: { links: Links[] }) => {
   const [selectedFolderId, setSelectedFolderId] = useState<string>('all')
@@ -21,7 +21,7 @@ export const CardList = ({ links }: { links: Links[] }) => {
         const folders = await useGetFolders()
         setFolders(folders)
       } catch (error) {
-        console.error(fetchFolderDataError, error)
+        console.error(FETCH_FOLDER_DATA_ERROR, error)
       }
     }
     fetchFolders()

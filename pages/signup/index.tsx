@@ -11,14 +11,14 @@ import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
 import { useCheckDuplicateEmail } from '@/libs/client/useCheckDuplicateEmail'
 import { withAuth } from '@/contexts/AuthProvider'
 import {
-  emailAlreadyInUseMessage,
-  emailFormatInvalid,
-  emailIsEmpty,
-  passwordCheckIsEmpty,
-  passwordFormatInvalid,
-  passwordIsEmpty,
-  passwordIsNotMach,
-  serverError,
+  EMAIL_ALREADY_IN_USE_MESSAGE,
+  EMAIL_FORMAT_INVALID,
+  EMAIL_IS_EMPTY,
+  PASSWORD_CHECK_IS_EMPTY,
+  PASSWORD_FORMAT_INVALID,
+  PASSWORD_IS_EMPTY,
+  PASSWORD_IS_NOT_MATCH,
+  SERVER_ERROR,
 } from '@/constants/errorMessage'
 import { useSignUpUser } from '@/libs/client/useSignUpUser'
 
@@ -53,10 +53,10 @@ const SignUp: NextPage = () => {
               name="email"
               register={register}
               validationRules={{
-                required: emailIsEmpty,
+                required: EMAIL_IS_EMPTY,
                 pattern: {
                   value: emailPattern,
-                  message: emailFormatInvalid,
+                  message: EMAIL_FORMAT_INVALID,
                 },
                 validate: {
                   asyncValidation: async (value: string) => {
@@ -65,10 +65,10 @@ const SignUp: NextPage = () => {
                       return true
                     }
                     if (response.status === 409) {
-                      return emailAlreadyInUseMessage
+                      return EMAIL_ALREADY_IN_USE_MESSAGE
                     }
                     if (response.status === 500) {
-                      return serverError
+                      return SERVER_ERROR
                     }
                     return `${response.status}: ${response.message}`
                   },
@@ -82,10 +82,10 @@ const SignUp: NextPage = () => {
               type={showPassword.password ? 'text' : 'password'}
               register={register}
               validationRules={{
-                required: passwordIsEmpty,
+                required: PASSWORD_IS_EMPTY,
                 pattern: {
                   value: passwordPattern,
-                  message: passwordFormatInvalid,
+                  message: PASSWORD_FORMAT_INVALID,
                 },
               }}
               error={errors.password?.message}
@@ -98,9 +98,9 @@ const SignUp: NextPage = () => {
               name="passwordCheck"
               register={register}
               validationRules={{
-                required: passwordCheckIsEmpty,
+                required: PASSWORD_CHECK_IS_EMPTY,
                 validate: (value: string) =>
-                  value === password || passwordIsNotMach,
+                  value === password || PASSWORD_IS_NOT_MATCH,
               }}
               error={errors.passwordCheck?.message}
               toggleShowPassword={() => toggleShowPassword('passwordCheck')}

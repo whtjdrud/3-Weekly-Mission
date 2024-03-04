@@ -9,10 +9,10 @@ import Input from '@/components/atomicComponents/Input'
 import { emailPattern, passwordPattern } from '@/utils/regexPatterns'
 import { withAuth } from '@/contexts/AuthProvider'
 import {
-  emailFormatInvalid,
-  emailIsEmpty,
-  passwordFormatInvalid,
-  passwordIsEmpty,
+  EMAIL_FORMAT_INVALID,
+  EMAIL_IS_EMPTY,
+  PASSWORD_FORMAT_INVALID,
+  PASSWORD_IS_EMPTY,
 } from '@/constants/errorMessage'
 import { useLoginUser } from '@/libs/client/useLoginUser'
 
@@ -42,10 +42,10 @@ const Login: NextPage = () => {
               name="email"
               register={register}
               validationRules={{
-                required: emailIsEmpty,
+                required: EMAIL_IS_EMPTY,
                 pattern: {
                   value: emailPattern,
-                  message: emailFormatInvalid,
+                  message: EMAIL_FORMAT_INVALID,
                 },
               }}
               error={errors.email?.message}
@@ -56,10 +56,10 @@ const Login: NextPage = () => {
               name="password"
               register={register}
               validationRules={{
-                required: passwordIsEmpty,
+                required: PASSWORD_IS_EMPTY,
                 pattern: {
                   value: passwordPattern,
-                  message: passwordFormatInvalid,
+                  message: PASSWORD_FORMAT_INVALID,
                 },
               }}
               error={errors.password?.message}
