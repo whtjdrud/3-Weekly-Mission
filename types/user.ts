@@ -3,10 +3,16 @@ import { LoginForm } from '@/types/sign'
 export interface HeaderPageProps {
   user: User
 }
+
+export interface ProfileProps {
+  imageSource: string
+  email: string
+}
+
 export interface User {
   id: string
   email: string
-  image_source: string
+  imageSource: string
   name: string
 }
 

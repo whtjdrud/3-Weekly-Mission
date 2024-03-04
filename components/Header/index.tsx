@@ -5,7 +5,7 @@ import Profile from '@/components/atomicComponents/Profile'
 import { HeaderPageProps } from '@/types/user'
 
 const HeaderPage = ({ user }: HeaderPageProps) => {
-  const { email, image_source } = user
+  const { email, imageSource } = user
 
   return (
     <header className={styles.header}>
@@ -19,7 +19,7 @@ const HeaderPage = ({ user }: HeaderPageProps) => {
           />
         </Link>
         {user ? (
-          <Profile email={email} imageSource={image_source} />
+          <Profile email={email} imageSource={imageSource} />
         ) : (
           <div className={styles.loginProfile}>
             <Link className={`${styles.cta} ${styles.ctaShort}`} href="/login">
