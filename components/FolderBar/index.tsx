@@ -26,9 +26,6 @@ const FolderBar: React.FC<FolderBarProps> = ({
   const handleKakaoClick = () => {
     alert('아직 제공되지 않습니다.')
   }
-  const handleFacebookClick = () => {
-    window.open(`https://www.facebook.com/sharer.php?u='${shareLink}'`)
-  }
 
   const handleLinkCopyClick = () => {
     navigator.clipboard
@@ -124,7 +121,7 @@ const FolderBar: React.FC<FolderBarProps> = ({
         isOpen={currentModal === MODALS_ID.share}
         folderName={folderName}
         onKakaoClick={handleKakaoClick}
-        onFacebookClick={handleFacebookClick}
+        shareLink={shareLink}
         onLinkCopyClick={handleLinkCopyClick}
         onCloseClick={closeModal}
       />
