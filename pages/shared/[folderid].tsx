@@ -8,6 +8,7 @@ import { ShareProps } from '@/types/folder'
 import axiosInstance from '@/libs/axiosInstance'
 import FolderInfo from '@/components/FolderInfo'
 import { withAuth } from '@/contexts/AuthProvider'
+import { Link } from '@/types/card'
 
 const Share = ({ user, links, folderName }: ShareProps) => {
   return (
@@ -15,7 +16,7 @@ const Share = ({ user, links, folderName }: ShareProps) => {
       <HeaderPage user={user} />
       <div className={styles.container}>
         <FolderInfo
-          profileImage={user?.image_source}
+          profileImage={user?.imageSource}
           ownerName={user?.name}
           folderName={folderName}
         />
@@ -51,11 +52,33 @@ export const getServerSideProps = withAuth(async (context, user) => {
       },
     })
 
+    const links = linkResponse.data.map((link: Link) => {
+      const {
+        id,
+        favorite,
+        created_at,
+        url,
+        title,
+        image_source,
+        description,
+      } = link
+
+      return {
+        id: id,
+        favorite: favorite,
+        created_at: created_at,
+        url: url,
+        title: title,
+        imageSource: image_source,
+        description: description,
+      }
+    })
+
     return {
       props: {
         folderName: folderResponse.data[0]?.name || null,
         user: user,
-        links: linkResponse.data,
+        links: links,
       },
     }
   } catch (error) {
@@ -65,7 +88,7 @@ export const getServerSideProps = withAuth(async (context, user) => {
         folderName: null,
         ownerName: null,
         email: null,
-        image_source: null,
+        imageSource: null,
         links: [],
         errorMessage: 'Fetch data error',
       },

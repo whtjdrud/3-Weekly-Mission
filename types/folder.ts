@@ -49,7 +49,7 @@ export interface Links {
   id: string
   title: string
   url: string
-  image_source: string
+  imageSource: string
   alt: string
   description: string
   elapsedTime: string

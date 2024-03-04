@@ -2,20 +2,11 @@ import React, { MouseEventHandler, useRef, useState } from 'react'
 import { CardContent } from '@/components/atomicComponents/CardContent'
 import styles from './card.module.css'
 import { convertDate, timeSince } from '@/utils/dateUtils'
-
-type CardProps = {
-  url: string
-  image_source: string
-  alt: string
-  description: string
-  created_at: string
-  onDeleteClick: () => void
-  onAddToFolderClick: () => void
-}
+import { CardProps } from '@/types/card'
 
 export const Card = ({
   url,
-  image_source,
+  imageSource,
   alt,
   description,
   created_at,
@@ -47,7 +38,7 @@ export const Card = ({
     <a href={url} target="_blank" rel="noopener noreferrer">
       <div className={styles.container}>
         <img
-          src={image_source || DEFAULT_IMAGE}
+          src={imageSource || DEFAULT_IMAGE}
           className={styles.cardImage}
           alt={alt}
         />

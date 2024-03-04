@@ -20,7 +20,7 @@ export function withAuth(
           return await gssp(context, {
             id: '',
             email: '',
-            image_source: '',
+            imageSource: '',
             name: '',
           })
         }
@@ -38,17 +38,18 @@ export function withAuth(
         },
       })
 
-      const user = userResponse.data[0]
+      const {
+        id,
+        email,
+        image_source: imageSource,
+        name,
+      } = userResponse.data[0]
 
-      if (
-        !user ||
-        !user.id ||
-        !user.email ||
-        !user.image_source ||
-        !user.name
-      ) {
+      if (!id || !email || !imageSource || !name) {
         throw new Error('Invalid user object')
       }
+
+      const user = { id, email, imageSource, name }
 
       if (options.reverseRedirect) {
         return {
