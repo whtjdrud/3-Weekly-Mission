@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import { User } from '@/types/user'
 
 export interface Folder {
@@ -9,10 +9,22 @@ export interface Folder {
   linkCount: number
 }
 
-export type FolderProps = {
+export interface FolderProps {
   user: User
   shareLink: string
   folders: Folder[]
+}
+
+export interface FolderButtonProps {
+  text: string
+  onClick: MouseEventHandler<HTMLButtonElement>
+  isSelected?: boolean
+}
+
+export interface FolderInfoProps {
+  profileImage: string
+  ownerName: string
+  folderName: string
 }
 export interface FolderBarProps {
   folders: Folder[]
@@ -21,13 +33,13 @@ export interface FolderBarProps {
   shareLink: string
 }
 
-export type shareProps = {
+export interface ShareProps {
   user: User
   links: Links[]
   folderName: string
 }
 
-export type Links = {
+export interface Links {
   id: string
   title: string
   url: string

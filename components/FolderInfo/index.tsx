@@ -1,14 +1,11 @@
 import styles from './folderinfo.module.css'
+import { FolderInfoProps } from '@/types/folder'
 
 const FolderInfo = ({
   profileImage,
   ownerName,
   folderName,
-}: {
-  profileImage: string
-  ownerName: string
-  folderName: string
-}) => {
+}: FolderInfoProps) => {
   return (
     <div className={styles.container}>
       <img

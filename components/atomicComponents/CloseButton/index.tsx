@@ -1,10 +1,7 @@
-import React, { MouseEventHandler } from 'react'
 import styles from './closebutton.module.css'
-interface CloseButtonProps {
-  onClick: MouseEventHandler<HTMLDivElement | HTMLButtonElement>
-}
+import { CloseButtonProps } from '@/types/common'
 
-const CloseButton: React.FC<CloseButtonProps> = ({ onClick }) => {
+const CloseButton = ({ onClick }: CloseButtonProps) => {
   return (
     <button onClick={onClick}>
       <img

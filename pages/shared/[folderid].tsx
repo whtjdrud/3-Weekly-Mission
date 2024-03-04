@@ -4,12 +4,12 @@ import Footer from '@/components/Footer'
 import SearchBar from '@/components/SearchBar'
 import styles from '@/styles/folder.module.css'
 import { CardList } from '@/components/CardList'
-import { shareProps } from '@/types/folder'
+import { ShareProps } from '@/types/folder'
 import axiosInstance from '@/libs/axiosInstance'
 import FolderInfo from '@/components/FolderInfo'
 import { withAuth } from '@/contexts/AuthProvider'
 
-const Share = ({ user, links, folderName }: shareProps) => {
+const Share = ({ user, links, folderName }: ShareProps) => {
   return (
     <>
       <HeaderPage user={user} />

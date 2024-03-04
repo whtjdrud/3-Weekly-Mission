@@ -1,17 +1,8 @@
 import styles from './folderbutton.module.css'
-import React, { MouseEventHandler, useState } from 'react'
+import React from 'react'
+import { FolderButtonProps } from '@/types/folder'
 
-type FolderButtonProps = {
-  text: string
-  onClick: MouseEventHandler<HTMLButtonElement>
-  isSelected?: boolean
-}
-
-const FolderButton: React.FC<FolderButtonProps> = ({
-  text,
-  onClick,
-  isSelected = false,
-}) => {
+const FolderButton = ({ text, onClick, isSelected }: FolderButtonProps) => {
   return (
     <button
       className={`${styles.container} ${isSelected ? styles.selected : ''}`}
