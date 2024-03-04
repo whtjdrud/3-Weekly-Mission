@@ -53,7 +53,7 @@ const FolderBar = ({
         ))}
       </div>
       <button
-        className={styles.addButton}
+        className={styles.add_button}
         onClick={() => setCurrentModal(MODALS_ID.addFolder)}
       >
         <span>폴더 추가</span>
@@ -64,7 +64,7 @@ const FolderBar = ({
           alt="폴더추가 버튼"
         />
       </button>
-      <div className={styles.folderName}>
+      <div className={styles.folder_name}>
         <h2>{folderName}</h2>
       </div>
 

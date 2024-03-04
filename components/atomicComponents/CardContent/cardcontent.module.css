@@ -12,7 +12,7 @@
   background-color: var(--color-light-blue);
 }
 
-.elapsedTime {
+.elapsed_time {
   font-size: 1.3rem;
   color: var(--color-text-content-gray);
 }
@@ -26,7 +26,7 @@
   line-height: 150%;
 }
 
-.createdAt {
+.created_at {
   font-size: 1.4rem;
   color: var(--color-text-content-black);
 }

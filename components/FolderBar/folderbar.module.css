@@ -24,7 +24,7 @@
   row-gap: 1.2rem;
   flex-grow: 1;
 }
-.folderName {
+.folder_name {
   grid-area: folder-name;
   margin-top: 1.6rem;
   font-size: 2rem;
@@ -35,7 +35,7 @@
   }
 }
 
-.addButton {
+.add_button {
   grid-area: add-button;
   display: flex;
   gap: 1rem;

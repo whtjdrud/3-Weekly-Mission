@@ -37,7 +37,7 @@ const Folder = ({ user, shareLink, folders }: FolderProps) => {
         <AddLink />
         <main className={styles.items}>
           <SearchBar />
-          <div className={styles.folderBox}>
+          <div className={styles.folder_box}>
             <FolderBar
               folders={folders}
               selectedFolderId={selectedFolderId}

@@ -39,7 +39,7 @@ export const Card = ({
       <div className={styles.container}>
         <img
           src={imageSource || DEFAULT_IMAGE}
-          className={styles.cardImage}
+          className={styles.card_image}
           alt={alt}
         />
         <CardContent

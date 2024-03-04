@@ -1,25 +1,16 @@
 import styles from './shareModal.module.css'
-import { FC, MouseEventHandler } from 'react'
 import Modal from '@/components/atomicComponents/Modals/modal'
 import Link from 'next/link'
+import { ShareModalProps } from '@/types/modal'
 
-type ShareModalProps = {
-  isOpen: boolean
-  folderName: string
-  onKakaoClick: MouseEventHandler<HTMLButtonElement>
-  shareLink: string
-  onLinkCopyClick: MouseEventHandler<HTMLButtonElement>
-  onCloseClick: MouseEventHandler<HTMLDivElement | HTMLButtonElement>
-}
-
-const ShareModal: FC<ShareModalProps> = ({
+const ShareModal = ({
   isOpen,
   folderName,
   onKakaoClick,
   shareLink,
   onLinkCopyClick,
   onCloseClick,
-}) => {
+}: ShareModalProps) => {
   if (!isOpen) return null
 
   return (
@@ -27,7 +18,7 @@ const ShareModal: FC<ShareModalProps> = ({
       <div className={styles.items}>
         <h2 className={styles.title}>폴더 공유</h2>
         <p className={styles.description}>{folderName}</p>
-        <div className={styles.modalContent}>
+        <div className={styles.modal_content}>
           <button className={styles.button} onClick={onKakaoClick}>
             <img src="/images/modal/kakao.svg" alt="Kakao Icon" />
             <span>카카오톡</span>

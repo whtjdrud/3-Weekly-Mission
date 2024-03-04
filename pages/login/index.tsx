@@ -32,7 +32,7 @@ const Login: NextPage = () => {
       <div className={styles.sign_box}>
         <form
           id="sign_form"
-          className={styles.signForm}
+          className={styles.sign_form}
           onSubmit={handleSubmit(onValid)}
         >
           <div className={styles.sign_box_inputs}>

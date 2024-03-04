@@ -1,31 +1,30 @@
 .sign_box_input {
-    display: flex;
-    flex-direction: column;
-    row-gap: 12px;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  position: relative;
 }
 
 .sign_box_input label {
-    font-size: 1.4rem;
-    font-weight: 400;
+  font-size: 1.4rem;
+  font-weight: 400;
 }
 .input {
-    padding: 18px 15px;
-    border-radius: 8px;
-    border: 1px solid #ccd5e3;
-    font-size: 1.6rem;
+  padding: 18px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccd5e3;
+  font-size: 1.6rem;
 }
 
 .input:focus {
-    border: #6d6afe 1px solid;
+  border: #6d6afe 1px solid;
 }
 
-
 .input_error {
-    border: 1px solid #ff5b56;
+  border: 1px solid #ff5b56;
 }
 
 .sign_box_input p {
-    color: var(--Linkbrary-red, #ff5b56);
-    font-size: 14px;
+  color: var(--color-red);
+  font-size: 14px;
 }

@@ -22,20 +22,20 @@
   border-radius: 1.5rem;
   background-color: var(--color-white);
 
-  @media (min-width: 768px) and (max-width: 1024px) {
+  @media (min-width: 768px) {
     height: 6.9rem;
     column-gap: 2rem;
     padding: 0 2rem;
   }
 }
 
-.inputBox {
+.input_box {
   display: flex;
   align-items: center;
   width: 100%;
   column-gap: 0.8rem;
 
-  @media (min-width: 768px) and (max-width: 1024px) {
+  @media (min-width: 768px) {
     column-gap: 1.2rem;
   }
 }
@@ -44,7 +44,7 @@
   width: 1.6rem;
   height: 1.6rem;
 
-  @media (min-width: 768px) and (max-width: 1024px) {
+  @media (min-width: 768px) {
     width: 2rem;
     height: 2rem;
   }
@@ -56,7 +56,7 @@
   font-size: 1.4rem;
   line-height: 150%;
 
-  @media (min-width: 768px) and (max-width: 1024px) {
+  @media (min-width: 768px) {
     height: 6.7rem;
     font-size: 1.6rem;
   }

@@ -17,7 +17,7 @@
   max-width: 400px;
 }
 
-.signForm {
+.sign_form {
   display: flex;
   flex-direction: column;
   row-gap: 30px;
@@ -56,11 +56,11 @@
 }
 
 .sign_box_input p {
-  color: var(--Linkbrary-red, #ff5b56);
+  color: var(--color-red, #ff5b56);
   font-size: 14px;
 }
 
-.eyeButton {
+.eye_button {
   position: absolute;
   top: 50px;
   right: 15px;
@@ -69,11 +69,11 @@
   background-color: transparent;
   border: 0;
 }
-.eyeOff {
+.eye_off {
   background-image: url('/images/signin/eye-off.svg');
 }
 
-.eyeOn {
+.eye_on {
   background-image: url('/images/signin/eye-on.svg');
 }
 

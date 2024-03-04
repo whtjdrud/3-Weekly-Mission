@@ -1,24 +1,15 @@
 import styles from './delteModal.module.css'
-import { FC, MouseEventHandler } from 'react'
 import Modal from '@/components/atomicComponents/Modals/modal'
+import { DeleteModalProps } from '@/types/modal'
 
-type DeleteModalProps = {
-  title: string
-  buttonText: string
-  isOpen: boolean
-  themeColor: string
-  description: string
-  onCloseClick: MouseEventHandler<HTMLDivElement | HTMLButtonElement>
-}
-
-const DeleteModal: FC<DeleteModalProps> = ({
+const DeleteModal = ({
   isOpen,
   title,
   buttonText,
   themeColor,
   description,
   onCloseClick,
-}) => {
+}: DeleteModalProps) => {
   if (!isOpen) return null
 
   return (
@@ -29,7 +20,7 @@ const DeleteModal: FC<DeleteModalProps> = ({
     >
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.description}>{description}</p>
-      <div className={styles.modalContent}></div>
+      <div className={styles.modal_content}></div>
     </Modal>
   )
 }

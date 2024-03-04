@@ -4,7 +4,7 @@ const AddLink = () => {
   return (
     <div className={styles.container}>
       <form className={styles.form}>
-        <div className={styles.inputBox}>
+        <div className={styles.input_box}>
           <Image
             className={styles.icon}
             src="images/link.svg"

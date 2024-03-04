@@ -1,19 +1,8 @@
 import styles from './inputModal.module.css'
-import { ChangeEventHandler, FC, MouseEventHandler } from 'react'
 import Modal from '@/components/atomicComponents/Modals/modal'
+import { InputModalProps } from '@/types/modal'
 
-type InputModalProps = {
-  title: string
-  placeholder: string
-  buttonText: string
-  isOpen: boolean
-  value: string
-  themeColor: string
-  onChange: ChangeEventHandler<HTMLInputElement>
-  onCloseClick: MouseEventHandler<HTMLDivElement | HTMLButtonElement>
-}
-
-const InputModal: FC<InputModalProps> = ({
+const InputModal = ({
   isOpen,
   title,
   placeholder,
@@ -22,9 +11,8 @@ const InputModal: FC<InputModalProps> = ({
   onChange,
   themeColor,
   onCloseClick,
-}) => {
+}: InputModalProps) => {
   if (!isOpen) return null
-
   return (
     <Modal
       buttonText={buttonText}
@@ -32,7 +20,7 @@ const InputModal: FC<InputModalProps> = ({
       themeColor={themeColor}
     >
       <h2 className={styles.title}>{title}</h2>
-      <div className={styles.modalContent}>
+      <div className={styles.modal_content}>
         <input
           type="text"
           value={value}

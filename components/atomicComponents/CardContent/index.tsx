@@ -13,9 +13,9 @@ export const CardContent = ({
 }: CardContentProps) => {
   return (
     <div className={styles.container}>
-      <span className={styles.elapsedTime}>{elapsedTime}</span>
+      <span className={styles.elapsed_time}>{elapsedTime}</span>
       <p className={styles.description}>{description}</p>
-      <span className={styles.createdAt}>{createdAt}</span>
+      <span className={styles.created_at}>{createdAt}</span>
     </div>
   )
 }

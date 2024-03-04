@@ -1,18 +1,13 @@
 import styles from './modal.module.css'
-import { MouseEventHandler, ReactNode } from 'react'
 import CloseButton from '@/components/atomicComponents/CloseButton'
+import { ModalProps } from '@/types/modal'
 
 const Modal = ({
   children,
   onCloseClick,
   themeColor,
   buttonText,
-}: {
-  children: ReactNode
-  onCloseClick: MouseEventHandler<HTMLDivElement | HTMLButtonElement>
-  themeColor?: string
-  buttonText?: string
-}) => {
+}: ModalProps) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContainer}>

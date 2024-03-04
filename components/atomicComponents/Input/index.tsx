@@ -25,7 +25,7 @@ const Input = ({
         <button
           onClick={toggleShowPassword}
           type="button"
-          className={`${styles.eyeButton} ${type === 'text' ? styles.eyeOff : styles.eyeOn}`}
+          className={`${styles.eye_button} ${type === 'text' ? styles.eye_off : styles.eye_on}`}
         />
       )}
       {error && <p className="error_msg">{error}</p>}

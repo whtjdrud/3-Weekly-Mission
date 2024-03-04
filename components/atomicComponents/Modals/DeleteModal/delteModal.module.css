@@ -1,4 +1,4 @@
-.modalContent {
+.modal_content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,13 +13,6 @@
   row-gap: 2.4rem;
 }
 
-.modalHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  row-gap: 0.8rem;
-}
 .title {
   color: var(--color-gray100);
   font-size: 2rem;
